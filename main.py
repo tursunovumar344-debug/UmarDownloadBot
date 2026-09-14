@@ -1,6 +1,8 @@
 import os
 import re
 import tempfile
+import threading
+import http.server
 from pathlib import Path
 
 import yt_dlp
@@ -36,8 +38,7 @@ def get_url(text: str) -> str | None:
     if not match:
         return None
 
-    url = match.group(0).rstrip(".,!?)]}")
-    return url
+    return match.group(0).rstrip(".,!?)]}")
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -53,13 +54,11 @@ async def download_video(url: str, folder: str) -> Path | None:
 
     options = {
         "outtmpl": output_template,
-        "format": "best[ext=mp4][vcodec!=none]/best[vcodec!=none]/best",
+        "format": "best[ext=mp4]/best",
         "noplaylist": True,
         "quiet": True,
         "no_warnings": True,
-        "restrictfilenames": True,
-        "socket_timeout": 30,
-        "retries": 2,
+        "merge_output_format": "mp4",
     }
 
     try:
@@ -76,7 +75,10 @@ async def download_video(url: str, folder: str) -> Path | None:
     return files[0]
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+):
     if not update.message or not update.message.text:
         return
 
@@ -91,8 +93,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         if video is None or not video.exists():
             await update.message.reply_text(
-                "❌ Videoni yuklab bo‘lmadi.\n"
-                "Havola ochiq va ishlaydigan bo‘lishi kerak."
+                "❌ Videoni yuklab bo‘lmadi."
             )
             return
 
@@ -116,15 +117,47 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
 
 
+class HealthHandler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"UmarDownloadBot is running")
+
+    def log_message(self, format, *args):
+        pass
+
+
+def run_web_server():
+    port = int(os.environ.get("PORT", "10000"))
+
+    server = http.server.ThreadingHTTPServer(
+        ("0.0.0.0", port),
+        HealthHandler,
+    )
+
+    server.serve_forever()
+
+
 def main():
     if not BOT_TOKEN:
-        raise RuntimeError("TELEGRAM_BOT_TOKEN topilmadi")
+        raise RuntimeError(
+            "TELEGRAM_BOT_TOKEN topilmadi"
+        )
+
+    threading.Thread(
+        target=run_web_server,
+        daemon=True,
+    ).start()
 
     app = Application.builder().token(BOT_TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
+
     app.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
+        MessageHandler(
+            filters.TEXT & ~filters.COMMAND,
+            handle_message,
+        )
     )
 
     app.run_polling()
