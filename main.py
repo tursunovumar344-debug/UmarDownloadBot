@@ -5,10 +5,15 @@ import asyncio
 import tempfile
 import threading
 import http.server
+import subprocess
 from pathlib import Path
 
 import yt_dlp
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+)
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -45,13 +50,12 @@ def get_url(text):
 
 
 def is_supported(url):
-    url = url.lower()
+    url_lower = url.lower()
 
-    for domain in ALLOWED_DOMAINS:
-        if domain in url:
-            return True
-
-    return False
+    return any(
+        domain in url_lower
+        for domain in ALLOWED_DOMAINS
+    )
 
 
 def load_users():
@@ -60,8 +64,8 @@ def load_users():
             with open(DATA_FILE, "r", encoding="utf-8") as file:
                 data = json.load(file)
 
-                if isinstance(data, dict):
-                    return data
+            if isinstance(data, dict):
+                return data
 
     except Exception as error:
         print("USERS LOAD ERROR:", error)
@@ -72,7 +76,12 @@ def load_users():
 def save_users(users):
     try:
         with open(DATA_FILE, "w", encoding="utf-8") as file:
-            json.dump(users, file, ensure_ascii=False, indent=2)
+            json.dump(
+                users,
+                file,
+                ensure_ascii=False,
+                indent=2,
+            )
 
     except Exception as error:
         print("USERS SAVE ERROR:", error)
@@ -88,7 +97,7 @@ def register_user(update):
 
     if user_id not in users:
         users[user_id] = {
-            "first_seen": str(asyncio.get_event_loop().time())
+            "name": update.effective_user.first_name or "",
         }
 
         save_users(users)
@@ -99,7 +108,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         "👋 Assalomu alaykum!\n\n"
-        "Instagram, TikTok yoki YouTube havolasini yuboring.\n\n"
+        "📥 Instagram, TikTok yoki YouTube "
+        "havolasini yuboring.\n\n"
         "🤖 @UmarDownloadBot"
     )
 
@@ -123,17 +133,20 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     users = load_users()
 
     await update.message.reply_text(
-        f"📊 Bot statistikasi\n\n"
+        "📊 Bot statistikasi\n\n"
         f"👤 Jami foydalanuvchilar: {len(users)}"
     )
 
 
 def download_video_sync(url, folder):
-    output = str(Path(folder) / "video.%(ext)s")
+    output = str(
+        Path(folder) / "video.%(ext)s"
+    )
 
     options = {
         "outtmpl": output,
-        "format": "best[ext=mp4]/bestvideo[ext=mp4]+bestaudio/best",
+        "format": "bestvideo[ext=mp4]+bestaudio/"
+                 "best[ext=mp4]/best",
         "noplaylist": True,
         "quiet": True,
         "no_warnings": True,
@@ -149,7 +162,9 @@ def download_video_sync(url, folder):
         print("DOWNLOAD ERROR:", error)
         return None
 
-    files = list(Path(folder).glob("video.*"))
+    files = list(
+        Path(folder).glob("video.*")
+    )
 
     files = [
         file
@@ -164,7 +179,7 @@ def download_video_sync(url, folder):
 
     files.sort(
         key=lambda file: file.stat().st_size,
-        reverse=True
+        reverse=True,
     )
 
     return files[0]
@@ -174,11 +189,14 @@ async def download_video(url, folder):
     return await asyncio.to_thread(
         download_video_sync,
         url,
-        folder
+        folder,
     )
 
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+):
     if not update.message:
         return
 
@@ -197,7 +215,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_supported(url):
         await update.message.reply_text(
             "❌ Bu havola qo‘llab-quvvatlanmaydi.\n\n"
-            "Instagram, TikTok yoki YouTube havolasini yuboring."
+            "Instagram, TikTok yoki YouTube "
+            "havolasini yuboring."
         )
         return
 
@@ -205,18 +224,18 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "⏳ Yuklanmoqda..."
     )
 
-    with tempfile.TemporaryDirectory() as folder:
+    folder = tempfile.mkdtemp()
 
-        video = await download_video(url, folder)
+    try:
+        video = await download_video(
+            url,
+            folder,
+        )
 
         if video is None or not video.exists():
-
-            try:
-                await loading.edit_text(
-                    "❌ Videoni yuklab bo‘lmadi."
-                )
-            except Exception:
-                pass
+            await loading.edit_text(
+                "❌ Videoni yuklab bo‘lmadi."
+            )
 
             return
 
@@ -230,45 +249,95 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [
                     InlineKeyboardButton(
                         "🔘 Dumaloq video",
-                        callback_data="round_video"
+                        callback_data="round_video",
                     )
                 ]
             ]
         )
 
-        try:
-            with open(video, "rb") as video_file:
+        with open(video, "rb") as video_file:
+            await update.message.reply_video(
+                video=video_file,
+                supports_streaming=True,
+                caption="🤖 @UmarDownloadBot",
+                reply_markup=keyboard,
+            )
 
-                await update.message.reply_video(
-                    video=video_file,
-                    supports_streaming=True,
-                    caption="🤖 @UmarDownloadBot",
-                    reply_markup=keyboard
-                )
+    except Exception as error:
+        print("SEND ERROR:", error)
+
+        try:
+            await loading.edit_text(
+                "❌ Videoni yuborishda xatolik yuz berdi."
+            )
+        except Exception:
+            pass
+
+    finally:
+        try:
+            for file in Path(folder).iterdir():
+                file.unlink()
+
+            Path(folder).rmdir()
 
         except Exception as error:
-
-            print("TELEGRAM VIDEO ERROR:", error)
-
-            try:
-                with open(video, "rb") as video_file:
-
-                    await update.message.reply_document(
-                        document=video_file,
-                        caption="🤖 @UmarDownloadBot",
-                        reply_markup=keyboard
-                    )
-
-            except Exception as document_error:
-
-                print("TELEGRAM DOCUMENT ERROR:", document_error)
-
-                await update.message.reply_text(
-                    "❌ Videoni yuborishda xatolik yuz berdi."
-                )
+            print("TEMP CLEANUP ERROR:", error)
 
 
-async def round_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
+def make_round_video(input_file, output_file):
+    command = [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(input_file),
+        "-vf",
+        (
+            "crop="
+            "min(iw\\,ih):"
+            "min(iw\\,ih),"
+            "(iw-min(iw\\,ih))/2:"
+            "(ih-min(iw\\,ih))/2,"
+            "scale=480:480"
+        ),
+        "-c:v",
+        "libx264",
+        "-preset",
+        "veryfast",
+        "-crf",
+        "28",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "96k",
+        "-movflags",
+        "+faststart",
+        str(output_file),
+    ]
+
+    result = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        print(
+            "FFMPEG ERROR:",
+            result.stderr[-3000:],
+        )
+        return False
+
+    return (
+        Path(output_file).exists()
+        and Path(output_file).stat().st_size > 0
+    )
+
+
+async def round_video(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+):
     query = update.callback_query
 
     if not query:
@@ -281,23 +350,79 @@ async def round_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not message:
         return
 
-    await query.edit_message_reply_markup(
-        reply_markup=None
-    )
-
-    await message.reply_text(
+    status_message = await message.reply_text(
         "🔄 Dumaloq video tayyorlanmoqda..."
     )
 
+    temp_folder = tempfile.mkdtemp()
 
-class HealthHandler(http.server.BaseHTTPRequestHandler):
+    try:
+        input_file = Path(temp_folder) / "input.mp4"
+        output_file = Path(temp_folder) / "round.mp4"
 
+        if not message.video:
+            await status_message.edit_text(
+                "❌ Asl video topilmadi."
+            )
+            return
+
+        telegram_file = await context.bot.get_file(
+            message.video.file_id
+        )
+
+        await telegram_file.download_to_drive(
+            custom_path=str(input_file)
+        )
+
+        success = await asyncio.to_thread(
+            make_round_video,
+            input_file,
+            output_file,
+        )
+
+        if not success:
+            await status_message.edit_text(
+                "❌ Dumaloq video tayyorlab bo‘lmadi."
+            )
+            return
+
+        await status_message.delete()
+
+        with open(output_file, "rb") as video_file:
+            await message.reply_video_note(
+                video_note=video_file
+            )
+
+    except Exception as error:
+        print("ROUND VIDEO ERROR:", error)
+
+        try:
+            await status_message.edit_text(
+                "❌ Dumaloq video yaratishda xatolik yuz berdi."
+            )
+        except Exception:
+            pass
+
+    finally:
+        try:
+            for file in Path(temp_folder).iterdir():
+                file.unlink()
+
+            Path(temp_folder).rmdir()
+
+        except Exception:
+            pass
+
+
+class HealthHandler(
+    http.server.BaseHTTPRequestHandler
+):
     def do_GET(self):
         self.send_response(200)
 
         self.send_header(
             "Content-Type",
-            "text/plain"
+            "text/plain",
         )
 
         self.end_headers()
@@ -314,18 +439,18 @@ def run_web_server():
     port = int(
         os.environ.get(
             "PORT",
-            "10000"
+            "10000",
         )
     )
 
     server = http.server.ThreadingHTTPServer(
         ("0.0.0.0", port),
-        HealthHandler
+        HealthHandler,
     )
 
     print(
         "Web server running on port",
-        port
+        port,
     )
 
     server.serve_forever()
@@ -339,38 +464,41 @@ def main():
 
     threading.Thread(
         target=run_web_server,
-        daemon=True
+        daemon=True,
     ).start()
 
-    app = Application.builder().token(
-        BOT_TOKEN
-    ).build()
+    app = (
+        Application
+        .builder()
+        .token(BOT_TOKEN)
+        .build()
+    )
 
     app.add_handler(
         CommandHandler(
             "start",
-            start
+            start,
         )
     )
 
     app.add_handler(
         CommandHandler(
             "stats",
-            stats
+            stats,
         )
     )
 
     app.add_handler(
         CallbackQueryHandler(
             round_video,
-            pattern="^round_video$"
+            pattern="^round_video$",
         )
     )
 
     app.add_handler(
         MessageHandler(
             filters.TEXT & ~filters.COMMAND,
-            handle_message
+            handle_message,
         )
     )
 
