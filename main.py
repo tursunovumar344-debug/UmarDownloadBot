@@ -5,15 +5,17 @@ import asyncio
 import tempfile
 import threading
 import http.server
-import subprocess
 from pathlib import Path
 
 import yt_dlp
+import imageio_ffmpeg
+
 from telegram import (
     Update,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
 )
+
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -28,6 +30,8 @@ BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 ADMIN_ID = os.getenv("ADMIN_ID")
 
 DATA_FILE = Path("users.json")
+
+FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
 
 ALLOWED_DOMAINS = (
     "instagram.com",
@@ -97,7 +101,7 @@ def register_user(update):
 
     if user_id not in users:
         users[user_id] = {
-            "name": update.effective_user.first_name or "",
+            "name": update.effective_user.first_name or ""
         }
 
         save_users(users)
@@ -140,17 +144,22 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def download_video_sync(url, folder):
     output = str(
-        Path(folder) / "video.%(ext)s"
+        Path(folder) / "source.%(ext)s"
     )
 
     options = {
         "outtmpl": output,
-        "format": "bestvideo[ext=mp4]+bestaudio/"
-                 "best[ext=mp4]/best",
+
+        "format": (
+            "bestvideo+bestaudio/"
+            "best"
+        ),
+
         "noplaylist": True,
         "quiet": True,
         "no_warnings": True,
         "retries": 3,
+
         "merge_output_format": "mp4",
     }
 
@@ -163,7 +172,7 @@ def download_video_sync(url, folder):
         return None
 
     files = list(
-        Path(folder).glob("video.*")
+        Path(folder).glob("source.*")
     )
 
     files = [
@@ -185,11 +194,141 @@ def download_video_sync(url, folder):
     return files[0]
 
 
-async def download_video(url, folder):
+def convert_to_telegram_mp4(input_file, output_file):
+    command = [
+        FFMPEG,
+        "-y",
+        "-i",
+        str(input_file),
+
+        "-vf",
+        "scale='min(720,iw)':'-2'",
+
+        "-c:v",
+        "libx264",
+
+        "-preset",
+        "veryfast",
+
+        "-crf",
+        "27",
+
+        "-pix_fmt",
+        "yuv420p",
+
+        "-c:a",
+        "aac",
+
+        "-b:a",
+        "128k",
+
+        "-movflags",
+        "+faststart",
+
+        str(output_file),
+    ]
+
+    try:
+        result = asyncio.run(
+            asyncio.to_thread(
+                _run_ffmpeg,
+                command,
+            )
+        )
+
+        if result != 0:
+            return False
+
+    except Exception as error:
+        print("CONVERT ERROR:", error)
+        return False
+
+    return (
+        Path(output_file).exists()
+        and Path(output_file).stat().st_size > 0
+    )
+
+
+def _run_ffmpeg(command):
+    import subprocess
+
+    result = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        print(
+            "FFMPEG ERROR:",
+            result.stderr[-3000:],
+        )
+
+    return result.returncode
+
+
+async def prepare_video(input_file, output_file):
     return await asyncio.to_thread(
-        download_video_sync,
-        url,
-        folder,
+        _convert_sync,
+        input_file,
+        output_file,
+    )
+
+
+def _convert_sync(input_file, output_file):
+    import subprocess
+
+    command = [
+        FFMPEG,
+        "-y",
+        "-i",
+        str(input_file),
+
+        "-vf",
+        "scale='min(720,iw)':'-2'",
+
+        "-c:v",
+        "libx264",
+
+        "-preset",
+        "veryfast",
+
+        "-crf",
+        "27",
+
+        "-pix_fmt",
+        "yuv420p",
+
+        "-c:a",
+        "aac",
+
+        "-b:a",
+        "128k",
+
+        "-movflags",
+        "+faststart",
+
+        str(output_file),
+    ]
+
+    result = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        print(
+            "FFMPEG ERROR:",
+            result.stderr[-3000:],
+        )
+        return False
+
+    return (
+        Path(output_file).exists()
+        and Path(output_file).stat().st_size > 0
     )
 
 
@@ -205,9 +344,9 @@ async def handle_message(
 
     register_user(update)
 
-    text = update.message.text.strip()
-
-    url = get_url(text)
+    url = get_url(
+        update.message.text.strip()
+    )
 
     if not url:
         return
@@ -227,16 +366,31 @@ async def handle_message(
     folder = tempfile.mkdtemp()
 
     try:
-        video = await download_video(
+        source = await asyncio.to_thread(
+            download_video_sync,
             url,
             folder,
         )
 
-        if video is None or not video.exists():
+        if source is None:
             await loading.edit_text(
                 "❌ Videoni yuklab bo‘lmadi."
             )
+            return
 
+        final_video = (
+            Path(folder) / "telegram_video.mp4"
+        )
+
+        success = await prepare_video(
+            source,
+            final_video,
+        )
+
+        if not success:
+            await loading.edit_text(
+                "❌ Videoni tayyorlashda xatolik."
+            )
             return
 
         try:
@@ -255,7 +409,11 @@ async def handle_message(
             ]
         )
 
-        with open(video, "rb") as video_file:
+        with open(
+            final_video,
+            "rb"
+        ) as video_file:
+
             await update.message.reply_video(
                 video=video_file,
                 supports_streaming=True,
@@ -264,7 +422,10 @@ async def handle_message(
             )
 
     except Exception as error:
-        print("SEND ERROR:", error)
+        print(
+            "HANDLE ERROR:",
+            error,
+        )
 
         try:
             await loading.edit_text(
@@ -280,37 +441,56 @@ async def handle_message(
 
             Path(folder).rmdir()
 
-        except Exception as error:
-            print("TEMP CLEANUP ERROR:", error)
+        except Exception:
+            pass
 
 
-def make_round_video(input_file, output_file):
+def make_round_video_sync(
+    input_file,
+    output_file,
+):
+    import subprocess
+
     command = [
-        "ffmpeg",
+        FFMPEG,
         "-y",
         "-i",
         str(input_file),
+
+        "-t",
+        "60",
+
         "-vf",
         (
             "crop="
             "min(iw\\,ih):"
-            "min(iw\\,ih),"
+            "min(iw\\,ih):"
             "(iw-min(iw\\,ih))/2:"
             "(ih-min(iw\\,ih))/2,"
             "scale=480:480"
         ),
+
         "-c:v",
         "libx264",
+
         "-preset",
         "veryfast",
+
         "-crf",
         "28",
+
+        "-pix_fmt",
+        "yuv420p",
+
         "-c:a",
         "aac",
+
         "-b:a",
         "96k",
+
         "-movflags",
         "+faststart",
+
         str(output_file),
     ]
 
@@ -323,7 +503,7 @@ def make_round_video(input_file, output_file):
 
     if result.returncode != 0:
         print(
-            "FFMPEG ERROR:",
+            "ROUND FFMPEG ERROR:",
             result.stderr[-3000:],
         )
         return False
@@ -350,21 +530,26 @@ async def round_video(
     if not message:
         return
 
-    status_message = await message.reply_text(
+    status = await message.reply_text(
         "🔄 Dumaloq video tayyorlanmoqda..."
     )
 
-    temp_folder = tempfile.mkdtemp()
+    folder = tempfile.mkdtemp()
 
     try:
-        input_file = Path(temp_folder) / "input.mp4"
-        output_file = Path(temp_folder) / "round.mp4"
-
         if not message.video:
-            await status_message.edit_text(
+            await status.edit_text(
                 "❌ Asl video topilmadi."
             )
             return
+
+        input_file = (
+            Path(folder) / "input.mp4"
+        )
+
+        output_file = (
+            Path(folder) / "round.mp4"
+        )
 
         telegram_file = await context.bot.get_file(
             message.video.file_id
@@ -375,40 +560,50 @@ async def round_video(
         )
 
         success = await asyncio.to_thread(
-            make_round_video,
+            make_round_video_sync,
             input_file,
             output_file,
         )
 
         if not success:
-            await status_message.edit_text(
-                "❌ Dumaloq video tayyorlab bo‘lmadi."
+            await status.edit_text(
+                "❌ Dumaloq video yaratib bo‘lmadi."
             )
             return
 
-        await status_message.delete()
+        try:
+            await status.delete()
+        except Exception:
+            pass
 
-        with open(output_file, "rb") as video_file:
+        with open(
+            output_file,
+            "rb"
+        ) as video_file:
+
             await message.reply_video_note(
                 video_note=video_file
             )
 
     except Exception as error:
-        print("ROUND VIDEO ERROR:", error)
+        print(
+            "ROUND VIDEO ERROR:",
+            error,
+        )
 
         try:
-            await status_message.edit_text(
-                "❌ Dumaloq video yaratishda xatolik yuz berdi."
+            await status.edit_text(
+                "❌ Dumaloq video yaratishda xatolik."
             )
         except Exception:
             pass
 
     finally:
         try:
-            for file in Path(temp_folder).iterdir():
+            for file in Path(folder).iterdir():
                 file.unlink()
 
-            Path(temp_folder).rmdir()
+            Path(folder).rmdir()
 
         except Exception:
             pass
@@ -431,7 +626,11 @@ class HealthHandler(
             b"UmarDownloadBot is running"
         )
 
-    def log_message(self, format, *args):
+    def log_message(
+        self,
+        format,
+        *args,
+    ):
         pass
 
 
