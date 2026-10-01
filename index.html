@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Abdurazzoq somsa</title>
+<title>Abdurazzoq somsa — Hisob-kitob</title>
 
 <style>
 * {
@@ -16,76 +16,118 @@
 body {
     font-family: Arial, sans-serif;
     background: #f7f3ee;
-    color: #2d2118;
-    min-height: 100vh;
+    color: #2b211b;
+    padding-bottom: 40px;
 }
 
-/* YUQORI QISM */
 .header {
     background: linear-gradient(135deg, #ff8a00, #e85d04);
     color: white;
     text-align: center;
-    padding: 28px 15px 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 25px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
 }
 
 .logo {
     font-family: Georgia, serif;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: bold;
-    letter-spacing: 1px;
-    text-shadow: 2px 3px 5px rgba(0,0,0,0.25);
 }
 
-.subtitle {
+.header p {
     margin-top: 7px;
     font-size: 14px;
-    opacity: 0.95;
 }
 
-/* ASOSIY QISM */
 .container {
     width: 94%;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 20px auto;
 }
 
-/* STATISTIKA */
-.stats {
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+.title {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
 }
 
-.stat {
-    background: white;
-    border-radius: 15px;
-    padding: 15px 8px;
-    text-align: center;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+.menu-item {
+    border: 2px solid #eee;
+    border-radius: 14px;
+    padding: 12px;
 }
 
-.stat-number {
-    font-size: 24px;
-    font-weight: bold;
-    color: #e85d04;
+.menu-item h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
 }
 
-.stat-title {
-    font-size: 12px;
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
     margin-top: 5px;
-    color: #777;
 }
 
-/* BO'LIM NOMI */
-.section-title {
-    font-size: 22px;
+input:focus,
+select:focus {
+    border-color: #ff8a00;
+}
+
+label {
+    display: block;
+    font-size: 13px;
     font-weight: bold;
-    margin: 22px 0 13px;
+    margin-top: 10px;
 }
 
-/* TANDIRLAR */
+button {
+    border: none;
+    border-radius: 11px;
+    padding: 11px 15px;
+    background: #ff8a00;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+.save-btn {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.danger {
+    background: #d62828;
+}
+
+.dark {
+    background: #2b211b;
+}
+
 .tandir-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -93,161 +135,110 @@ body {
 }
 
 .tandir {
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    border-left: 5px solid #ff8a00;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    padding: 14px;
 }
 
 .tandir h3 {
-    font-size: 17px;
-    margin-bottom: 7px;
-}
-
-.tandir p {
-    color: #777;
-    font-size: 13px;
-}
-
-.tandir button {
-    margin-top: 12px;
-    width: 100%;
-    border: none;
-    background: #ff8a00;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.tandir button:active {
-    transform: scale(0.97);
-}
-
-/* MENYU */
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.menu-card {
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-
-.food-icon {
-    font-size: 38px;
     margin-bottom: 8px;
 }
 
-.menu-card h3 {
-    font-size: 17px;
-    margin-bottom: 6px;
-}
-
-.description {
-    color: #777;
-    font-size: 12px;
-    min-height: 30px;
-}
-
-.price {
-    color: #e85d04;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.menu-card button {
-    width: 100%;
-    margin-top: 10px;
-    border: none;
-    background: #2d2118;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* BUYURTMALAR */
-.order-box {
-    background: white;
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-
-.order-box h2 {
-    margin-bottom: 12px;
-}
-
-.order-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 9px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.total {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.clear-btn {
-    width: 100%;
-    margin-top: 15px;
+.result {
+    background: #fff7ed;
+    border-radius: 12px;
     padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #d62828;
-    color: white;
+    margin-top: 10px;
     font-weight: bold;
+    color: #d85b00;
 }
 
-/* PASTKI QISM */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.stat {
+    background: #fff7ed;
+    border-radius: 14px;
+    padding: 14px 8px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 20px;
+    color: #e85d04;
+}
+
+.stat span {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.expense-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    align-items: end;
+}
+
+.history-item {
+    border: 1px solid #eee;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+.history-date {
+    font-weight: bold;
+    color: #e85d04;
+    margin-bottom: 8px;
+}
+
+.history-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    padding: 15px;
+}
+
 .footer {
     text-align: center;
-    margin-top: 30px;
-    padding: 25px 10px;
-    background: #2d2118;
-    color: white;
+    color: #777;
+    font-size: 12px;
+    margin-top: 25px;
 }
 
-.footer strong {
-    color: #ff9f1c;
-}
+@media(max-width:600px) {
 
-/* TELEFON */
-@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
 
-    .logo {
-        font-size: 27px;
+    .tandir-grid {
+        grid-template-columns: 1fr;
     }
 
     .stats {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .tandir-grid,
-    .menu-grid {
-        grid-template-columns: 1fr 1fr;
+    .expense-row {
+        grid-template-columns: 1fr;
     }
 
-    .stat-number {
-        font-size: 20px;
-    }
-
-    .section-title {
-        font-size: 20px;
+    .logo {
+        font-size: 26px;
     }
 }
 </style>
@@ -255,287 +246,867 @@ body {
 
 <body>
 
-<!-- YUQORI QISM -->
 <header class="header">
     <div class="logo">🥟 Abdurazzoq somsa</div>
-    <div class="subtitle">Mazali somsa • Issiq tandir • Sifatli xizmat</div>
+    <p>Kunlik hisob-kitob tizimi</p>
 </header>
 
 <div class="container">
 
-    <!-- STATISTIKA -->
-    <div class="stats">
+    <!-- MENU -->
+    <div class="card">
+        <div class="title">🥟 Somsa menyusi</div>
 
-        <div class="stat">
-            <div class="stat-number" id="orderCount">0</div>
-            <div class="stat-title">Buyurtmalar</div>
-        </div>
+        <div class="menu-grid">
 
-        <div class="stat">
-            <div class="stat-number" id="somsaCount">0</div>
-            <div class="stat-title">Somsalar</div>
-        </div>
+            <div class="menu-item">
+                <h3>🐑 Qo‘y go‘shtli somsa</h3>
 
-        <div class="stat">
-            <div class="stat-number">10</div>
-            <div class="stat-title">Tandir</div>
-        </div>
-
-    </div>
-
-
-    <!-- TANDIRLAR -->
-    <div class="section-title">🔥 Tandirlar</div>
-
-    <div class="tandir-grid">
-
-        <div class="tandir">
-            <h3>🔥 1-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(1)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 2-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(2)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 3-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(3)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 4-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(4)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 5-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(5)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 6-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(6)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 7-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(7)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 8-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(8)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 9-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(9)">Tanlash</button>
-        </div>
-
-        <div class="tandir">
-            <h3>🔥 10-Tandir</h3>
-            <p>Somsa tayyorlanmoqda</p>
-            <button onclick="selectTandir(10)">Tanlash</button>
-        </div>
-
-    </div>
-
-
-    <!-- MENYU -->
-    <div class="section-title">🥟 Somsa menyusi</div>
-
-    <div class="menu-grid">
-
-        <div class="menu-card">
-            <div class="food-icon">🥟</div>
-            <h3>Go‘shtli somsa</h3>
-            <div class="description">
-                Issiq tandirda pishirilgan mazali somsa
+                <label>Narxi</label>
+                <input
+                    id="qoyPrice"
+                    type="number"
+                    placeholder="Masalan: 15000"
+                >
             </div>
-            <div class="price">12 000 so‘m</div>
-            <button onclick="addOrder('Go‘shtli somsa',12000)">
-                Buyurtma berish
-            </button>
-        </div>
 
+            <div class="menu-item">
+                <h3>🐄 Mol go‘shtli somsa</h3>
 
-        <div class="menu-card">
-            <div class="food-icon">🥟</div>
-            <h3>Qovoqli somsa</h3>
-            <div class="description">
-                Yangi qovoqdan tayyorlangan somsa
+                <label>Narxi</label>
+                <input
+                    id="molPrice"
+                    type="number"
+                    placeholder="Masalan: 13000"
+                >
             </div>
-            <div class="price">10 000 so‘m</div>
-            <button onclick="addOrder('Qovoqli somsa',10000)">
-                Buyurtma berish
-            </button>
-        </div>
 
+            <div class="menu-item">
+                <h3>🥟 Mayda somsa</h3>
 
-        <div class="menu-card">
-            <div class="food-icon">🥟</div>
-            <h3>Tovuqli somsa</h3>
-            <div class="description">
-                Yumshoq tovuq go‘shti bilan
+                <label>Narxi</label>
+                <input
+                    id="maydaPrice"
+                    type="number"
+                    placeholder="Masalan: 8000"
+                >
             </div>
-            <div class="price">12 000 so‘m</div>
-            <button onclick="addOrder('Tovuqli somsa',12000)">
-                Buyurtma berish
-            </button>
+
         </div>
 
-
-        <div class="menu-card">
-            <div class="food-icon">🥟</div>
-            <h3>Pishloqli somsa</h3>
-            <div class="description">
-                Issiq va mazali pishloqli somsa
-            </div>
-            <div class="price">13 000 so‘m</div>
-            <button onclick="addOrder('Pishloqli somsa',13000)">
-                Buyurtma berish
-            </button>
-        </div>
-
-    </div>
-
-
-    <!-- BUYURTMA -->
-    <div class="order-box">
-
-        <h2>🛒 Buyurtma</h2>
-
-        <div id="orders">
-            Hozircha buyurtma yo‘q.
-        </div>
-
-        <div class="total">
-            <span>Jami:</span>
-            <span id="total">0 so‘m</span>
-        </div>
-
-        <button class="clear-btn" onclick="clearOrders()">
-            Buyurtmalarni tozalash
+        <button class="save-btn" onclick="saveMenu()">
+            💾 Menyu narxlarini saqlash
         </button>
+    </div>
+
+
+    <!-- KUN -->
+    <div class="card">
+
+        <div class="title">📅 Hisob kuni</div>
+
+        <input
+            id="workDate"
+            type="date"
+        >
+
+    </div>
+
+
+    <!-- TANDIR -->
+    <div class="card">
+
+        <div class="title">🔥 Tandirlar</div>
+
+        <div class="tandir-grid" id="tandirContainer"></div>
+
+    </div>
+
+
+    <!-- XARAJATLAR -->
+    <div class="card">
+
+        <div class="title">🛒 Kunlik xarajatlar</div>
+
+        <div class="expense-row">
+
+            <div>
+                <label>Xarajat nomi</label>
+                <input
+                    id="expenseName"
+                    type="text"
+                    placeholder="Masalan: Go‘sht"
+                >
+            </div>
+
+            <div>
+                <label>Summa</label>
+                <input
+                    id="expenseAmount"
+                    type="number"
+                    placeholder="200000"
+                >
+            </div>
+
+            <button onclick="addExpense()">
+                Qo‘shish
+            </button>
+
+        </div>
+
+        <div id="expenseList" style="margin-top:15px;"></div>
+
+    </div>
+
+
+    <!-- HISOB -->
+    <div class="card">
+
+        <div class="title">📊 Bugungi hisob</div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="totalPieces">0</strong>
+                <span>Jami somsa</span>
+            </div>
+
+            <div class="stat">
+                <strong id="totalIncome">0</strong>
+                <span>Jami tushum</span>
+            </div>
+
+            <div class="stat">
+                <strong id="totalExpense">0</strong>
+                <span>Jami xarajat</span>
+            </div>
+
+            <div class="stat">
+                <strong id="profit">0</strong>
+                <span>Sof foyda</span>
+            </div>
+
+        </div>
+
+        <button class="save-btn" onclick="saveDay()">
+            💾 Shu kunni saqlash
+        </button>
+
+    </div>
+
+
+    <!-- TARIX -->
+    <div class="card">
+
+        <div class="title">📚 Oldingi kunlar</div>
+
+        <label>Sanani tanlang</label>
+
+        <input
+            id="historyDate"
+            type="date"
+            onchange="showHistory()"
+        >
+
+        <div id="historyResult" style="margin-top:15px;">
+            <div class="empty">
+                Sana tanlang.
+            </div>
+        </div>
 
     </div>
 
 </div>
 
-
-<!-- FOOTER -->
-<footer class="footer">
-    <strong>Abdurazzoq somsa</strong>
-    <br><br>
-    Mazali somsa — yaxshi kayfiyat ❤️
-</footer>
+<div class="footer">
+    Abdurazzoq somsa © Kunlik hisob-kitob
+</div>
 
 
 <script>
 
-let orders = [];
-let total = 0;
-let somsaCount = 0;
-let orderCount = 0;
+/* =========================
+   MA'LUMOTLAR
+========================= */
+
+let menu = {
+    qoy: 0,
+    mol: 0,
+    mayda: 0
+};
+
+let currentData = {
+    tandirs: [],
+    expenses: []
+};
 
 
-/* TANDIR TANLASH */
-function selectTandir(number) {
+/* =========================
+   SAQLANGAN MENYUNI YUKLASH
+========================= */
 
-    alert(
-        "🔥 " + number + "-Tandir tanlandi!"
+function loadMenu() {
+
+    const saved = localStorage.getItem("abdurazzoq_menu");
+
+    if (saved) {
+        menu = JSON.parse(saved);
+    }
+
+    document.getElementById("qoyPrice").value = menu.qoy || "";
+    document.getElementById("molPrice").value = menu.mol || "";
+    document.getElementById("maydaPrice").value = menu.mayda || "";
+}
+
+
+/* =========================
+   MENYUNI SAQLASH
+========================= */
+
+function saveMenu() {
+
+    menu.qoy =
+        Number(document.getElementById("qoyPrice").value) || 0;
+
+    menu.mol =
+        Number(document.getElementById("molPrice").value) || 0;
+
+    menu.mayda =
+        Number(document.getElementById("maydaPrice").value) || 0;
+
+    localStorage.setItem(
+        "abdurazzoq_menu",
+        JSON.stringify(menu)
     );
 
+    alert("✅ Menyu narxlari saqlandi!");
+
+    renderTandirs();
 }
 
 
-/* BUYURTMA QO‘SHISH */
-function addOrder(name, price) {
+/* =========================
+   TANDIRLARNI YARATISH
+========================= */
 
-    orders.push({
-        name: name,
-        price: price
+function renderTandirs() {
+
+    const box =
+        document.getElementById("tandirContainer");
+
+    box.innerHTML = "";
+
+    for (let i = 1; i <= 10; i++) {
+
+        const div = document.createElement("div");
+
+        div.className = "tandir";
+
+        div.innerHTML = `
+
+            <h3>🔥 ${i}-Tandir</h3>
+
+            <label>Somsa turi</label>
+
+            <select id="type${i}" onchange="calculateTandir(${i})">
+
+                <option value="">
+                    Tanlang
+                </option>
+
+                <option value="qoy">
+                    Qo‘y go‘shtli somsa
+                </option>
+
+                <option value="mol">
+                    Mol go‘shtli somsa
+                </option>
+
+                <option value="mayda">
+                    Mayda somsa
+                </option>
+
+            </select>
+
+            <label>Yopilgan somsa soni</label>
+
+            <input
+                id="count${i}"
+                type="number"
+                min="0"
+                placeholder="Masalan: 350"
+                oninput="calculateTandir(${i})"
+            >
+
+            <div
+                class="result"
+                id="result${i}">
+                Jami: 0 so‘m
+            </div>
+
+        `;
+
+        box.appendChild(div);
+    }
+}
+
+
+/* =========================
+   BIR TANDIR HISOBI
+========================= */
+
+function calculateTandir(number) {
+
+    const type =
+        document.getElementById("type" + number).value;
+
+    const count =
+        Number(
+            document.getElementById("count" + number).value
+        ) || 0;
+
+    let price = 0;
+
+    if (type === "qoy") {
+        price = menu.qoy;
+    }
+
+    if (type === "mol") {
+        price = menu.mol;
+    }
+
+    if (type === "mayda") {
+        price = menu.mayda;
+    }
+
+    const total = count * price;
+
+    document.getElementById(
+        "result" + number
+    ).innerText =
+        "Jami: " + formatMoney(total) + " so‘m";
+
+    calculateTotal();
+}
+
+
+/* =========================
+   UMUMIY HISOB
+========================= */
+
+function calculateTotal() {
+
+    let pieces = 0;
+    let income = 0;
+
+    for (let i = 1; i <= 10; i++) {
+
+        const type =
+            document.getElementById("type" + i)?.value;
+
+        const count =
+            Number(
+                document.getElementById("count" + i)?.value
+            ) || 0;
+
+        let price = 0;
+
+        if (type === "qoy") {
+            price = menu.qoy;
+        }
+
+        if (type === "mol") {
+            price = menu.mol;
+        }
+
+        if (type === "mayda") {
+            price = menu.mayda;
+        }
+
+        pieces += count;
+        income += count * price;
+    }
+
+    let expense = 0;
+
+    currentData.expenses.forEach(item => {
+        expense += item.amount;
     });
 
-    total += price;
-    somsaCount++;
-    orderCount++;
+    const profit = income - expense;
 
-    updateOrders();
+    document.getElementById("totalPieces").innerText =
+        formatMoney(pieces);
 
+    document.getElementById("totalIncome").innerText =
+        formatMoney(income);
+
+    document.getElementById("totalExpense").innerText =
+        formatMoney(expense);
+
+    document.getElementById("profit").innerText =
+        formatMoney(profit);
 }
 
 
-/* BUYURTMALARNI KO‘RSATISH */
-function updateOrders() {
+/* =========================
+   XARAJAT QO‘SHISH
+========================= */
 
-    const ordersBox = document.getElementById("orders");
+function addExpense() {
 
-    if (orders.length === 0) {
+    const name =
+        document.getElementById("expenseName").value.trim();
 
-        ordersBox.innerHTML =
-            "Hozircha buyurtma yo‘q.";
+    const amount =
+        Number(
+            document.getElementById("expenseAmount").value
+        ) || 0;
 
-    } else {
+    if (!name || amount <= 0) {
 
-        ordersBox.innerHTML = "";
+        alert("Xarajat nomi va summasini kiriting.");
 
-        orders.forEach(function(order, index) {
+        return;
+    }
 
-            const item = document.createElement("div");
+    currentData.expenses.push({
+        name: name,
+        amount: amount
+    });
 
-            item.className = "order-item";
+    document.getElementById("expenseName").value = "";
+    document.getElementById("expenseAmount").value = "";
 
-            item.innerHTML =
-                "<span>" +
-                (index + 1) +
-                ". " +
-                order.name +
-                "</span>" +
-                "<strong>" +
-                order.price.toLocaleString() +
-                " so‘m</strong>";
+    renderExpenses();
+    calculateTotal();
+}
 
-            ordersBox.appendChild(item);
 
-        });
+/* =========================
+   XARAJATLARNI KO‘RSATISH
+========================= */
 
+function renderExpenses() {
+
+    const box =
+        document.getElementById("expenseList");
+
+    box.innerHTML = "";
+
+    if (currentData.expenses.length === 0) {
+
+        box.innerHTML =
+            '<div class="empty">Xarajat kiritilmagan.</div>';
+
+        return;
+    }
+
+    currentData.expenses.forEach((item, index) => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "history-item";
+
+        div.innerHTML = `
+
+            <div class="history-line">
+
+                <span>
+                    🛒 ${item.name}
+                </span>
+
+                <strong>
+                    ${formatMoney(item.amount)} so‘m
+                </strong>
+
+            </div>
+
+            <button
+                class="danger"
+                onclick="removeExpense(${index})">
+                O‘chirish
+            </button>
+        `;
+
+        box.appendChild(div);
+    });
+}
+
+
+/* =========================
+   XARAJATNI O‘CHIRISH
+========================= */
+
+function removeExpense(index) {
+
+    currentData.expenses.splice(index, 1);
+
+    renderExpenses();
+
+    calculateTotal();
+}
+
+
+/* =========================
+   KUNNI SAQLASH
+========================= */
+
+function saveDay() {
+
+    const date =
+        document.getElementById("workDate").value;
+
+    if (!date) {
+
+        alert("Avval sanani tanlang.");
+
+        return;
+    }
+
+    const tandirs = [];
+
+    for (let i = 1; i <= 10; i++) {
+
+        const type =
+            document.getElementById("type" + i).value;
+
+        const count =
+            Number(
+                document.getElementById("count" + i).value
+            ) || 0;
+
+        if (type && count > 0) {
+
+            let price = 0;
+            let name = "";
+
+            if (type === "qoy") {
+                price = menu.qoy;
+                name = "Qo‘y go‘shtli somsa";
+            }
+
+            if (type === "mol") {
+                price = menu.mol;
+                name = "Mol go‘shtli somsa";
+            }
+
+            if (type === "mayda") {
+                price = menu.mayda;
+                name = "Mayda somsa";
+            }
+
+            tandirs.push({
+                tandir: i,
+                type: type,
+                name: name,
+                count: count,
+                price: price,
+                total: count * price
+            });
+        }
+    }
+
+    let income = 0;
+    let pieces = 0;
+
+    tandirs.forEach(item => {
+
+        pieces += item.count;
+        income += item.total;
+
+    });
+
+    let expense = 0;
+
+    currentData.expenses.forEach(item => {
+        expense += item.amount;
+    });
+
+    const data = {
+
+        date: date,
+
+        tandirs: tandirs,
+
+        expenses: currentData.expenses,
+
+        pieces: pieces,
+
+        income: income,
+
+        expense: expense,
+
+        profit: income - expense
+    };
+
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("abdurazzoq_history") || "{}"
+        );
+
+
+    history[date] = data;
+
+
+    localStorage.setItem(
+        "abdurazzoq_history",
+        JSON.stringify(history)
+    );
+
+
+    alert(
+        "✅ " +
+        formatDate(date) +
+        " hisob-kitobi saqlandi!"
+    );
+}
+
+
+/* =========================
+   TARIXNI KO‘RISH
+========================= */
+
+function showHistory() {
+
+    const date =
+        document.getElementById("historyDate").value;
+
+    const box =
+        document.getElementById("historyResult");
+
+    if (!date) {
+
+        box.innerHTML =
+            '<div class="empty">Sana tanlang.</div>';
+
+        return;
     }
 
 
-    document.getElementById("total").innerText =
-        total.toLocaleString() + " so‘m";
+    const history =
+        JSON.parse(
+            localStorage.getItem("abdurazzoq_history") || "{}"
+        );
 
-    document.getElementById("somsaCount").innerText =
-        somsaCount;
 
-    document.getElementById("orderCount").innerText =
-        orderCount;
+    const data = history[date];
 
+
+    if (!data) {
+
+        box.innerHTML = `
+            <div class="empty">
+                ${formatDate(date)} uchun saqlangan hisob topilmadi.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    let html = `
+
+        <div class="history-item">
+
+            <div class="history-date">
+                📅 ${formatDate(date)}
+            </div>
+
+            <div class="history-line">
+                <span>🥟 Jami somsa</span>
+                <strong>
+                    ${formatMoney(data.pieces)} dona
+                </strong>
+            </div>
+
+            <div class="history-line">
+                <span>💰 Jami tushum</span>
+                <strong>
+                    ${formatMoney(data.income)} so‘m
+                </strong>
+            </div>
+
+            <div class="history-line">
+                <span>🛒 Xarajat</span>
+                <strong>
+                    ${formatMoney(data.expense)} so‘m
+                </strong>
+            </div>
+
+            <div class="history-line">
+                <span>✅ Sof foyda</span>
+                <strong>
+                    ${formatMoney(data.profit)} so‘m
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="title" style="margin-top:20px;">
+            🔥 Tandirlar
+        </div>
+    `;
+
+
+    data.tandirs.forEach(item => {
+
+        html += `
+
+            <div class="history-item">
+
+                <div class="history-line">
+
+                    <span>
+                        🔥 ${item.tandir}-Tandir
+                    </span>
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                </div>
+
+                <div class="history-line">
+
+                    <span>
+                        Yopilgan
+                    </span>
+
+                    <strong>
+                        ${formatMoney(item.count)} dona
+                    </strong>
+
+                </div>
+
+                <div class="history-line">
+
+                    <span>
+                        Narxi
+                    </span>
+
+                    <strong>
+                        ${formatMoney(item.price)} so‘m
+                    </strong>
+
+                </div>
+
+                <div class="history-line">
+
+                    <span>
+                        Jami
+                    </span>
+
+                    <strong>
+                        ${formatMoney(item.total)} so‘m
+                    </strong>
+
+                </div>
+
+            </div>
+        `;
+    });
+
+
+    if (data.expenses.length > 0) {
+
+        html += `
+            <div class="title" style="margin-top:20px;">
+                🛒 Xarajatlar
+            </div>
+        `;
+
+        data.expenses.forEach(item => {
+
+            html += `
+
+                <div class="history-line">
+
+                    <span>
+                        ${item.name}
+                    </span>
+
+                    <strong>
+                        ${formatMoney(item.amount)} so‘m
+                    </strong>
+
+                </div>
+            `;
+        });
+    }
+
+
+    box.innerHTML = html;
 }
 
 
-/* TOZALASH */
-function clearOrders() {
+/* =========================
+   PUL FORMAT
+========================= */
 
-    orders = [];
-    total = 0;
-    somsaCount = 0;
+function formatMoney(number) {
 
-    updateOrders();
-
+    return Number(number || 0)
+        .toLocaleString("uz-UZ");
 }
+
+
+/* =========================
+   SANA FORMAT
+========================= */
+
+function formatDate(date) {
+
+    const parts = date.split("-");
+
+    return parts[2] +
+        "." +
+        parts[1] +
+        "." +
+        parts[0];
+}
+
+
+/* =========================
+   BUGUNGI SANANI BERISH
+========================= */
+
+function setToday() {
+
+    const today =
+        new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        String(today.getMonth() + 1)
+        .padStart(2, "0");
+
+    const day =
+        String(today.getDate())
+        .padStart(2, "0");
+
+    document.getElementById("workDate").value =
+        year + "-" + month + "-" + day;
+}
+
+
+/* =========================
+   BOSHLASH
+========================= */
+
+loadMenu();
+
+setToday();
+
+renderTandirs();
+
+renderExpenses();
+
+calculateTotal();
 
 </script>
 
