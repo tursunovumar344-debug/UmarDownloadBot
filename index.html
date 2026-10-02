@@ -3,408 +3,871 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdurazzoq Somsa</title>
+
+<title>ILMIX — Hammasiga erishish o‘z qo‘lingda</title>
 
 <style>
+:root{
+    --blue:#2563eb;
+    --blue2:#1d4ed8;
+    --dark:#111827;
+    --text:#182235;
+    --muted:#687386;
+    --bg:#f6f8fc;
+    --white:#fff;
+    --border:#e5eaf2;
+    --green:#059669;
+}
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#0f1115;
-    color:#fff;
-    padding-bottom:85px;
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
 }
 
-header{
-    background:#171a20;
-    padding:18px 20px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    border-bottom:1px solid #292e38;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+button,
+input,
+select{
+    font:inherit;
 }
 
-.logo{
-    font-size:21px;
-    font-weight:800;
-}
-
-.logo span{
-    color:#f0a13a;
-}
-
-.icon-btn{
-    border:0;
-    background:#252a33;
-    color:white;
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    font-size:20px;
+button{
     cursor:pointer;
 }
 
-.container{
-    padding:18px;
-    max-width:1100px;
+a{
+    text-decoration:none;
+}
+
+/* HEADER */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    max-width:1250px;
+    height:74px;
     margin:auto;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.page{
+.logo{
+    font-size:29px;
+    font-weight:950;
+    color:var(--blue);
+    letter-spacing:-1.5px;
+}
+
+.logo span{
+    color:var(--dark);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#566174;
+    font-size:14px;
+    font-weight:700;
+}
+
+.nav-links a:hover{
+    color:var(--blue);
+}
+
+.login{
+    border:0;
+    background:var(--blue);
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:800;
+}
+
+.menu{
     display:none;
+    border:0;
+    background:none;
+    font-size:27px;
 }
 
-.page.active{
-    display:block;
-}
+/* HERO */
 
-h2{
-    margin-bottom:15px;
-}
-
-h3{
-    margin-bottom:8px;
-}
-
-.dashboard{
+.hero{
+    max-width:1250px;
+    min-height:600px;
+    margin:auto;
+    padding:70px 22px;
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    color:var(--blue);
+    background:#eaf1ff;
+    padding:9px 15px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.5px;
     margin-bottom:20px;
 }
 
-.card{
-    background:#181c23;
-    border:1px solid #292e38;
-    border-radius:16px;
-    padding:16px;
+.hero h1{
+    font-size:58px;
+    line-height:1.05;
+    letter-spacing:-2.7px;
+    margin-bottom:22px;
 }
 
-.stat-title{
-    color:#9299a7;
-    font-size:13px;
-    margin-bottom:8px;
+.hero h1 span{
+    color:var(--blue);
 }
 
-.stat-number{
-    font-size:25px;
-    font-weight:bold;
+.hero p{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.8;
+    max-width:590px;
+    margin-bottom:30px;
 }
 
-.stat-money{
-    color:#58d68d;
-}
-
-.section-title{
+.hero-buttons{
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:20px 0 12px;
+    flex-wrap:wrap;
+    gap:12px;
 }
 
 .btn{
     border:0;
-    background:#f0a13a;
-    color:#111;
-    padding:11px 15px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
+    border-radius:13px;
+    padding:14px 21px;
+    font-weight:850;
 }
 
-.btn.secondary{
-    background:#292f39;
-    color:#fff;
-}
-
-.btn.danger{
-    background:#c94c4c;
+.btn-primary{
     color:white;
+    background:var(--blue);
+    box-shadow:0 12px 30px rgba(37,99,235,.22);
 }
 
-.btn.green{
-    background:#2ebd70;
-    color:white;
+.btn-secondary{
+    color:var(--text);
+    background:white;
+    border:1px solid var(--border);
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.table-card{
-    background:#181c23;
-    border:1px solid #292e38;
-    border-radius:16px;
-    padding:15px;
-    cursor:pointer;
-}
-
-.table-card.busy{
-    border-color:#f0a13a;
-}
-
-.status{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:8px;
-    font-size:11px;
-    background:#242a32;
-    color:#aeb5c1;
-}
-
-.status.busy{
-    background:#513919;
-    color:#f0b65d;
-}
-
-.status.free{
-    background:#183b2a;
-    color:#5de091;
-}
-
-.small{
-    color:#949baa;
-    font-size:13px;
-}
-
-.total{
-    font-size:19px;
-    font-weight:bold;
-    margin-top:9px;
-}
-
-.product{
+.hero-visual{
+    min-height:430px;
+    border-radius:35px;
+    background:linear-gradient(145deg,#e9f0ff,#f7faff);
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:10px;
-    background:#181c23;
-    border:1px solid #292e38;
-    border-radius:14px;
-    padding:13px;
-    margin-bottom:9px;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
 }
 
-.product-info{
-    flex:1;
+.circle{
+    position:absolute;
+    width:310px;
+    height:310px;
+    background:#d9e6ff;
+    border-radius:50%;
 }
 
-.product-name{
-    font-weight:bold;
+.study{
+    position:relative;
+    z-index:2;
+    width:300px;
+    background:white;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(30,60,120,.15);
+}
+
+.study-logo{
+    font-size:25px;
+    font-weight:950;
+    color:var(--blue);
+    margin-bottom:20px;
+}
+
+.study-card{
+    padding:18px;
+    border-radius:15px;
+    background:#f3f6fb;
+    margin-bottom:12px;
+}
+
+.study-card:last-child{
+    margin-bottom:0;
+}
+
+.study-card b{
+    display:block;
     margin-bottom:5px;
 }
 
-.product-price{
-    color:#f0a13a;
+.study-card span{
+    color:var(--muted);
     font-size:13px;
 }
 
-.qty input{
-    width:75px;
-    height:40px;
-    background:#242932;
-    color:#fff;
-    border:1px solid #3a414d;
-    border-radius:9px;
+/* SECTION */
+
+.section{
+    max-width:1250px;
+    margin:auto;
+    padding:75px 22px;
+}
+
+.heading{
     text-align:center;
-    font-size:17px;
-    font-weight:bold;
-    outline:none;
+    margin-bottom:42px;
 }
 
-.qty input:focus{
-    border-color:#f0a13a;
+.heading small{
+    color:var(--blue);
+    font-weight:900;
 }
 
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:72px;
-    background:#171a20;
-    border-top:1px solid #292e38;
+.heading h2{
+    margin-top:8px;
+    font-size:39px;
+    letter-spacing:-1.4px;
+}
+
+.heading p{
+    color:var(--muted);
+    margin-top:10px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.feature{
+    background:white;
+    border:1px solid var(--border);
+    padding:27px;
+    border-radius:21px;
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(30,50,90,.08);
+}
+
+.icon{
+    width:51px;
+    height:51px;
     display:flex;
-    justify-content:space-around;
     align-items:center;
-    z-index:100;
-}
-
-.nav-item{
-    color:#8d95a3;
-    text-align:center;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.nav-item div{
-    font-size:21px;
-    margin-bottom:3px;
-}
-
-.nav-item.active{
-    color:#f0a13a;
-}
-
-.modal-bg{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    display:none;
-    align-items:flex-end;
     justify-content:center;
-    z-index:200;
+    background:#edf3ff;
+    border-radius:15px;
+    font-size:23px;
+    margin-bottom:17px;
 }
 
-.modal-bg.show{
-    display:flex;
+.feature h3{
+    margin-bottom:8px;
 }
+
+.feature p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* SEARCH */
+
+.search{
+    max-width:850px;
+    margin:0 auto 30px;
+    position:relative;
+}
+
+.search input{
+    width:100%;
+    height:58px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:0 20px;
+    outline:none;
+    background:white;
+    box-shadow:0 8px 25px rgba(20,40,80,.05);
+}
+
+.search input:focus{
+    border-color:var(--blue);
+}
+
+/* FILTERS */
+
+.filters{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:35px;
+}
+
+.filter{
+    border:1px solid var(--border);
+    background:white;
+    padding:10px 15px;
+    border-radius:50px;
+    color:#596477;
+    font-weight:700;
+}
+
+.filter.active{
+    background:var(--blue);
+    border-color:var(--blue);
+    color:white;
+}
+
+/* BOOKS */
+
+.books{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.book{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:21px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.book:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 45px rgba(20,40,80,.1);
+}
+
+.cover{
+    height:250px;
+    padding:19px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.cover.blue{
+    background:linear-gradient(145deg,#155eef,#5790ff);
+}
+
+.cover.green{
+    background:linear-gradient(145deg,#047857,#34d399);
+}
+
+.cover.orange{
+    background:linear-gradient(145deg,#ea580c,#fb923c);
+}
+
+.cover.red{
+    background:linear-gradient(145deg,#be123c,#fb7185);
+}
+
+.cover.purple{
+    background:linear-gradient(145deg,#6d28d9,#a78bfa);
+}
+
+.cover.dark{
+    background:linear-gradient(145deg,#111827,#475569);
+}
+
+.cover-inner{
+    width:100%;
+    height:100%;
+    border:2px solid rgba(255,255,255,.65);
+    border-radius:8px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.cover-inner small{
+    opacity:.85;
+    margin-bottom:12px;
+    font-weight:700;
+}
+
+.cover-inner h3{
+    font-size:23px;
+    line-height:1.2;
+}
+
+.cover-symbol{
+    font-size:38px;
+    margin-top:18px;
+}
+
+.book-body{
+    padding:18px;
+}
+
+.book-body h3{
+    margin-bottom:7px;
+}
+
+.book-body p{
+    color:var(--muted);
+    font-size:13px;
+    min-height:40px;
+    line-height:1.5;
+}
+
+.book-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:14px;
+}
+
+.book-actions button{
+    border:0;
+    padding:10px 7px;
+    border-radius:10px;
+    font-weight:800;
+    font-size:12px;
+}
+
+.open{
+    color:white;
+    background:var(--blue);
+}
+
+.exercise{
+    color:var(--blue);
+    background:#edf3ff;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    color:var(--muted);
+}
+
+/* EXERCISES */
+
+.exercise-box{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:28px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field{
+    width:100%;
+    height:50px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:0 14px;
+    outline:none;
+    background:white;
+}
+
+.field:focus{
+    border-color:var(--blue);
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.find-btn{
+    width:100%;
+    height:50px;
+    margin-top:13px;
+    border:0;
+    border-radius:11px;
+    background:var(--blue);
+    color:white;
+    font-weight:850;
+}
+
+.result{
+    display:none;
+    margin-top:20px;
+    background:#f4f7fc;
+    border-radius:16px;
+    padding:20px;
+    line-height:1.7;
+}
+
+.result.show{
+    display:block;
+}
+
+/* PHOTO */
+
+.photo-section{
+    background:#111827;
+    border-radius:30px;
+    padding:55px;
+    color:white;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:40px;
+    align-items:center;
+}
+
+.photo-section small{
+    color:#79a2ff;
+    font-weight:900;
+}
+
+.photo-section h2{
+    font-size:38px;
+    margin-top:9px;
+}
+
+.photo-section p{
+    color:#b7c1d2;
+    line-height:1.7;
+    margin:15px 0 25px;
+}
+
+.upload{
+    display:inline-block;
+    background:var(--blue);
+    padding:14px 20px;
+    border-radius:12px;
+    font-weight:850;
+}
+
+.upload input{
+    display:none;
+}
+
+.upload-box{
+    min-height:220px;
+    border:2px dashed #4b5870;
+    border-radius:22px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#aeb8ca;
+    padding:20px;
+}
+
+.upload-box strong{
+    font-size:46px;
+    margin-bottom:10px;
+}
+
+/* HOW */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.step{
+    background:white;
+    border:1px solid var(--border);
+    padding:30px;
+    border-radius:20px;
+}
+
+.step-number{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:var(--blue);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    margin-bottom:20px;
+}
+
+.step p{
+    color:var(--muted);
+    line-height:1.65;
+    margin-top:8px;
+}
+
+/* FOOTER */
+
+.footer{
+    background:#101827;
+    color:white;
+    margin-top:40px;
+}
+
+.footer-inner{
+    max-width:1250px;
+    margin:auto;
+    padding:55px 22px 30px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-logo{
+    font-size:30px;
+    font-weight:950;
+    color:#6f99ff;
+}
+
+.footer-text{
+    max-width:410px;
+    color:#98a4b8;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+.footer h4{
+    margin-bottom:15px;
+}
+
+.footer a{
+    display:block;
+    color:#98a4b8;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.copyright{
+    max-width:1250px;
+    margin:auto;
+    border-top:1px solid #273245;
+    padding:18px 22px;
+    color:#68758b;
+    font-size:12px;
+    position:relative;
+}
+
+.founder{
+    position:absolute;
+    right:22px;
+    bottom:18px;
+    color:#59667a;
+}
+
+/* MODAL */
 
 .modal{
-    width:100%;
-    max-width:650px;
-    max-height:92vh;
-    overflow-y:auto;
-    background:#171a20;
-    border-radius:22px 22px 0 0;
-    padding:20px;
-    border-top:1px solid #333944;
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(8,15,30,.72);
+    align-items:center;
+    justify-content:center;
+    padding:18px;
 }
 
-.modal-head{
+.modal.show{
     display:flex;
-    justify-content:space-between;
+}
+
+.modal-card{
+    width:min(950px,100%);
+    max-height:92vh;
+    overflow:hidden;
+    background:white;
+    border-radius:22px;
+    position:relative;
+}
+
+.modal-top{
+    height:65px;
+    padding:0 20px;
+    display:flex;
     align-items:center;
-    margin-bottom:18px;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+}
+
+.modal-top h3{
+    font-size:17px;
 }
 
 .close{
-    background:#292f38;
-    color:white;
+    width:38px;
+    height:38px;
     border:0;
-    width:35px;
-    height:35px;
-    border-radius:9px;
-    font-size:20px;
+    border-radius:50%;
+    background:#eef1f6;
+    font-size:21px;
 }
 
-.input{
+.modal-body{
+    overflow:auto;
+    max-height:calc(92vh - 65px);
+}
+
+.pdf{
     width:100%;
-    padding:13px;
-    background:#242932;
-    color:#fff;
-    border:1px solid #343b46;
-    border-radius:10px;
-    outline:none;
-    margin:6px 0 12px;
+    height:75vh;
+    border:0;
 }
 
-label{
-    color:#aeb5c0;
-    font-size:13px;
+.info{
+    padding:30px;
 }
 
-.modal-total{
-    background:#222730;
-    border-radius:12px;
-    padding:15px;
-    margin:15px 0;
-    display:flex;
-    justify-content:space-between;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.actions .btn{
-    flex:1;
-    min-width:120px;
-}
-
-.tandir{
-    background:#181c23;
-    border:1px solid #292e38;
-    border-radius:16px;
-    padding:15px;
-    margin-bottom:12px;
-}
-
-.tandir-head{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
-
-.progress{
-    height:8px;
-    background:#292e38;
-    border-radius:10px;
-    overflow:hidden;
-    margin:7px 0 12px;
-}
-
-.progress div{
-    height:100%;
-    background:#f0a13a;
-}
-
-.report-row{
-    display:flex;
-    justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid #292e38;
-}
-
-.empty{
-    text-align:center;
-    padding:35px 15px;
-    color:#858d9b;
-}
-
-.history{
-    background:#181c23;
-    border:1px solid #292e38;
-    border-radius:14px;
-    padding:14px;
+.info h2{
     margin-bottom:10px;
 }
 
-.product-editor{
-    background:#20252d;
-    padding:12px;
-    border-radius:12px;
-    margin-bottom:10px;
+.info p{
+    color:var(--muted);
+    line-height:1.7;
 }
 
-@media(min-width:700px){
+.notice{
+    margin-top:18px;
+    padding:15px;
+    background:#eff6ff;
+    color:#2450a4;
+    border-radius:12px;
+    line-height:1.6;
+}
 
-    .grid{
-        grid-template-columns:repeat(4,1fr);
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .books{
+        grid-template-columns:repeat(3,1fr);
     }
 
-    .dashboard{
-        grid-template-columns:repeat(4,1fr);
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px){
+
+    .nav{
+        height:68px;
     }
 
-    .bottom-nav{
-        left:50%;
-        transform:translateX(-50%);
-        width:700px;
-        border-radius:18px 18px 0 0;
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:68px;
+        left:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px 22px;
+        border-bottom:1px solid var(--border);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .login{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:45px;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero-visual{
+        min-height:340px;
+    }
+
+    .features,
+    .books,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .photo-section{
+        grid-template-columns:1fr;
+        padding:30px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr;
+    }
+
+    .founder{
+        position:static;
+        display:block;
+        margin-top:7px;
     }
 }
 </style>
@@ -412,394 +875,1120 @@ label{
 
 <body>
 
-<header>
+<header class="header">
 
-<div class="logo">
-ABDURRAZOQ <span>SOMSA</span>
+<div class="nav">
+
+<a href="#home" class="logo">
+ILM<span>IX</span>
+</a>
+
+<nav class="nav-links" id="navLinks">
+<a href="#home">Bosh sahifa</a>
+<a href="#books">Darsliklar</a>
+<a href="#exercises">Mashqlar</a>
+<a href="#photo">Rasm orqali</a>
+<a href="#how">Qanday ishlaydi?</a>
+</nav>
+
+<button class="login" onclick="openLogin()">
+Kirish
+</button>
+
+<button class="menu" onclick="toggleMenu()">
+☰
+</button>
+
 </div>
-
-<button class="icon-btn" onclick="openSettings()">⚙️</button>
 
 </header>
 
-<main class="container">
 
-<!-- ASOSIY -->
-<section id="home" class="page active">
+<main>
 
-<h2>Asosiy</h2>
+<!-- HERO -->
 
-<div class="dashboard">
+<section class="hero" id="home">
 
-<div class="card">
-<div class="stat-title">Bugungi tushum</div>
-<div class="stat-number stat-money" id="homeRevenue">
-0 so'm
-</div>
+<div>
+
+<div class="badge">
+9-SINF TA'LIM PLATFORMASI
 </div>
 
-<div class="card">
-<div class="stat-title">Faol stollar</div>
-<div class="stat-number" id="homeTables">0</div>
+<h1>
+Hammasiga erishish
+<span>o‘z qo‘lingda.</span>
+</h1>
+
+<p>
+ILMIX — 9-sinf o‘quvchilari uchun darslik,
+mashq, izoh va o‘rganishni bir joyga jamlaydigan
+zamonaviy ta’lim platformasi.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#books" class="btn btn-primary">
+Darsliklarni ko‘rish
+</a>
+
+<a href="#exercises" class="btn btn-secondary">
+Mashqni topish
+</a>
+
 </div>
 
-<div class="card">
-<div class="stat-title">Bugun sotilgan</div>
-<div class="stat-number" id="homeSold">0</div>
 </div>
 
-<div class="card">
-<div class="stat-title">Faol tandirlar</div>
-<div class="stat-number" id="homeTandir">0</div>
+
+<div class="hero-visual">
+
+<div class="circle"></div>
+
+<div class="study">
+
+<div class="study-logo">
+ILMIX
+</div>
+
+<div class="study-card">
+<b>📚 Darslik</b>
+<span>Kerakli fan va darslikni tanlang</span>
+</div>
+
+<div class="study-card">
+<b>✏️ Mashq</b>
+<span>Bet va mashq orqali qidiring</span>
+</div>
+
+<div class="study-card">
+<b>📷 Rasm orqali</b>
+<span>Masalani suratdan aniqlash</span>
 </div>
 
 </div>
 
-<div class="section-title">
+</div>
 
-<h3>Tezkor stollar</h3>
+</section>
 
-<button class="btn" onclick="showPage('tables')">
+
+<!-- FEATURES -->
+
+<section class="section">
+
+<div class="heading">
+
+<small>ILMIX IMKONIYATLARI</small>
+
+<h2>O‘qishni osonlashtiramiz</h2>
+
+<p>
+Kerakli ta’lim vositalari bitta platformada.
+</p>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+<div class="icon">📚</div>
+<h3>Darsliklar</h3>
+<p>
+9-sinf fanlari bo‘yicha rasmiy elektron darsliklarga
+qulay kirish.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">✏️</div>
+<h3>Mashqlar</h3>
+<p>
+Fan, bet va mashq raqami orqali topshiriqni topish
+uchun maxsus qidiruv.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">📷</div>
+<h3>Rasm orqali</h3>
+<p>
+Masalani suratga olib yuborish uchun tayyor interfeys.
+AI modul keyingi backend bosqichida ulanadi.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">🧠</div>
+<h3>Tushuntirish</h3>
+<p>
+Faqat javobni emas, masalani tushunishga yordam
+beradigan yechimni ko‘rsatish.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BOOKS -->
+
+<section class="section" id="books">
+
+<div class="heading">
+
+<small>9-SINF</small>
+
+<h2>Darsliklar</h2>
+
+<p>
+Kerakli fanni tanlang va rasmiy elektron darslikni oching.
+</p>
+
+</div>
+
+
+<div class="search">
+
+<input
+id="bookSearch"
+type="text"
+placeholder="🔎 Fan yoki darslik nomini qidiring..."
+oninput="searchBooks()"
+>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter active" onclick="filterBooks('all',this)">
 Barchasi
 </button>
 
-</div>
+<button class="filter" onclick="filterBooks('aniq',this)">
+Aniq fanlar
+</button>
 
-<div id="homeTableGrid" class="grid"></div>
+<button class="filter" onclick="filterBooks('tabiiy',this)">
+Tabiiy fanlar
+</button>
 
-</section>
+<button class="filter" onclick="filterBooks('ijtimoiy',this)">
+Ijtimoiy fanlar
+</button>
 
-
-<!-- STOLLAR -->
-<section id="tables" class="page">
-
-<div class="section-title">
-
-<h2>Stollar</h2>
-
-<button class="btn" onclick="openSettings()">
-⚙️
+<button class="filter" onclick="filterBooks('til',this)">
+Tillar
 </button>
 
 </div>
 
-<div id="tableGrid" class="grid"></div>
 
-</section>
+<div class="books" id="booksContainer">
 
+<!-- MATEMATIKA -->
 
-<!-- TANDIRLAR -->
-<section id="tandir" class="page">
+<article class="book"
+data-name="matematika algebra geometriya"
+data-category="aniq">
 
-<div class="section-title">
+<div class="cover blue">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>MATEMATIKA</h3>
+<div class="cover-symbol">∑ √ π</div>
+</div>
+</div>
 
-<h2>Tandirlar</h2>
+<div class="book-body">
 
-<button class="btn" onclick="openTandir()">
-+ Tandir
+<h3>Matematika</h3>
+
+<p>
+9-sinf matematika darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Matematika','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Matematika')">
+Mashqlar
 </button>
 
 </div>
 
-<div id="tandirList"></div>
+</div>
 
-</section>
+</article>
 
 
-<!-- MENU -->
-<section id="menu" class="page">
+<!-- FIZIKA -->
 
-<div class="section-title">
+<article class="book"
+data-name="fizika astronomiya"
+data-category="tabiiy">
 
-<h2>Menyu</h2>
+<div class="cover purple">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>FIZIKA</h3>
+<div class="cover-symbol">⚛</div>
+</div>
+</div>
 
-<button class="btn" onclick="openSettings()">
-⚙️
+<div class="book-body">
+
+<h3>Fizika</h3>
+
+<p>
+Fizika va astronomiya yo‘nalishi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Fizika','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Fizika')">
+Mashqlar
 </button>
 
 </div>
 
-<div id="menuList"></div>
+</div>
+
+</article>
+
+
+<!-- KIMYO -->
+
+<article class="book"
+data-name="kimyo"
+data-category="tabiiy">
+
+<div class="cover green">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>KIMYO</h3>
+<div class="cover-symbol">⚗</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Kimyo</h3>
+
+<p>
+9-sinf Kimyo darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openPDF(
+'https://eduportal.uz/Umumiyfiles/darsliklar/9/kimyo_9_uzb.pdf',
+'Kimyo — 9-sinf'
+)">
+Darslikni ochish
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Kimyo')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- BIOLOGIYA -->
+
+<article class="book"
+data-name="biologiya genetika"
+data-category="tabiiy">
+
+<div class="cover green">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>BIOLOGIYA</h3>
+<div class="cover-symbol">🧬</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Biologiya</h3>
+
+<p>
+9-sinf Biologiya darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openPDF(
+'https://old.eduportal.uz/Umumiyfiles/darsliklar/9/biologiya_9_uzb.pdf',
+'Biologiya — 9-sinf'
+)">
+Darslikni ochish
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Biologiya')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- GEOGRAFIYA -->
+
+<article class="book"
+data-name="geografiya"
+data-category="tabiiy">
+
+<div class="cover blue">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>GEOGRAFIYA</h3>
+<div class="cover-symbol">🌍</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Geografiya</h3>
+
+<p>
+9-sinf Geografiya darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Geografiya','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Geografiya')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- ONA TILI -->
+
+<article class="book"
+data-name="ona tili o'zbek tili"
+data-category="til">
+
+<div class="cover orange">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>ONA TILI</h3>
+<div class="cover-symbol">Aa</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Ona tili</h3>
+
+<p>
+9-sinf Ona tili darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Ona tili','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Ona tili')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- ADABIYOT -->
+
+<article class="book"
+data-name="adabiyot"
+data-category="til">
+
+<div class="cover red">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>ADABIYOT</h3>
+<div class="cover-symbol">📖</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Adabiyot</h3>
+
+<p>
+9-sinf Adabiyot darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Adabiyot','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Adabiyot')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- INGLIZ TILI -->
+
+<article class="book"
+data-name="ingliz tili english"
+data-category="til">
+
+<div class="cover orange">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>ENGLISH</h3>
+<div class="cover-symbol">EN</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Ingliz tili</h3>
+
+<p>
+9-sinf English darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Ingliz tili','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Ingliz tili')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- RUS TILI -->
+
+<article class="book"
+data-name="rus tili"
+data-category="til">
+
+<div class="cover dark">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>RUS TILI</h3>
+<div class="cover-symbol">АБВ</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Rus tili</h3>
+
+<p>
+9-sinf Rus tili darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Rus tili','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Rus tili')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- O'ZBEKISTON TARIXI -->
+
+<article class="book"
+data-name="o'zbekiston tarixi tarix"
+data-category="ijtimoiy">
+
+<div class="cover red">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>O‘ZBEKISTON TARIXI</h3>
+<div class="cover-symbol">🏛</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>O‘zbekiston tarixi</h3>
+
+<p>
+9-sinf O‘zbekiston tarixi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('O‘zbekiston tarixi','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('O‘zbekiston tarixi')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- JAHON TARIXI -->
+
+<article class="book"
+data-name="jahon tarixi"
+data-category="ijtimoiy">
+
+<div class="cover purple">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>JAHON TARIXI</h3>
+<div class="cover-symbol">🌍</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Jahon tarixi</h3>
+
+<p>
+9-sinf Jahon tarixi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openPDF(
+'https://old.eduportal.uz/Umumiyfiles/muhokama/jahon_tarixi_9_uzb.pdf',
+'Jahon tarixi — 9-sinf'
+)">
+Darslikni ochish
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Jahon tarixi')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- INFORMATIKA -->
+
+<article class="book"
+data-name="informatika axborot texnologiyalari"
+data-category="aniq">
+
+<div class="cover dark">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>INFORMATIKA</h3>
+<div class="cover-symbol">&lt;/&gt;</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Informatika</h3>
+
+<p>
+Informatika va axborot texnologiyalari
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openPDF(
+'https://eduportal.uz/Umumiyfiles/darsliklar/9/informatika_9_uzb.pdf',
+'Informatika va axborot texnologiyalari — 9-sinf'
+)">
+Darslikni ochish
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Informatika')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- DAVLAT VA HUQUQ -->
+
+<article class="book"
+data-name="davlat huquq huquqshunoslik"
+data-category="ijtimoiy">
+
+<div class="cover blue">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>DAVLAT VA HUQUQ ASOSLARI</h3>
+<div class="cover-symbol">⚖</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Davlat va huquq asoslari</h3>
+
+<p>
+9-sinf darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Davlat va huquq asoslari','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Davlat va huquq asoslari')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- TARBIYA -->
+
+<article class="book"
+data-name="tarbiya"
+data-category="ijtimoiy">
+
+<div class="cover green">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>TARBIYA</h3>
+<div class="cover-symbol">💡</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Tarbiya</h3>
+
+<p>
+9-sinf Tarbiya darsligi
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Tarbiya','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Tarbiya')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- IQTISOD -->
+
+<article class="book"
+data-name="iqtisod iqtisodiyot tadbirkorlik"
+data-category="ijtimoiy">
+
+<div class="cover orange">
+<div class="cover-inner">
+<small>9-SINF</small>
+<h3>IQTISOD</h3>
+<div class="cover-symbol">₽ $</div>
+</div>
+</div>
+
+<div class="book-body">
+
+<h3>Iqtisodiy bilim asoslari</h3>
+
+<p>
+Iqtisodiyot va tadbirkorlik asoslari
+</p>
+
+<div class="book-actions">
+
+<button class="open"
+onclick="openOfficial('Iqtisodiy bilim asoslari','https://qr.uzedu.uz/uz/services/index/4')">
+Rasmiy darslik
+</button>
+
+<button class="exercise"
+onclick="chooseExercise('Iqtisodiy bilim asoslari')">
+Mashqlar
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+
+<div class="empty" id="empty">
+🔎 Bunday darslik topilmadi.
+</div>
 
 </section>
 
 
-<!-- HISOBOT -->
-<section id="report" class="page">
+<!-- EXERCISES -->
 
-<h2>Hisobot</h2>
+<section class="section" id="exercises">
 
-<div class="dashboard">
+<div class="heading">
 
-<div class="card">
+<small>MASHQLAR</small>
 
-<div class="stat-title">
-Jami tushum
-</div>
+<h2>Mashqni toping</h2>
 
-<div class="stat-number stat-money"
-id="reportRevenue">
-0
-</div>
+<p>
+Fan, bet va mashq raqamini kiriting.
+</p>
 
 </div>
 
-<div class="card">
 
-<div class="stat-title">
-Yopilgan hisoblar
+<div class="exercise-box">
+
+<div class="form-grid">
+
+<select class="field full" id="subject">
+<option value="">Fanni tanlang</option>
+<option>Matematika</option>
+<option>Fizika</option>
+<option>Kimyo</option>
+<option>Biologiya</option>
+<option>Geografiya</option>
+<option>Ona tili</option>
+<option>Adabiyot</option>
+<option>Ingliz tili</option>
+<option>Rus tili</option>
+<option>O‘zbekiston tarixi</option>
+<option>Jahon tarixi</option>
+<option>Informatika</option>
+<option>Davlat va huquq asoslari</option>
+<option>Tarbiya</option>
+<option>Iqtisodiy bilim asoslari</option>
+</select>
+
+<input
+class="field"
+id="page"
+type="number"
+min="1"
+placeholder="Bet raqami">
+
+<input
+class="field"
+id="exerciseNumber"
+type="number"
+min="1"
+placeholder="Mashq raqami">
+
 </div>
 
-<div class="stat-number"
-id="reportBills">
-0
+<button class="find-btn" onclick="findExercise()">
+🔎 Mashqni qidirish
+</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</section>
+
+
+<!-- PHOTO -->
+
+<section class="section" id="photo">
+
+<div class="photo-section">
+
+<div>
+
+<small>RASM ORQALI YECHISH</small>
+
+<h2>
+Masalani rasmga oling
+</h2>
+
+<p>
+O‘quvchi masala yoki topshiriqni suratga oladi.
+ILMIX uni aniqlash va javob/tushuntirish chiqarish
+uchun tayyorlangan.
+</p>
+
+<label class="upload">
+
+📷 Rasm tanlash
+
+<input
+type="file"
+accept="image/*"
+onchange="photoSelected(this)"
+>
+
+</label>
+
+</div>
+
+
+<div class="upload-box">
+
+<strong>📷</strong>
+
+<div id="uploadText">
+Masala rasmini shu yerga yuklang
 </div>
 
 </div>
 
 </div>
 
-<div class="card">
+</section>
 
-<h3>Mahsulotlar bo‘yicha</h3>
 
-<div id="productReport"></div>
+<!-- HOW -->
+
+<section class="section" id="how">
+
+<div class="heading">
+
+<small>3 QADAM</small>
+
+<h2>ILMIX qanday ishlaydi?</h2>
 
 </div>
 
-<div class="section-title">
 
-<h3>Yopilgan hisoblar</h3>
+<div class="steps">
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<h3>Fanni tanlang</h3>
+
+<p>
+Kerakli 9-sinf fanini va darslikni tanlang.
+</p>
 
 </div>
 
-<div id="historyList"></div>
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<h3>Mashqni toping</h3>
+
+<p>
+Bet va mashq raqami orqali kerakli topshiriqqa
+o‘ting.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<h3>Yechimni o‘rganing</h3>
+
+<p>
+Javob va tushuntirishni ko‘rib, masalani
+o‘zingiz ham tushunib oling.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
 </main>
 
 
-<!-- NAVIGATION -->
-<nav class="bottom-nav">
+<!-- FOOTER -->
 
-<div class="nav-item active"
-onclick="showPage('home',this)">
+<footer class="footer">
 
-<div>🏠</div>
-Asosiy
+<div class="footer-inner">
+
+<div>
+
+<div class="footer-logo">
+ILMIX
+</div>
+
+<p class="footer-text">
+Hammasiga erishish o‘z qo‘lingda.
+9-sinf o‘quvchilari uchun zamonaviy
+ta’lim platformasi.
+</p>
 
 </div>
 
-<div class="nav-item"
-onclick="showPage('tables',this)">
 
-<div>🪑</div>
-Stollar
+<div>
 
-</div>
+<h4>Platforma</h4>
 
-<div class="nav-item"
-onclick="showPage('tandir',this)">
-
-<div>🔥</div>
-Tandirlar
+<a href="#books">Darsliklar</a>
+<a href="#exercises">Mashqlar</a>
+<a href="#photo">Rasm orqali</a>
+<a href="#how">Qanday ishlaydi?</a>
 
 </div>
 
-<div class="nav-item"
-onclick="showPage('menu',this)">
 
-<div>🍽️</div>
-Menyu
+<div>
 
-</div>
+<h4>Rasmiy manba</h4>
 
-<div class="nav-item"
-onclick="showPage('report',this)">
+<a
+href="https://qr.uzedu.uz/uz/services/index/4"
+target="_blank">
+Darsliklar portali
+</a>
 
-<div>📊</div>
-Hisobot
-
-</div>
-
-</nav>
-
-
-<!-- SETTINGS -->
-<div id="settingsModal" class="modal-bg">
-
-<div class="modal">
-
-<div class="modal-head">
-
-<h2>Sozlamalar</h2>
-
-<button class="close"
-onclick="closeModal('settingsModal')">
-×
-</button>
+<a href="#home">
+Bosh sahifa
+</a>
 
 </div>
 
-<label>
-Stollar soni
-</label>
+</div>
 
-<input
-id="tableCount"
-class="input"
-type="number"
-min="1"
-max="200"
->
 
-<h3>
-Mahsulotlar va narxlar
+<div class="copyright">
+
+© 2026 ILMIX. Barcha huquqlar himoyalangan.
+
+<span class="founder">
+Loyiha asoschisi — Umar Tursunov
+</span>
+
+</div>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-card">
+
+<div class="modal-top">
+
+<h3 id="modalTitle">
+ILMIX
 </h3>
 
-<div id="productEditors"></div>
-
-<button class="btn secondary"
-onclick="addProduct()">
-+ Mahsulot qo‘shish
-</button>
-
-<br><br>
-
-<button class="btn"
-style="width:100%"
-onclick="saveSettings()">
-Saqlash
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ZAKAZ -->
-<div id="orderModal" class="modal-bg">
-
-<div class="modal">
-
-<div class="modal-head">
-
-<h2 id="orderTitle">
-Stol
-</h2>
-
-<button class="close"
-onclick="closeModal('orderModal')">
+<button class="close" onclick="closeModal()">
 ×
 </button>
 
 </div>
 
-<div id="orderProducts"></div>
-
-<div class="modal-total">
-
-<span>
-Jami
-</span>
-
-<span id="orderTotal">
-0 so'm
-</span>
-
-</div>
-
-<div class="actions">
-
-<button class="btn green"
-onclick="closeBill()">
-Hisobni yopish
-</button>
-
-<button class="btn secondary"
-onclick="closeModal('orderModal')">
-Yopish
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- TANDIR -->
-<div id="tandirModal" class="modal-bg">
-
-<div class="modal">
-
-<div class="modal-head">
-
-<h2>
-Yangi tandir
-</h2>
-
-<button class="close"
-onclick="closeModal('tandirModal')">
-×
-</button>
-
-</div>
-
-<label>
-Tandir nomi
-</label>
-
-<input
-id="tandirName"
-class="input"
-placeholder="Masalan: 1-tandir"
->
-
-<label>
-Qo‘y go‘shtli somsa
-</label>
-
-<input
-id="tandirQoy"
-class="input"
-type="number"
-min="0"
-value="0"
->
-
-<label>
-Mol go‘shtli somsa
-</label>
-
-<input
-id="tandirMol"
-class="input"
-type="number"
-min="0"
-value="0"
->
-
-<label>
-Maydacha somsa
-</label>
-
-<input
-id="tandirMayda"
-class="input"
-type="number"
-min="0"
-value="0"
->
-
-<button class="btn"
-style="width:100%"
-onclick="saveTandir()">
-
-Tandirni ochish
-
-</button>
+<div class="modal-body" id="modalBody"></div>
 
 </div>
 
@@ -808,1771 +1997,339 @@ Tandirni ochish
 
 <script>
 
-const KEY = "abdurazzoq_somsa_v4";
+/* MENU */
 
-let data =
-JSON.parse(localStorage.getItem(KEY)) ||
-{
-    tableCount:20,
-
-    products:[
-        {
-            id:"qoy",
-            name:"Qo‘y go‘shtli somsa",
-            price:10000
-        },
-        {
-            id:"mol",
-            name:"Mol go‘shtli somsa",
-            price:10000
-        },
-        {
-            id:"mayda",
-            name:"Maydacha somsa",
-            price:8000
-        },
-        {
-            id:"cola",
-            name:"Coca-Cola",
-            price:12000
-        },
-        {
-            id:"fanta",
-            name:"Fanta",
-            price:12000
-        },
-        {
-            id:"choy",
-            name:"Choy",
-            price:5000
-        }
-    ],
-
-    tables:{},
-
-    tandirs:[],
-
-    history:[]
-};
-
-
-let currentTable = null;
-
-
-function saveData(){
-
-    localStorage.setItem(
-        KEY,
-        JSON.stringify(data)
-    );
-
-}
-
-
-function money(number){
-
-    return Number(number || 0)
-    .toLocaleString("uz-UZ")
-    + " so'm";
-
-}
-
-
-function getTable(index){
-
-    if(!data.tables[index]){
-
-        data.tables[index] = {
-            orders:{}
-        };
-
-    }
-
-    return data.tables[index];
-
-}
-
-
-function getProduct(id){
-
-    return data.products.find(
-        p=>p.id===id
-    );
-
-}
-
-
-function totalOrder(table){
-
-    let total=0;
-
-    Object.keys(table.orders)
-    .forEach(id=>{
-
-        const p=getProduct(id);
-
-        if(p){
-
-            total +=
-            p.price *
-            table.orders[id];
-
-        }
-
-    });
-
-    return total;
-
-}
-
-
-function totalQty(table){
-
-    return Object.values(
-        table.orders
-    )
-    .reduce(
-        (a,b)=>a+Number(b),
-        0
-    );
-
-}
-
-
-function showPage(page,element){
-
-    document.querySelectorAll(".page")
-    .forEach(p=>{
-        p.classList.remove("active");
-    });
+function toggleMenu(){
 
     document
-    .getElementById(page)
-    .classList.add("active");
-
-
-    document.querySelectorAll(".nav-item")
-    .forEach(n=>{
-        n.classList.remove("active");
-    });
-
-
-    if(element){
-
-        element.classList.add("active");
-
-    }else{
-
-        const nav =
-        document.querySelector(
-            `.nav-item[onclick*="'${page}'"]`
-        );
-
-        if(nav){
-            nav.classList.add("active");
-        }
-
-    }
-
-
-    renderAll();
+    .getElementById("navLinks")
+    .classList.toggle("show");
 
 }
 
 
-function renderAll(){
+/* MODAL */
 
-    renderTables();
+function openModal(title,html){
 
-    renderHome();
+    document.getElementById("modalTitle").textContent=title;
 
-    renderMenu();
+    document.getElementById("modalBody").innerHTML=html;
 
-    renderTandirs();
+    document.getElementById("modal").classList.add("show");
 
-    renderReport();
+}
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
 
 }
 
 
-function renderHome(){
+/* PDF */
 
-    let revenue =
-    data.history.reduce(
-        (sum,h)=>sum+h.total,
-        0
+function openPDF(url,title){
+
+    openModal(
+        title,
+        `
+        <iframe
+            class="pdf"
+            src="${url}">
+        </iframe>
+        `
     );
-
-
-    let activeTables=0;
-
-    let sold=0;
-
-
-    for(
-        let i=1;
-        i<=data.tableCount;
-        i++
-    ){
-
-        const t=getTable(i);
-
-        if(totalQty(t)>0){
-
-            activeTables++;
-
-            sold += totalQty(t);
-
-        }
-
-    }
-
-
-    const activeTandir =
-    data.tandirs
-    .filter(t=>t.active)
-    .length;
-
-
-    document
-    .getElementById("homeRevenue")
-    .textContent=money(revenue);
-
-
-    document
-    .getElementById("homeTables")
-    .textContent=activeTables;
-
-
-    document
-    .getElementById("homeSold")
-    .textContent=sold;
-
-
-    document
-    .getElementById("homeTandir")
-    .textContent=activeTandir;
-
-
-    const box =
-    document.getElementById(
-        "homeTableGrid"
-    );
-
-    box.innerHTML="";
-
-
-    const limit =
-    Math.min(
-        data.tableCount,
-        8
-    );
-
-
-    for(
-        let i=1;
-        i<=limit;
-        i++
-    ){
-
-        box.appendChild(
-            createTableCard(i)
-        );
-
-    }
 
 }
 
 
-function createTableCard(i){
+/* OFFICIAL PORTAL */
 
-    const t=getTable(i);
+function openOfficial(subject,url){
 
-    const qty=totalQty(t);
+    openModal(
+        subject,
+        `
+        <div class="info">
 
-    const total=totalOrder(t);
+            <h2>${subject}</h2>
 
+            <p>
+            ILMIX sizni rasmiy ta'lim portalidagi
+            darslikka olib boradi.
+            </p>
 
-    const div=
-    document.createElement("div");
-
-
-    div.className=
-    "table-card "+
-    (qty?"busy":"");
-
-
-    div.innerHTML=`
-
-        <h3>
-        Stol ${i}
-        </h3>
-
-        <span class="status ${
-            qty ? "busy":"free"
-        }">
-
-        ${qty ? "Band":"Bo‘sh"}
-
-        </span>
-
-        <div class="small"
-        style="margin-top:9px">
-
-        ${qty} dona mahsulot
-
-        </div>
-
-        <div class="total">
-
-        ${money(total)}
-
-        </div>
-
-    `;
-
-
-    div.onclick=
-    ()=>openOrder(i);
-
-
-    return div;
-
-}
-
-
-function renderTables(){
-
-    const grid =
-    document.getElementById(
-        "tableGrid"
-    );
-
-    grid.innerHTML="";
-
-
-    for(
-        let i=1;
-        i<=data.tableCount;
-        i++
-    ){
-
-        grid.appendChild(
-            createTableCard(i)
-        );
-
-    }
-
-}
-
-
-function openOrder(tableNumber){
-
-    currentTable=tableNumber;
-
-
-    const table=
-    getTable(tableNumber);
-
-
-    document
-    .getElementById("orderTitle")
-    .textContent=
-    "Stol "+tableNumber;
-
-
-    const box=
-    document.getElementById(
-        "orderProducts"
-    );
-
-
-    box.innerHTML="";
-
-
-    data.products.forEach(p=>{
-
-        const qty=
-        table.orders[p.id] || 0;
-
-
-        const row=
-        document.createElement("div");
-
-
-        row.className="product";
-
-
-        row.innerHTML=`
-
-        <div class="product-info">
-
-            <div class="product-name">
-            ${p.name}
+            <div class="notice">
+            📚 Darslikning original elektron nusxasi
+            rasmiy manbadan ochiladi.
             </div>
 
-            <div class="product-price">
-            ${money(p.price)}
-            </div>
-
-        </div>
-
-        <div class="qty">
-
-            <input
-            id="qty-${p.id}"
-            type="number"
-            min="0"
-            value="${qty}"
-            inputmode="numeric"
-            onchange="setQty('${p.id}',this.value)"
-            >
-
-        </div>
-
-        `;
-
-
-        box.appendChild(row);
-
-    });
-
-
-    updateOrderTotal();
-
-
-    document
-    .getElementById("orderModal")
-    .classList.add("show");
-
-}
-
-
-function setQty(productId,value){
-
-    if(!currentTable)
-        return;
-
-
-    const table=
-    getTable(currentTable);
-
-
-    let newQty=
-    Number(value);
-
-
-    if(
-        !Number.isFinite(newQty)
-        ||
-        newQty<0
-    ){
-
-        newQty=0;
-
-    }
-
-
-    newQty=Math.floor(newQty);
-
-
-    const oldQty=
-    table.orders[productId] || 0;
-
-
-    let difference=
-    newQty-oldQty;
-
-
-    /*
-    SOMSA KO‘PAYTIRILSA
-    TANDIRDAGI QOLDIQ TEKSHIRILADI
-    */
-
-    if(
-        difference>0
-        &&
-        isSomsa(productId)
-    ){
-
-        const available=
-        getAvailable(productId);
-
-
-        if(
-            available<difference
-        ){
-
-            newQty=
-            oldQty+available;
-
-
-            difference=
-            newQty-oldQty;
-
-
-            alert(
-                "Tandirda faqat "+
-                available+
-                " dona qolgan."
-            );
-
-        }
-
-
-        if(difference>0){
-
-            consumeFromTandir(
-                productId,
-                difference
-            );
-
-        }
-
-    }
-
-
-    /*
-    SOMSA KAMAYTIRILSA
-    TANDIRGA QAYTARILADI
-    */
-
-    if(
-        difference<0
-        &&
-        isSomsa(productId)
-    ){
-
-        returnToTandir(
-            productId,
-            Math.abs(difference)
-        );
-
-    }
-
-
-    if(newQty===0){
-
-        delete table.orders[productId];
-
-    }else{
-
-        table.orders[productId]=newQty;
-
-    }
-
-
-    saveData();
-
-
-    const input=
-    document.getElementById(
-        "qty-"+productId
-    );
-
-
-    if(input){
-
-        input.value=newQty;
-
-    }
-
-
-    updateOrderTotal();
-
-
-    renderTables();
-
-    renderHome();
-
-    renderTandirs();
-
-}
-
-
-function isSomsa(id){
-
-    return [
-        "qoy",
-        "mol",
-        "mayda"
-    ].includes(id);
-
-}
-
-
-function getAvailable(productId){
-
-    let total=0;
-
-
-    data.tandirs.forEach(t=>{
-
-        if(!t.active)
-            return;
-
-
-        if(productId==="qoy"){
-
-            total +=
-            t.qoy-t.soldQoy;
-
-        }
-
-
-        if(productId==="mol"){
-
-            total +=
-            t.mol-t.soldMol;
-
-        }
-
-
-        if(productId==="mayda"){
-
-            total +=
-            t.mayda-t.soldMayda;
-
-        }
-
-    });
-
-
-    return Math.max(
-        0,
-        total
-    );
-
-}
-
-
-function consumeFromTandir(
-    productId,
-    qty
-){
-
-    for(
-        const t of data.tandirs
-    ){
-
-        if(!t.active)
-            continue;
-
-
-        if(productId==="qoy"){
-
-            const remain=
-            t.qoy-t.soldQoy;
-
-            const use=
-            Math.min(
-                remain,
-                qty
-            );
-
-            t.soldQoy+=use;
-
-            qty-=use;
-
-        }
-
-
-        if(productId==="mol"){
-
-            const remain=
-            t.mol-t.soldMol;
-
-            const use=
-            Math.min(
-                remain,
-                qty
-            );
-
-            t.soldMol+=use;
-
-            qty-=use;
-
-        }
-
-
-        if(productId==="mayda"){
-
-            const remain=
-            t.mayda-t.soldMayda;
-
-            const use=
-            Math.min(
-                remain,
-                qty
-            );
-
-            t.soldMayda+=use;
-
-            qty-=use;
-
-        }
-
-
-        if(qty<=0)
-            break;
-
-    }
-
-}
-
-
-function returnToTandir(
-    productId,
-    qty
-){
-
-    for(
-        let i=data.tandirs.length-1;
-        i>=0;
-        i--
-    ){
-
-        const t=data.tandirs[i];
-
-
-        if(!t.active)
-            continue;
-
-
-        if(productId==="qoy"){
-
-            const use=
-            Math.min(
-                t.soldQoy,
-                qty
-            );
-
-            t.soldQoy-=use;
-
-            qty-=use;
-
-        }
-
-
-        if(productId==="mol"){
-
-            const use=
-            Math.min(
-                t.soldMol,
-                qty
-            );
-
-            t.soldMol-=use;
-
-            qty-=use;
-
-        }
-
-
-        if(productId==="mayda"){
-
-            const use=
-            Math.min(
-                t.soldMayda,
-                qty
-            );
-
-            t.soldMayda-=use;
-
-            qty-=use;
-
-        }
-
-
-        if(qty<=0)
-            break;
-
-    }
-
-}
-
-
-function updateOrderTotal(){
-
-    if(!currentTable)
-        return;
-
-
-    const table=
-    getTable(currentTable);
-
-
-    document
-    .getElementById("orderTotal")
-    .textContent=
-    money(
-        totalOrder(table)
-    );
-
-}
-
-
-function closeBill(){
-
-    if(!currentTable)
-        return;
-
-
-    const table=
-    getTable(currentTable);
-
-
-    const total=
-    totalOrder(table);
-
-
-    if(total<=0){
-
-        alert(
-            "Stolda buyurtma yo‘q."
-        );
-
-        return;
-
-    }
-
-
-    const items={};
-
-
-    Object.keys(
-        table.orders
-    )
-    .forEach(id=>{
-
-        const p=
-        getProduct(id);
-
-
-        if(p){
-
-            items[id]={
-                name:p.name,
-                qty:table.orders[id],
-                price:p.price
-            };
-
-        }
-
-    });
-
-
-    data.history.unshift({
-
-        id:Date.now(),
-
-        table:currentTable,
-
-        time:
-        new Date()
-        .toLocaleString(
-            "uz-UZ"
-        ),
-
-        total:total,
-
-        items:items
-
-    });
-
-
-    table.orders={};
-
-
-    saveData();
-
-
-    currentTable=null;
-
-
-    closeModal(
-        "orderModal"
-    );
-
-
-    renderAll();
-
-}
-
-
-function renderMenu(){
-
-    const box=
-    document.getElementById(
-        "menuList"
-    );
-
-
-    box.innerHTML="";
-
-
-    data.products.forEach(p=>{
-
-        const div=
-        document.createElement("div");
-
-
-        div.className="product";
-
-
-        div.innerHTML=`
-
-        <div class="product-info">
-
-            <div class="product-name">
-            ${p.name}
-            </div>
-
-            <div class="product-price">
-            ${money(p.price)}
-            </div>
-
-        </div>
-
-        <span class="small">
-
-        ${
-            isSomsa(p.id)
-            ?
-            "🥟 Somsa"
-            :
-            "🍽️ Mahsulot"
-        }
-
-        </span>
-
-        `;
-
-
-        box.appendChild(div);
-
-    });
-
-}
-
-
-function openTandir(){
-
-    document
-    .getElementById(
-        "tandirName"
-    )
-    .value=
-    "Tandir "+
-    (data.tandirs.length+1);
-
-
-    document
-    .getElementById(
-        "tandirQoy"
-    )
-    .value=0;
-
-
-    document
-    .getElementById(
-        "tandirMol"
-    )
-    .value=0;
-
-
-    document
-    .getElementById(
-        "tandirMayda"
-    )
-    .value=0;
-
-
-    document
-    .getElementById(
-        "tandirModal"
-    )
-    .classList.add("show");
-
-}
-
-
-function saveTandir(){
-
-    const name=
-    document
-    .getElementById(
-        "tandirName"
-    )
-    .value
-    .trim();
-
-
-    const qoy=
-    Number(
-        document
-        .getElementById(
-            "tandirQoy"
-        )
-        .value
-    ) || 0;
-
-
-    const mol=
-    Number(
-        document
-        .getElementById(
-            "tandirMol"
-        )
-        .value
-    ) || 0;
-
-
-    const mayda=
-    Number(
-        document
-        .getElementById(
-            "tandirMayda"
-        )
-        .value
-    ) || 0;
-
-
-    if(!name){
-
-        alert(
-            "Tandir nomini kiriting."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        qoy+mol+mayda<=0
-    ){
-
-        alert(
-            "Kamida bitta somsa sonini kiriting."
-        );
-
-        return;
-
-    }
-
-
-    data.tandirs.push({
-
-        id:Date.now(),
-
-        name:name,
-
-        qoy:qoy,
-
-        mol:mol,
-
-        mayda:mayda,
-
-        soldQoy:0,
-
-        soldMol:0,
-
-        soldMayda:0,
-
-        active:true,
-
-        created:
-        new Date()
-        .toLocaleString(
-            "uz-UZ"
-        )
-
-    });
-
-
-    saveData();
-
-
-    closeModal(
-        "tandirModal"
-    );
-
-
-    renderAll();
-
-}
-
-
-function renderTandirs(){
-
-    const box=
-    document.getElementById(
-        "tandirList"
-    );
-
-
-    box.innerHTML="";
-
-
-    if(
-        data.tandirs.length===0
-    ){
-
-        box.innerHTML=`
-
-        <div class="empty">
-        Hozircha tandir ochilmagan.
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    data.tandirs.forEach(t=>{
-
-        const qoyRemain=
-        t.qoy-t.soldQoy;
-
-
-        const molRemain=
-        t.mol-t.soldMol;
-
-
-        const maydaRemain=
-        t.mayda-t.soldMayda;
-
-
-        const total=
-        t.qoy+
-        t.mol+
-        t.mayda;
-
-
-        const sold=
-        t.soldQoy+
-        t.soldMol+
-        t.soldMayda;
-
-
-        const percent=
-        total
-        ?
-        Math.min(
-            100,
-            Math.round(
-                sold/total*100
-            )
-        )
-        :
-        0;
-
-
-        const div=
-        document.createElement(
-            "div"
-        );
-
-
-        div.className="tandir";
-
-
-        div.innerHTML=`
-
-        <div class="tandir-head">
-
-        <h3>
-        🔥 ${t.name}
-        </h3>
-
-        <span class="status ${
-            t.active
-            ?
-            "busy"
-            :
-            "free"
-        }">
-
-        ${
-            t.active
-            ?
-            "Faol"
-            :
-            "Yopilgan"
-        }
-
-        </span>
-
-        </div>
-
-
-        <div class="small">
-
-        Qo‘y:
-        <b>${t.qoy}</b> tayyor /
-        <b>${t.soldQoy}</b> sotilgan /
-        <b>${qoyRemain}</b> qolgan
-
-        </div>
-
-
-        <div class="progress">
-
-        <div
-        style="
-        width:${
-            t.qoy
-            ?
-            Math.min(
-                100,
-                t.soldQoy/t.qoy*100
-            )
-            :
-            0
-        }%
-        ">
-        </div>
-
-        </div>
-
-
-        <div class="small">
-
-        Mol:
-        <b>${t.mol}</b> tayyor /
-        <b>${t.soldMol}</b> sotilgan /
-        <b>${molRemain}</b> qolgan
-
-        </div>
-
-
-        <div class="progress">
-
-        <div
-        style="
-        width:${
-            t.mol
-            ?
-            Math.min(
-                100,
-                t.soldMol/t.mol*100
-            )
-            :
-            0
-        }%
-        ">
-        </div>
-
-        </div>
-
-
-        <div class="small">
-
-        Maydacha:
-        <b>${t.mayda}</b> tayyor /
-        <b>${t.soldMayda}</b> sotilgan /
-        <b>${maydaRemain}</b> qolgan
-
-        </div>
-
-
-        <div class="progress">
-
-        <div
-        style="
-        width:${
-            t.mayda
-            ?
-            Math.min(
-                100,
-                t.soldMayda/t.mayda*100
-            )
-            :
-            0
-        }%
-        ">
-        </div>
-
-        </div>
-
-
-        <div class="small">
-
-        Umumiy sotilgan:
-        ${sold} / ${total}
-        (${percent}%)
-
-        </div>
-
-
-        ${
-            t.active
-            ?
-            `
             <br>
 
-            <button
-            class="btn danger"
-            onclick="finishTandir(${t.id})">
+            <a
+            href="${url}"
+            target="_blank"
+            class="btn btn-primary"
+            style="display:inline-block;color:white">
 
-            Tandirni yopish
+            Rasmiy darslikni ochish
 
-            </button>
-            `
-            :
-            ""
-        }
+            </a>
 
-        `;
-
-
-        box.appendChild(div);
-
-    });
-
-}
-
-
-function finishTandir(id){
-
-    const t=
-    data.tandirs.find(
-        x=>x.id===id
+        </div>
+        `
     );
 
-
-    if(!t)
-        return;
-
-
-    if(
-        !confirm(
-            t.name+
-            "ni yopmoqchimisiz?"
-        )
-    )
-        return;
-
-
-    t.active=false;
-
-
-    saveData();
-
-
-    renderAll();
-
 }
 
 
-function openSettings(){
+/* LOGIN */
 
-    document
-    .getElementById(
-        "tableCount"
-    )
-    .value=
-    data.tableCount;
+function openLogin(){
 
+    openModal(
+        "ILMIX — Kirish",
+        `
+        <div class="info">
 
-    renderProductEditors();
+        <h2>Xush kelibsiz!</h2>
 
+        <p>
+        Profil tizimi keyingi backend bosqichida
+        haqiqiy akkauntlar bilan ulanadi.
+        </p>
 
-    document
-    .getElementById(
-        "settingsModal"
-    )
-    .classList.add("show");
-
-}
-
-
-function renderProductEditors(){
-
-    const box=
-    document.getElementById(
-        "productEditors"
-    );
-
-
-    box.innerHTML="";
-
-
-    data.products.forEach(
-        (p,index)=>{
-
-        const div=
-        document.createElement(
-            "div"
-        );
-
-
-        div.className=
-        "product-editor";
-
-
-        div.innerHTML=`
-
-        <label>
-        Mahsulot nomi
-        </label>
+        <br>
 
         <input
-        class="input"
-        value="${p.name}"
-        onchange="
-        data.products[${index}].name=this.value
-        ">
+        class="field"
+        placeholder="Telefon yoki email">
 
-
-        <label>
-        Narxi
-        </label>
+        <br><br>
 
         <input
-        class="input"
-        type="number"
-        value="${p.price}"
-        onchange="
-        data.products[${index}].price=
-        Number(this.value)
-        ">
+        class="field"
+        type="password"
+        placeholder="Parol">
 
+        <br><br>
 
         <button
-        class="btn danger"
-        onclick="
-        deleteProduct(${index})
-        ">
+        class="btn btn-primary"
+        style="border:0;color:white">
 
-        O‘chirish
+        Kirish
 
         </button>
 
-        `;
-
-
-        box.appendChild(div);
-
-    });
-
-}
-
-
-function addProduct(){
-
-    const id=
-    "p"+Date.now();
-
-
-    data.products.push({
-
-        id:id,
-
-        name:"Yangi mahsulot",
-
-        price:0
-
-    });
-
-
-    renderProductEditors();
-
-}
-
-
-function deleteProduct(index){
-
-    if(
-        data.products.length<=1
-    ){
-
-        alert(
-            "Kamida bitta mahsulot qolishi kerak."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !confirm(
-            "Bu mahsulotni o‘chirasizmi?"
-        )
-    )
-        return;
-
-
-    data.products.splice(
-        index,
-        1
-    );
-
-
-    renderProductEditors();
-
-}
-
-
-function saveSettings(){
-
-    let count=
-    Number(
-        document
-        .getElementById(
-            "tableCount"
-        )
-        .value
-    );
-
-
-    if(count<1)
-        count=1;
-
-
-    if(count>200)
-        count=200;
-
-
-    data.tableCount=count;
-
-
-    saveData();
-
-
-    closeModal(
-        "settingsModal"
-    );
-
-
-    renderAll();
-
-}
-
-
-function renderReport(){
-
-    const revenue=
-    data.history.reduce(
-        (sum,h)=>sum+h.total,
-        0
-    );
-
-
-    document
-    .getElementById(
-        "reportRevenue"
-    )
-    .textContent=
-    money(revenue);
-
-
-    document
-    .getElementById(
-        "reportBills"
-    )
-    .textContent=
-    data.history.length;
-
-
-    const stats={};
-
-
-    data.products.forEach(p=>{
-
-        stats[p.id]=0;
-
-    });
-
-
-    data.history.forEach(h=>{
-
-        Object.keys(h.items)
-        .forEach(id=>{
-
-            if(
-                stats[id]!==undefined
-            ){
-
-                stats[id]+=
-                h.items[id].qty;
-
-            }
-
-        });
-
-    });
-
-
-    const box=
-    document.getElementById(
-        "productReport"
-    );
-
-
-    box.innerHTML="";
-
-
-    data.products.forEach(p=>{
-
-        box.innerHTML+=`
-
-        <div class="report-row">
-
-        <span>
-        ${p.name}
-        </span>
-
-        <b>
-        ${stats[p.id]||0} dona
-        </b>
-
         </div>
-
-        `;
-
-    });
-
-
-    const history=
-    document.getElementById(
-        "historyList"
+        `
     );
 
-
-    history.innerHTML="";
-
-
-    if(
-        data.history.length===0
-    ){
-
-        history.innerHTML=`
-
-        <div class="empty">
-        Hali yopilgan hisoblar yo‘q.
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    data.history
-    .slice(0,50)
-    .forEach(h=>{
-
-        const div=
-        document.createElement(
-            "div"
-        );
-
-
-        div.className="history";
-
-
-        let items="";
-
-
-        Object.values(
-            h.items
-        )
-        .forEach(item=>{
-
-            items+=`
-
-            <div class="small">
-
-            ${item.name}
-            ×
-            ${item.qty}
-
-            </div>
-
-            `;
-
-        });
-
-
-        div.innerHTML=`
-
-        <div
-        style="
-        display:flex;
-        justify-content:space-between;
-        margin-bottom:8px;
-        ">
-
-        <b>
-        Stol ${h.table}
-        </b>
-
-        <b>
-        ${money(h.total)}
-        </b>
-
-        </div>
-
-        ${items}
-
-        <div
-        class="small"
-        style="margin-top:9px">
-
-        ${h.time}
-
-        </div>
-
-        `;
-
-
-        history.appendChild(div);
-
-    });
-
 }
 
 
-function closeModal(id){
+/* BOOK SEARCH */
 
-    document
-    .getElementById(id)
-    .classList.remove("show");
+function searchBooks(){
 
-}
+    const query=
+    document.getElementById("bookSearch")
+    .value
+    .toLowerCase()
+    .trim();
 
+    const books=
+    document.querySelectorAll(".book");
 
-document
-.querySelectorAll(".modal-bg")
-.forEach(bg=>{
+    let count=0;
 
-    bg.addEventListener(
-        "click",
-        function(e){
+    books.forEach(book=>{
 
-            if(
-                e.target===bg
-            ){
+        const name=
+        book.dataset.name.toLowerCase();
 
-                bg.classList.remove(
-                    "show"
-                );
+        if(name.includes(query)){
 
-            }
+            book.style.display="block";
+            count++;
+
+        }else{
+
+            book.style.display="none";
 
         }
-    );
+
+    });
+
+    document.getElementById("empty").style.display=
+    count===0 ? "block" : "none";
+
+}
+
+
+/* FILTER */
+
+function filterBooks(category,button){
+
+    document
+    .querySelectorAll(".filter")
+    .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    const books=
+    document.querySelectorAll(".book");
+
+    let count=0;
+
+    books.forEach(book=>{
+
+        if(
+            category==="all" ||
+            book.dataset.category===category
+        ){
+
+            book.style.display="block";
+            count++;
+
+        }else{
+
+            book.style.display="none";
+
+        }
+
+    });
+
+    document.getElementById("empty").style.display=
+    count===0 ? "block" : "none";
+
+}
+
+
+/* EXERCISE */
+
+function chooseExercise(subject){
+
+    document.getElementById("subject").value=subject;
+
+    document
+    .getElementById("exercises")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* EXERCISE SEARCH */
+
+function findExercise(){
+
+    const subject=
+    document.getElementById("subject").value;
+
+    const page=
+    document.getElementById("page").value;
+
+    const number=
+    document.getElementById("exerciseNumber").value;
+
+    const result=
+    document.getElementById("result");
+
+    if(!subject || !page || !number){
+
+        result.innerHTML=
+        "⚠️ Iltimos, fan, bet va mashq raqamini kiriting.";
+
+        result.classList.add("show");
+
+        return;
+
+    }
+
+
+    /*
+       REAL DATABASE ULANISH UCHUN TAYYOR FORMAT
+
+       Masalan backenddan:
+
+       {
+          subject:"Matematika",
+          page:34,
+          exercise:5,
+          answer:"...",
+          solution:"..."
+       }
+
+       keladi.
+    */
+
+    result.innerHTML=`
+
+    <h3>
+    ${subject} — ${page}-bet, ${number}-mashq
+    </h3>
+
+    <p style="margin-top:10px;color:#687386">
+
+    Bu qidiruv oynasi real ma'lumotlar bazasi bilan
+    ishlashga tayyor.
+
+    </p>
+
+    <div class="notice">
+
+    📚 Keyingi server bazasida aynan shu
+    <b>fan → bet → mashq → javob → yechim</b>
+    tuzilmasi ishlaydi.
+
+    </div>
+
+    `;
+
+    result.classList.add("show");
+
+}
+
+
+/* PHOTO */
+
+function photoSelected(input){
+
+    if(!input.files.length) return;
+
+    const file=input.files[0];
+
+    document.getElementById("uploadText").innerHTML=
+    `
+    <b style="color:#8fb2ff">
+    ✓ ${file.name}
+    </b>
+    <br>
+    <small>
+    Rasm qabul qilindi.
+    </small>
+    `;
+
+}
+
+
+/* MODAL OUTSIDE CLICK */
+
+document
+.getElementById("modal")
+.addEventListener("click",function(e){
+
+    if(e.target===this){
+
+        closeModal();
+
+    }
 
 });
-
-
-renderAll();
 
 </script>
 
