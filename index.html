@@ -10,7 +10,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -34,7 +34,6 @@ header{
 .logo{
     font-size:21px;
     font-weight:800;
-    letter-spacing:.5px;
 }
 
 .logo span{
@@ -153,10 +152,6 @@ h3{
     border-color:#f0a13a;
 }
 
-.table-card h3{
-    margin-bottom:7px;
-}
-
 .status{
     display:inline-block;
     padding:5px 8px;
@@ -213,26 +208,21 @@ h3{
     font-size:13px;
 }
 
-.qty{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.qty button{
-    width:34px;
-    height:34px;
-    border:0;
-    border-radius:9px;
-    background:#2a303a;
+.qty input{
+    width:75px;
+    height:40px;
+    background:#242932;
     color:#fff;
-    font-size:18px;
+    border:1px solid #3a414d;
+    border-radius:9px;
+    text-align:center;
+    font-size:17px;
+    font-weight:bold;
+    outline:none;
 }
 
-.qty span{
-    min-width:25px;
-    text-align:center;
-    font-weight:bold;
+.qty input:focus{
+    border-color:#f0a13a;
 }
 
 .bottom-nav{
@@ -323,39 +313,6 @@ label{
     font-size:13px;
 }
 
-.form-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.order-line{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid #292e38;
-}
-
-.order-name{
-    font-weight:bold;
-}
-
-.order-actions{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.order-actions button{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:8px;
-    background:#2b313a;
-    color:white;
-}
-
 .modal-total{
     background:#222730;
     border-radius:12px;
@@ -434,6 +391,7 @@ label{
 }
 
 @media(min-width:700px){
+
     .grid{
         grid-template-columns:repeat(4,1fr);
     }
@@ -455,225 +413,439 @@ label{
 <body>
 
 <header>
-    <div class="logo">ABDURRAZOQ <span>SOMSA</span></div>
-    <button class="icon-btn" onclick="openSettings()">⚙️</button>
+
+<div class="logo">
+ABDURRAZOQ <span>SOMSA</span>
+</div>
+
+<button class="icon-btn" onclick="openSettings()">⚙️</button>
+
 </header>
 
 <main class="container">
 
-<!-- HOME -->
+<!-- ASOSIY -->
 <section id="home" class="page active">
-    <h2>Asosiy</h2>
 
-    <div class="dashboard">
-        <div class="card">
-            <div class="stat-title">Bugungi tushum</div>
-            <div class="stat-number stat-money" id="homeRevenue">0 so'm</div>
-        </div>
+<h2>Asosiy</h2>
 
-        <div class="card">
-            <div class="stat-title">Faol stollar</div>
-            <div class="stat-number" id="homeTables">0</div>
-        </div>
+<div class="dashboard">
 
-        <div class="card">
-            <div class="stat-title">Bugun sotilgan</div>
-            <div class="stat-number" id="homeSold">0</div>
-        </div>
+<div class="card">
+<div class="stat-title">Bugungi tushum</div>
+<div class="stat-number stat-money" id="homeRevenue">
+0 so'm
+</div>
+</div>
 
-        <div class="card">
-            <div class="stat-title">Faol tandirlar</div>
-            <div class="stat-number" id="homeTandir">0</div>
-        </div>
-    </div>
+<div class="card">
+<div class="stat-title">Faol stollar</div>
+<div class="stat-number" id="homeTables">0</div>
+</div>
 
-    <div class="section-title">
-        <h3>Tezkor stollar</h3>
-        <button class="btn" onclick="showPage('tables')">Barchasi</button>
-    </div>
+<div class="card">
+<div class="stat-title">Bugun sotilgan</div>
+<div class="stat-number" id="homeSold">0</div>
+</div>
 
-    <div id="homeTableGrid" class="grid"></div>
+<div class="card">
+<div class="stat-title">Faol tandirlar</div>
+<div class="stat-number" id="homeTandir">0</div>
+</div>
+
+</div>
+
+<div class="section-title">
+
+<h3>Tezkor stollar</h3>
+
+<button class="btn" onclick="showPage('tables')">
+Barchasi
+</button>
+
+</div>
+
+<div id="homeTableGrid" class="grid"></div>
+
 </section>
 
-<!-- TABLES -->
+
+<!-- STOLLAR -->
 <section id="tables" class="page">
-    <div class="section-title">
-        <h2>Stollar</h2>
-        <button class="btn" onclick="openSettings()">⚙️</button>
-    </div>
 
-    <div id="tableGrid" class="grid"></div>
+<div class="section-title">
+
+<h2>Stollar</h2>
+
+<button class="btn" onclick="openSettings()">
+⚙️
+</button>
+
+</div>
+
+<div id="tableGrid" class="grid"></div>
+
 </section>
 
-<!-- TANDIR -->
+
+<!-- TANDIRLAR -->
 <section id="tandir" class="page">
-    <div class="section-title">
-        <h2>Tandirlar</h2>
-        <button class="btn" onclick="openTandir()">+ Tandir</button>
-    </div>
 
-    <div id="tandirList"></div>
+<div class="section-title">
+
+<h2>Tandirlar</h2>
+
+<button class="btn" onclick="openTandir()">
++ Tandir
+</button>
+
+</div>
+
+<div id="tandirList"></div>
+
 </section>
+
 
 <!-- MENU -->
 <section id="menu" class="page">
-    <div class="section-title">
-        <h2>Menyu</h2>
-        <button class="btn" onclick="openSettings()">⚙️</button>
-    </div>
 
-    <div id="menuList"></div>
+<div class="section-title">
+
+<h2>Menyu</h2>
+
+<button class="btn" onclick="openSettings()">
+⚙️
+</button>
+
+</div>
+
+<div id="menuList"></div>
+
 </section>
 
-<!-- REPORT -->
+
+<!-- HISOBOT -->
 <section id="report" class="page">
-    <h2>Hisobot</h2>
 
-    <div class="dashboard">
-        <div class="card">
-            <div class="stat-title">Jami tushum</div>
-            <div class="stat-number stat-money" id="reportRevenue">0</div>
-        </div>
+<h2>Hisobot</h2>
 
-        <div class="card">
-            <div class="stat-title">Yopilgan hisoblar</div>
-            <div class="stat-number" id="reportBills">0</div>
-        </div>
-    </div>
+<div class="dashboard">
 
-    <div class="card">
-        <h3>Mahsulotlar bo‘yicha</h3>
-        <div id="productReport"></div>
-    </div>
+<div class="card">
 
-    <div class="section-title">
-        <h3>Yopilgan hisoblar</h3>
-    </div>
+<div class="stat-title">
+Jami tushum
+</div>
 
-    <div id="historyList"></div>
+<div class="stat-number stat-money"
+id="reportRevenue">
+0
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="stat-title">
+Yopilgan hisoblar
+</div>
+
+<div class="stat-number"
+id="reportBills">
+0
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Mahsulotlar bo‘yicha</h3>
+
+<div id="productReport"></div>
+
+</div>
+
+<div class="section-title">
+
+<h3>Yopilgan hisoblar</h3>
+
+</div>
+
+<div id="historyList"></div>
+
 </section>
 
 </main>
 
-<!-- BOTTOM NAV -->
+
+<!-- NAVIGATION -->
 <nav class="bottom-nav">
-    <div class="nav-item active" onclick="showPage('home',this)">
-        <div>🏠</div>
-        Asosiy
-    </div>
 
-    <div class="nav-item" onclick="showPage('tables',this)">
-        <div>🪑</div>
-        Stollar
-    </div>
+<div class="nav-item active"
+onclick="showPage('home',this)">
 
-    <div class="nav-item" onclick="showPage('tandir',this)">
-        <div>🔥</div>
-        Tandirlar
-    </div>
+<div>🏠</div>
+Asosiy
 
-    <div class="nav-item" onclick="showPage('menu',this)">
-        <div>🍽️</div>
-        Menyu
-    </div>
+</div>
 
-    <div class="nav-item" onclick="showPage('report',this)">
-        <div>📊</div>
-        Hisobot
-    </div>
+<div class="nav-item"
+onclick="showPage('tables',this)">
+
+<div>🪑</div>
+Stollar
+
+</div>
+
+<div class="nav-item"
+onclick="showPage('tandir',this)">
+
+<div>🔥</div>
+Tandirlar
+
+</div>
+
+<div class="nav-item"
+onclick="showPage('menu',this)">
+
+<div>🍽️</div>
+Menyu
+
+</div>
+
+<div class="nav-item"
+onclick="showPage('report',this)">
+
+<div>📊</div>
+Hisobot
+
+</div>
+
 </nav>
 
-<!-- SETTINGS MODAL -->
+
+<!-- SETTINGS -->
 <div id="settingsModal" class="modal-bg">
+
 <div class="modal">
 
-    <div class="modal-head">
-        <h2>Sozlamalar</h2>
-        <button class="close" onclick="closeModal('settingsModal')">×</button>
-    </div>
+<div class="modal-head">
 
-    <label>Stollar soni</label>
-    <input id="tableCount" class="input" type="number" min="1" max="200">
+<h2>Sozlamalar</h2>
 
-    <h3>Mahsulotlar va narxlar</h3>
-    <div id="productEditors"></div>
-
-    <button class="btn secondary" onclick="addProduct()">+ Mahsulot qo‘shish</button>
-
-    <br><br>
-
-    <button class="btn" style="width:100%" onclick="saveSettings()">
-        Saqlash
-    </button>
+<button class="close"
+onclick="closeModal('settingsModal')">
+×
+</button>
 
 </div>
+
+<label>
+Stollar soni
+</label>
+
+<input
+id="tableCount"
+class="input"
+type="number"
+min="1"
+max="200"
+>
+
+<h3>
+Mahsulotlar va narxlar
+</h3>
+
+<div id="productEditors"></div>
+
+<button class="btn secondary"
+onclick="addProduct()">
++ Mahsulot qo‘shish
+</button>
+
+<br><br>
+
+<button class="btn"
+style="width:100%"
+onclick="saveSettings()">
+Saqlash
+</button>
+
 </div>
 
-<!-- ORDER MODAL -->
+</div>
+
+
+<!-- ZAKAZ -->
 <div id="orderModal" class="modal-bg">
+
 <div class="modal">
 
-    <div class="modal-head">
-        <h2 id="orderTitle">Stol</h2>
-        <button class="close" onclick="closeModal('orderModal')">×</button>
-    </div>
+<div class="modal-head">
 
-    <div id="orderProducts"></div>
+<h2 id="orderTitle">
+Stol
+</h2>
 
-    <div class="modal-total">
-        <span>Jami</span>
-        <span id="orderTotal">0 so'm</span>
-    </div>
-
-    <div class="actions">
-        <button class="btn green" onclick="closeBill()">Hisobni yopish</button>
-        <button class="btn secondary" onclick="closeModal('orderModal')">Yopish</button>
-    </div>
+<button class="close"
+onclick="closeModal('orderModal')">
+×
+</button>
 
 </div>
+
+<div id="orderProducts"></div>
+
+<div class="modal-total">
+
+<span>
+Jami
+</span>
+
+<span id="orderTotal">
+0 so'm
+</span>
+
 </div>
 
-<!-- TANDIR MODAL -->
+<div class="actions">
+
+<button class="btn green"
+onclick="closeBill()">
+Hisobni yopish
+</button>
+
+<button class="btn secondary"
+onclick="closeModal('orderModal')">
+Yopish
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TANDIR -->
 <div id="tandirModal" class="modal-bg">
+
 <div class="modal">
 
-    <div class="modal-head">
-        <h2>Yangi tandir</h2>
-        <button class="close" onclick="closeModal('tandirModal')">×</button>
-    </div>
+<div class="modal-head">
 
-    <label>Tandir nomi</label>
-    <input id="tandirName" class="input" placeholder="Masalan: 1-tandir">
+<h2>
+Yangi tandir
+</h2>
 
-    <label>Qo‘y go‘shtli somsa</label>
-    <input id="tandirQoy" class="input" type="number" min="0" value="0">
-
-    <label>Mol go‘shtli somsa</label>
-    <input id="tandirMol" class="input" type="number" min="0" value="0">
-
-    <label>Maydacha somsa</label>
-    <input id="tandirMayda" class="input" type="number" min="0" value="0">
-
-    <button class="btn" style="width:100%" onclick="saveTandir()">
-        Tandirni ochish
-    </button>
+<button class="close"
+onclick="closeModal('tandirModal')">
+×
+</button>
 
 </div>
+
+<label>
+Tandir nomi
+</label>
+
+<input
+id="tandirName"
+class="input"
+placeholder="Masalan: 1-tandir"
+>
+
+<label>
+Qo‘y go‘shtli somsa
+</label>
+
+<input
+id="tandirQoy"
+class="input"
+type="number"
+min="0"
+value="0"
+>
+
+<label>
+Mol go‘shtli somsa
+</label>
+
+<input
+id="tandirMol"
+class="input"
+type="number"
+min="0"
+value="0"
+>
+
+<label>
+Maydacha somsa
+</label>
+
+<input
+id="tandirMayda"
+class="input"
+type="number"
+min="0"
+value="0"
+>
+
+<button class="btn"
+style="width:100%"
+onclick="saveTandir()">
+
+Tandirni ochish
+
+</button>
+
 </div>
+
+</div>
+
 
 <script>
-const KEY = "abdurazzoq_somsa_v3";
 
-let data = JSON.parse(localStorage.getItem(KEY)) || {
-    tableCount: 20,
+const KEY = "abdurazzoq_somsa_v4";
 
-    products: [
-        {id:"qoy", name:"Qo‘y go‘shtli somsa", price:10000},
-        {id:"mol", name:"Mol go‘shtli somsa", price:10000},
-        {id:"mayda", name:"Maydacha somsa", price:8000},
-        {id:"cola", name:"Coca-Cola", price:12000},
-        {id:"fanta", name:"Fanta", price:12000},
-        {id:"choy", name:"Choy", price:5000}
+let data =
+JSON.parse(localStorage.getItem(KEY)) ||
+{
+    tableCount:20,
+
+    products:[
+        {
+            id:"qoy",
+            name:"Qo‘y go‘shtli somsa",
+            price:10000
+        },
+        {
+            id:"mol",
+            name:"Mol go‘shtli somsa",
+            price:10000
+        },
+        {
+            id:"mayda",
+            name:"Maydacha somsa",
+            price:8000
+        },
+        {
+            id:"cola",
+            name:"Coca-Cola",
+            price:12000
+        },
+        {
+            id:"fanta",
+            name:"Fanta",
+            price:12000
+        },
+        {
+            id:"choy",
+            name:"Choy",
+            price:5000
+        }
     ],
 
     tables:{},
@@ -683,801 +855,1725 @@ let data = JSON.parse(localStorage.getItem(KEY)) || {
     history:[]
 };
 
+
 let currentTable = null;
 
+
 function saveData(){
-    localStorage.setItem(KEY, JSON.stringify(data));
+
+    localStorage.setItem(
+        KEY,
+        JSON.stringify(data)
+    );
+
 }
+
 
 function money(number){
-    return Number(number || 0).toLocaleString("uz-UZ") + " so'm";
+
+    return Number(number || 0)
+    .toLocaleString("uz-UZ")
+    + " so'm";
+
 }
 
+
 function getTable(index){
+
     if(!data.tables[index]){
+
         data.tables[index] = {
             orders:{}
         };
+
     }
 
     return data.tables[index];
+
 }
+
 
 function getProduct(id){
-    return data.products.find(p => p.id === id);
+
+    return data.products.find(
+        p=>p.id===id
+    );
+
 }
 
-function totalOrder(table){
-    let total = 0;
 
-    Object.keys(table.orders).forEach(id=>{
-        const p = getProduct(id);
+function totalOrder(table){
+
+    let total=0;
+
+    Object.keys(table.orders)
+    .forEach(id=>{
+
+        const p=getProduct(id);
 
         if(p){
-            total += p.price * table.orders[id];
+
+            total +=
+            p.price *
+            table.orders[id];
+
         }
+
     });
 
     return total;
+
 }
+
 
 function totalQty(table){
-    return Object.values(table.orders)
-        .reduce((a,b)=>a + Number(b),0);
+
+    return Object.values(
+        table.orders
+    )
+    .reduce(
+        (a,b)=>a+Number(b),
+        0
+    );
+
 }
 
-function showPage(page, element){
+
+function showPage(page,element){
 
     document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
+    .forEach(p=>{
+        p.classList.remove("active");
+    });
 
-    document.getElementById(page)
-        .classList.add("active");
+    document
+    .getElementById(page)
+    .classList.add("active");
+
 
     document.querySelectorAll(".nav-item")
-        .forEach(n=>n.classList.remove("active"));
+    .forEach(n=>{
+        n.classList.remove("active");
+    });
+
 
     if(element){
+
         element.classList.add("active");
+
     }else{
-        const nav = document.querySelector(
+
+        const nav =
+        document.querySelector(
             `.nav-item[onclick*="'${page}'"]`
         );
 
-        if(nav) nav.classList.add("active");
+        if(nav){
+            nav.classList.add("active");
+        }
+
     }
 
+
     renderAll();
+
 }
 
+
 function renderAll(){
+
     renderTables();
+
     renderHome();
+
     renderMenu();
+
     renderTandirs();
+
     renderReport();
+
 }
+
 
 function renderHome(){
 
-    let revenue = data.history.reduce(
-        (sum,h)=>sum + h.total,0
+    let revenue =
+    data.history.reduce(
+        (sum,h)=>sum+h.total,
+        0
     );
 
-    let activeTables = 0;
-    let sold = 0;
 
-    for(let i=1;i<=data.tableCount;i++){
+    let activeTables=0;
 
-        const t = getTable(i);
+    let sold=0;
+
+
+    for(
+        let i=1;
+        i<=data.tableCount;
+        i++
+    ){
+
+        const t=getTable(i);
 
         if(totalQty(t)>0){
+
             activeTables++;
+
             sold += totalQty(t);
+
         }
+
     }
 
-    const activeTandir = data.tandirs
-        .filter(t=>t.active).length;
 
-    document.getElementById("homeRevenue")
-        .textContent = money(revenue);
+    const activeTandir =
+    data.tandirs
+    .filter(t=>t.active)
+    .length;
 
-    document.getElementById("homeTables")
-        .textContent = activeTables;
 
-    document.getElementById("homeSold")
-        .textContent = sold;
+    document
+    .getElementById("homeRevenue")
+    .textContent=money(revenue);
 
-    document.getElementById("homeTandir")
-        .textContent = activeTandir;
 
-    const box = document.getElementById("homeTableGrid");
+    document
+    .getElementById("homeTables")
+    .textContent=activeTables;
 
-    box.innerHTML = "";
 
-    const limit = Math.min(data.tableCount,8);
+    document
+    .getElementById("homeSold")
+    .textContent=sold;
 
-    for(let i=1;i<=limit;i++){
-        box.appendChild(createTableCard(i));
+
+    document
+    .getElementById("homeTandir")
+    .textContent=activeTandir;
+
+
+    const box =
+    document.getElementById(
+        "homeTableGrid"
+    );
+
+    box.innerHTML="";
+
+
+    const limit =
+    Math.min(
+        data.tableCount,
+        8
+    );
+
+
+    for(
+        let i=1;
+        i<=limit;
+        i++
+    ){
+
+        box.appendChild(
+            createTableCard(i)
+        );
+
     }
+
 }
+
 
 function createTableCard(i){
 
-    const t = getTable(i);
-    const qty = totalQty(t);
-    const total = totalOrder(t);
+    const t=getTable(i);
 
-    const div = document.createElement("div");
+    const qty=totalQty(t);
 
-    div.className = "table-card " + (qty ? "busy":"");
+    const total=totalOrder(t);
 
-    div.innerHTML = `
-        <h3>Stol ${i}</h3>
 
-        <span class="status ${qty ? "busy":"free"}">
-            ${qty ? "Band":"Bo‘sh"}
+    const div=
+    document.createElement("div");
+
+
+    div.className=
+    "table-card "+
+    (qty?"busy":"");
+
+
+    div.innerHTML=`
+
+        <h3>
+        Stol ${i}
+        </h3>
+
+        <span class="status ${
+            qty ? "busy":"free"
+        }">
+
+        ${qty ? "Band":"Bo‘sh"}
+
         </span>
 
-        <div class="small" style="margin-top:9px">
-            ${qty} dona mahsulot
+        <div class="small"
+        style="margin-top:9px">
+
+        ${qty} dona mahsulot
+
         </div>
 
         <div class="total">
-            ${money(total)}
+
+        ${money(total)}
+
         </div>
+
     `;
 
-    div.onclick = ()=>openOrder(i);
+
+    div.onclick=
+    ()=>openOrder(i);
+
 
     return div;
+
 }
+
 
 function renderTables(){
 
-    const grid = document.getElementById("tableGrid");
+    const grid =
+    document.getElementById(
+        "tableGrid"
+    );
 
-    grid.innerHTML = "";
+    grid.innerHTML="";
 
-    for(let i=1;i<=data.tableCount;i++){
-        grid.appendChild(createTableCard(i));
+
+    for(
+        let i=1;
+        i<=data.tableCount;
+        i++
+    ){
+
+        grid.appendChild(
+            createTableCard(i)
+        );
+
     }
+
 }
+
 
 function openOrder(tableNumber){
 
-    currentTable = tableNumber;
+    currentTable=tableNumber;
 
-    const table = getTable(tableNumber);
 
-    document.getElementById("orderTitle")
-        .textContent = "Stol " + tableNumber;
+    const table=
+    getTable(tableNumber);
 
-    const box = document.getElementById("orderProducts");
 
-    box.innerHTML = "";
+    document
+    .getElementById("orderTitle")
+    .textContent=
+    "Stol "+tableNumber;
+
+
+    const box=
+    document.getElementById(
+        "orderProducts"
+    );
+
+
+    box.innerHTML="";
+
 
     data.products.forEach(p=>{
 
-        const qty = table.orders[p.id] || 0;
+        const qty=
+        table.orders[p.id] || 0;
 
-        const row = document.createElement("div");
 
-        row.className = "product";
+        const row=
+        document.createElement("div");
 
-        row.innerHTML = `
-            <div class="product-info">
-                <div class="product-name">${p.name}</div>
-                <div class="product-price">${money(p.price)}</div>
+
+        row.className="product";
+
+
+        row.innerHTML=`
+
+        <div class="product-info">
+
+            <div class="product-name">
+            ${p.name}
             </div>
 
-            <div class="qty">
-                <button onclick="changeQty('${p.id}',-1)">−</button>
-                <span id="qty-${p.id}">${qty}</span>
-                <button onclick="changeQty('${p.id}',1)">+</button>
+            <div class="product-price">
+            ${money(p.price)}
             </div>
+
+        </div>
+
+        <div class="qty">
+
+            <input
+            id="qty-${p.id}"
+            type="number"
+            min="0"
+            value="${qty}"
+            inputmode="numeric"
+            onchange="setQty('${p.id}',this.value)"
+            >
+
+        </div>
+
         `;
 
+
         box.appendChild(row);
+
     });
+
 
     updateOrderTotal();
 
-    document.getElementById("orderModal")
-        .classList.add("show");
+
+    document
+    .getElementById("orderModal")
+    .classList.add("show");
+
 }
 
-function changeQty(productId, amount){
 
-    if(!currentTable) return;
+function setQty(productId,value){
 
-    const table = getTable(currentTable);
+    if(!currentTable)
+        return;
 
-    const oldQty = table.orders[productId] || 0;
-    const newQty = oldQty + amount;
 
-    if(newQty < 0) return;
+    const table=
+    getTable(currentTable);
 
-    const p = getProduct(productId);
 
-    // Somsa bo‘lsa tandirdagi qoldiqni tekshiramiz
-    if(amount > 0 && isSomsa(productId)){
+    let newQty=
+    Number(value);
 
-        if(getAvailable(productId) <= 0){
-            alert("Bu turdagi somsa tandirda qolmagan!");
-            return;
+
+    if(
+        !Number.isFinite(newQty)
+        ||
+        newQty<0
+    ){
+
+        newQty=0;
+
+    }
+
+
+    newQty=Math.floor(newQty);
+
+
+    const oldQty=
+    table.orders[productId] || 0;
+
+
+    let difference=
+    newQty-oldQty;
+
+
+    /*
+    SOMSA KO‘PAYTIRILSA
+    TANDIRDAGI QOLDIQ TEKSHIRILADI
+    */
+
+    if(
+        difference>0
+        &&
+        isSomsa(productId)
+    ){
+
+        const available=
+        getAvailable(productId);
+
+
+        if(
+            available<difference
+        ){
+
+            newQty=
+            oldQty+available;
+
+
+            difference=
+            newQty-oldQty;
+
+
+            alert(
+                "Tandirda faqat "+
+                available+
+                " dona qolgan."
+            );
+
         }
 
-        consumeFromTandir(productId,1);
+
+        if(difference>0){
+
+            consumeFromTandir(
+                productId,
+                difference
+            );
+
+        }
+
     }
 
-    if(amount < 0 && isSomsa(productId)){
-        returnToTandir(productId,1);
+
+    /*
+    SOMSA KAMAYTIRILSA
+    TANDIRGA QAYTARILADI
+    */
+
+    if(
+        difference<0
+        &&
+        isSomsa(productId)
+    ){
+
+        returnToTandir(
+            productId,
+            Math.abs(difference)
+        );
+
     }
 
-    if(newQty === 0){
+
+    if(newQty===0){
+
         delete table.orders[productId];
+
     }else{
-        table.orders[productId] = newQty;
+
+        table.orders[productId]=newQty;
+
     }
+
 
     saveData();
 
-    const el = document.getElementById("qty-"+productId);
 
-    if(el) el.textContent = newQty;
+    const input=
+    document.getElementById(
+        "qty-"+productId
+    );
+
+
+    if(input){
+
+        input.value=newQty;
+
+    }
+
 
     updateOrderTotal();
-    renderAll();
+
+
+    renderTables();
+
+    renderHome();
+
+    renderTandirs();
+
 }
 
+
 function isSomsa(id){
-    return ["qoy","mol","mayda"].includes(id);
+
+    return [
+        "qoy",
+        "mol",
+        "mayda"
+    ].includes(id);
+
 }
+
 
 function getAvailable(productId){
 
-    let total = 0;
+    let total=0;
+
 
     data.tandirs.forEach(t=>{
 
-        if(!t.active) return;
+        if(!t.active)
+            return;
 
-        if(productId === "qoy"){
-            total += t.qoy - t.soldQoy;
+
+        if(productId==="qoy"){
+
+            total +=
+            t.qoy-t.soldQoy;
+
         }
 
-        if(productId === "mol"){
-            total += t.mol - t.soldMol;
+
+        if(productId==="mol"){
+
+            total +=
+            t.mol-t.soldMol;
+
         }
 
-        if(productId === "mayda"){
-            total += t.mayda - t.soldMayda;
+
+        if(productId==="mayda"){
+
+            total +=
+            t.mayda-t.soldMayda;
+
         }
+
     });
 
-    return Math.max(0,total);
+
+    return Math.max(
+        0,
+        total
+    );
+
 }
 
-function consumeFromTandir(productId,qty){
 
-    for(const t of data.tandirs){
+function consumeFromTandir(
+    productId,
+    qty
+){
 
-        if(!t.active) continue;
+    for(
+        const t of data.tandirs
+    ){
 
-        if(productId === "qoy"){
-            const remain = t.qoy - t.soldQoy;
+        if(!t.active)
+            continue;
 
-            const use = Math.min(remain,qty);
 
-            t.soldQoy += use;
-            qty -= use;
+        if(productId==="qoy"){
+
+            const remain=
+            t.qoy-t.soldQoy;
+
+            const use=
+            Math.min(
+                remain,
+                qty
+            );
+
+            t.soldQoy+=use;
+
+            qty-=use;
+
         }
 
-        if(productId === "mol"){
-            const remain = t.mol - t.soldMol;
 
-            const use = Math.min(remain,qty);
+        if(productId==="mol"){
 
-            t.soldMol += use;
-            qty -= use;
+            const remain=
+            t.mol-t.soldMol;
+
+            const use=
+            Math.min(
+                remain,
+                qty
+            );
+
+            t.soldMol+=use;
+
+            qty-=use;
+
         }
 
-        if(productId === "mayda"){
-            const remain = t.mayda - t.soldMayda;
 
-            const use = Math.min(remain,qty);
+        if(productId==="mayda"){
 
-            t.soldMayda += use;
-            qty -= use;
+            const remain=
+            t.mayda-t.soldMayda;
+
+            const use=
+            Math.min(
+                remain,
+                qty
+            );
+
+            t.soldMayda+=use;
+
+            qty-=use;
+
         }
 
-        if(qty <= 0) break;
+
+        if(qty<=0)
+            break;
+
     }
+
 }
 
-function returnToTandir(productId,qty){
 
-    for(let i=data.tandirs.length-1;i>=0;i--){
+function returnToTandir(
+    productId,
+    qty
+){
 
-        const t = data.tandirs[i];
+    for(
+        let i=data.tandirs.length-1;
+        i>=0;
+        i--
+    ){
 
-        if(!t.active) continue;
+        const t=data.tandirs[i];
 
-        if(productId === "qoy"){
-            const use = Math.min(t.soldQoy,qty);
-            t.soldQoy -= use;
-            qty -= use;
+
+        if(!t.active)
+            continue;
+
+
+        if(productId==="qoy"){
+
+            const use=
+            Math.min(
+                t.soldQoy,
+                qty
+            );
+
+            t.soldQoy-=use;
+
+            qty-=use;
+
         }
 
-        if(productId === "mol"){
-            const use = Math.min(t.soldMol,qty);
-            t.soldMol -= use;
-            qty -= use;
+
+        if(productId==="mol"){
+
+            const use=
+            Math.min(
+                t.soldMol,
+                qty
+            );
+
+            t.soldMol-=use;
+
+            qty-=use;
+
         }
 
-        if(productId === "mayda"){
-            const use = Math.min(t.soldMayda,qty);
-            t.soldMayda -= use;
-            qty -= use;
+
+        if(productId==="mayda"){
+
+            const use=
+            Math.min(
+                t.soldMayda,
+                qty
+            );
+
+            t.soldMayda-=use;
+
+            qty-=use;
+
         }
 
-        if(qty <= 0) break;
+
+        if(qty<=0)
+            break;
+
     }
+
 }
+
 
 function updateOrderTotal(){
 
-    if(!currentTable) return;
+    if(!currentTable)
+        return;
 
-    const table = getTable(currentTable);
 
-    document.getElementById("orderTotal")
-        .textContent = money(totalOrder(table));
+    const table=
+    getTable(currentTable);
+
+
+    document
+    .getElementById("orderTotal")
+    .textContent=
+    money(
+        totalOrder(table)
+    );
+
 }
+
 
 function closeBill(){
 
-    if(!currentTable) return;
-
-    const table = getTable(currentTable);
-
-    const total = totalOrder(table);
-
-    if(total <= 0){
-        alert("Stolda buyurtma yo‘q.");
+    if(!currentTable)
         return;
+
+
+    const table=
+    getTable(currentTable);
+
+
+    const total=
+    totalOrder(table);
+
+
+    if(total<=0){
+
+        alert(
+            "Stolda buyurtma yo‘q."
+        );
+
+        return;
+
     }
 
-    const items = {};
 
-    Object.keys(table.orders).forEach(id=>{
-        const p = getProduct(id);
+    const items={};
+
+
+    Object.keys(
+        table.orders
+    )
+    .forEach(id=>{
+
+        const p=
+        getProduct(id);
+
 
         if(p){
-            items[id] = {
+
+            items[id]={
                 name:p.name,
                 qty:table.orders[id],
                 price:p.price
             };
+
         }
+
     });
+
 
     data.history.unshift({
+
         id:Date.now(),
+
         table:currentTable,
-        time:new Date().toLocaleString("uz-UZ"),
+
+        time:
+        new Date()
+        .toLocaleString(
+            "uz-UZ"
+        ),
+
         total:total,
+
         items:items
+
     });
 
-    table.orders = {};
+
+    table.orders={};
+
 
     saveData();
 
-    currentTable = null;
 
-    closeModal("orderModal");
+    currentTable=null;
+
+
+    closeModal(
+        "orderModal"
+    );
+
 
     renderAll();
+
 }
+
 
 function renderMenu(){
 
-    const box = document.getElementById("menuList");
+    const box=
+    document.getElementById(
+        "menuList"
+    );
 
-    box.innerHTML = "";
+
+    box.innerHTML="";
+
 
     data.products.forEach(p=>{
 
-        const div = document.createElement("div");
+        const div=
+        document.createElement("div");
 
-        div.className = "product";
 
-        div.innerHTML = `
-            <div class="product-info">
-                <div class="product-name">${p.name}</div>
-                <div class="product-price">${money(p.price)}</div>
+        div.className="product";
+
+
+        div.innerHTML=`
+
+        <div class="product-info">
+
+            <div class="product-name">
+            ${p.name}
             </div>
 
-            <span class="small">
-                ${isSomsa(p.id) ? "🥟 Somsa":"🍽️ Mahsulot"}
-            </span>
+            <div class="product-price">
+            ${money(p.price)}
+            </div>
+
+        </div>
+
+        <span class="small">
+
+        ${
+            isSomsa(p.id)
+            ?
+            "🥟 Somsa"
+            :
+            "🍽️ Mahsulot"
+        }
+
+        </span>
+
         `;
 
+
         box.appendChild(div);
+
     });
+
 }
+
 
 function openTandir(){
 
-    document.getElementById("tandirName").value =
-        "Tandir " + (data.tandirs.length + 1);
+    document
+    .getElementById(
+        "tandirName"
+    )
+    .value=
+    "Tandir "+
+    (data.tandirs.length+1);
 
-    document.getElementById("tandirQoy").value = 0;
-    document.getElementById("tandirMol").value = 0;
-    document.getElementById("tandirMayda").value = 0;
 
-    document.getElementById("tandirModal")
-        .classList.add("show");
+    document
+    .getElementById(
+        "tandirQoy"
+    )
+    .value=0;
+
+
+    document
+    .getElementById(
+        "tandirMol"
+    )
+    .value=0;
+
+
+    document
+    .getElementById(
+        "tandirMayda"
+    )
+    .value=0;
+
+
+    document
+    .getElementById(
+        "tandirModal"
+    )
+    .classList.add("show");
+
 }
+
 
 function saveTandir(){
 
-    const name =
-        document.getElementById("tandirName").value.trim();
+    const name=
+    document
+    .getElementById(
+        "tandirName"
+    )
+    .value
+    .trim();
 
-    const qoy =
-        Number(document.getElementById("tandirQoy").value) || 0;
 
-    const mol =
-        Number(document.getElementById("tandirMol").value) || 0;
+    const qoy=
+    Number(
+        document
+        .getElementById(
+            "tandirQoy"
+        )
+        .value
+    ) || 0;
 
-    const mayda =
-        Number(document.getElementById("tandirMayda").value) || 0;
+
+    const mol=
+    Number(
+        document
+        .getElementById(
+            "tandirMol"
+        )
+        .value
+    ) || 0;
+
+
+    const mayda=
+    Number(
+        document
+        .getElementById(
+            "tandirMayda"
+        )
+        .value
+    ) || 0;
+
 
     if(!name){
-        alert("Tandir nomini kiriting.");
+
+        alert(
+            "Tandir nomini kiriting."
+        );
+
         return;
+
     }
 
-    if(qoy + mol + mayda <= 0){
-        alert("Kamida bitta somsa sonini kiriting.");
+
+    if(
+        qoy+mol+mayda<=0
+    ){
+
+        alert(
+            "Kamida bitta somsa sonini kiriting."
+        );
+
         return;
+
     }
+
 
     data.tandirs.push({
+
         id:Date.now(),
+
         name:name,
+
         qoy:qoy,
+
         mol:mol,
+
         mayda:mayda,
+
         soldQoy:0,
+
         soldMol:0,
+
         soldMayda:0,
+
         active:true,
-        created:new Date().toLocaleString("uz-UZ")
+
+        created:
+        new Date()
+        .toLocaleString(
+            "uz-UZ"
+        )
+
     });
+
 
     saveData();
 
-    closeModal("tandirModal");
+
+    closeModal(
+        "tandirModal"
+    );
+
 
     renderAll();
+
 }
+
 
 function renderTandirs(){
 
-    const box = document.getElementById("tandirList");
+    const box=
+    document.getElementById(
+        "tandirList"
+    );
 
-    box.innerHTML = "";
 
-    if(data.tandirs.length === 0){
+    box.innerHTML="";
 
-        box.innerHTML = `
-            <div class="empty">
-                Hozircha tandir ochilmagan.
-            </div>
+
+    if(
+        data.tandirs.length===0
+    ){
+
+        box.innerHTML=`
+
+        <div class="empty">
+        Hozircha tandir ochilmagan.
+        </div>
+
         `;
 
         return;
+
     }
+
 
     data.tandirs.forEach(t=>{
 
-        const qoyRemain = t.qoy - t.soldQoy;
-        const molRemain = t.mol - t.soldMol;
-        const maydaRemain = t.mayda - t.soldMayda;
+        const qoyRemain=
+        t.qoy-t.soldQoy;
 
-        const total = t.qoy+t.mol+t.mayda;
-        const sold = t.soldQoy+t.soldMol+t.soldMayda;
 
-        const percent = total
-            ? Math.min(100,Math.round(sold/total*100))
-            : 0;
+        const molRemain=
+        t.mol-t.soldMol;
 
-        const div = document.createElement("div");
 
-        div.className = "tandir";
+        const maydaRemain=
+        t.mayda-t.soldMayda;
 
-        div.innerHTML = `
-            <div class="tandir-head">
-                <h3>🔥 ${t.name}</h3>
 
-                <span class="status ${t.active ? "busy":"free"}">
-                    ${t.active ? "Faol":"Yopilgan"}
-                </span>
-            </div>
+        const total=
+        t.qoy+
+        t.mol+
+        t.mayda;
 
-            <div class="small">
-                Qo‘y: <b>${t.qoy}</b> tayyor /
-                <b>${t.soldQoy}</b> sotilgan /
-                <b>${qoyRemain}</b> qolgan
-            </div>
 
-            <div class="progress">
-                <div style="width:${t.qoy ? Math.min(100,t.soldQoy/t.qoy*100):0}%"></div>
-            </div>
+        const sold=
+        t.soldQoy+
+        t.soldMol+
+        t.soldMayda;
 
-            <div class="small">
-                Mol: <b>${t.mol}</b> tayyor /
-                <b>${t.soldMol}</b> sotilgan /
-                <b>${molRemain}</b> qolgan
-            </div>
 
-            <div class="progress">
-                <div style="width:${t.mol ? Math.min(100,t.soldMol/t.mol*100):0}%"></div>
-            </div>
+        const percent=
+        total
+        ?
+        Math.min(
+            100,
+            Math.round(
+                sold/total*100
+            )
+        )
+        :
+        0;
 
-            <div class="small">
-                Maydacha: <b>${t.mayda}</b> tayyor /
-                <b>${t.soldMayda}</b> sotilgan /
-                <b>${maydaRemain}</b> qolgan
-            </div>
 
-            <div class="progress">
-                <div style="width:${t.mayda ? Math.min(100,t.soldMayda/t.mayda*100):0}%"></div>
-            </div>
+        const div=
+        document.createElement(
+            "div"
+        );
 
-            <div class="small">
-                Umumiy sotilgan: ${sold} / ${total} (${percent}%)
-            </div>
 
-            ${
-                t.active
-                ?
-                `<br>
-                <button class="btn danger"
-                    onclick="finishTandir(${t.id})">
-                    Tandirni yopish
-                </button>`
-                :
-                ""
-            }
+        div.className="tandir";
+
+
+        div.innerHTML=`
+
+        <div class="tandir-head">
+
+        <h3>
+        🔥 ${t.name}
+        </h3>
+
+        <span class="status ${
+            t.active
+            ?
+            "busy"
+            :
+            "free"
+        }">
+
+        ${
+            t.active
+            ?
+            "Faol"
+            :
+            "Yopilgan"
+        }
+
+        </span>
+
+        </div>
+
+
+        <div class="small">
+
+        Qo‘y:
+        <b>${t.qoy}</b> tayyor /
+        <b>${t.soldQoy}</b> sotilgan /
+        <b>${qoyRemain}</b> qolgan
+
+        </div>
+
+
+        <div class="progress">
+
+        <div
+        style="
+        width:${
+            t.qoy
+            ?
+            Math.min(
+                100,
+                t.soldQoy/t.qoy*100
+            )
+            :
+            0
+        }%
+        ">
+        </div>
+
+        </div>
+
+
+        <div class="small">
+
+        Mol:
+        <b>${t.mol}</b> tayyor /
+        <b>${t.soldMol}</b> sotilgan /
+        <b>${molRemain}</b> qolgan
+
+        </div>
+
+
+        <div class="progress">
+
+        <div
+        style="
+        width:${
+            t.mol
+            ?
+            Math.min(
+                100,
+                t.soldMol/t.mol*100
+            )
+            :
+            0
+        }%
+        ">
+        </div>
+
+        </div>
+
+
+        <div class="small">
+
+        Maydacha:
+        <b>${t.mayda}</b> tayyor /
+        <b>${t.soldMayda}</b> sotilgan /
+        <b>${maydaRemain}</b> qolgan
+
+        </div>
+
+
+        <div class="progress">
+
+        <div
+        style="
+        width:${
+            t.mayda
+            ?
+            Math.min(
+                100,
+                t.soldMayda/t.mayda*100
+            )
+            :
+            0
+        }%
+        ">
+        </div>
+
+        </div>
+
+
+        <div class="small">
+
+        Umumiy sotilgan:
+        ${sold} / ${total}
+        (${percent}%)
+
+        </div>
+
+
+        ${
+            t.active
+            ?
+            `
+            <br>
+
+            <button
+            class="btn danger"
+            onclick="finishTandir(${t.id})">
+
+            Tandirni yopish
+
+            </button>
+            `
+            :
+            ""
+        }
+
         `;
 
+
         box.appendChild(div);
+
     });
+
 }
+
 
 function finishTandir(id){
 
-    const t = data.tandirs.find(x=>x.id===id);
+    const t=
+    data.tandirs.find(
+        x=>x.id===id
+    );
 
-    if(!t) return;
 
-    if(!confirm(
-        t.name + "ni yopmoqchimisiz?"
-    )) return;
+    if(!t)
+        return;
 
-    t.active = false;
+
+    if(
+        !confirm(
+            t.name+
+            "ni yopmoqchimisiz?"
+        )
+    )
+        return;
+
+
+    t.active=false;
+
 
     saveData();
 
+
     renderAll();
+
 }
+
 
 function openSettings(){
 
-    document.getElementById("tableCount").value =
-        data.tableCount;
+    document
+    .getElementById(
+        "tableCount"
+    )
+    .value=
+    data.tableCount;
+
 
     renderProductEditors();
 
-    document.getElementById("settingsModal")
-        .classList.add("show");
+
+    document
+    .getElementById(
+        "settingsModal"
+    )
+    .classList.add("show");
+
 }
+
 
 function renderProductEditors(){
 
-    const box = document.getElementById("productEditors");
+    const box=
+    document.getElementById(
+        "productEditors"
+    );
 
-    box.innerHTML = "";
 
-    data.products.forEach((p,index)=>{
+    box.innerHTML="";
 
-        const div = document.createElement("div");
 
-        div.className = "product-editor";
+    data.products.forEach(
+        (p,index)=>{
 
-        div.innerHTML = `
-            <label>Mahsulot nomi</label>
-            <input class="input"
-                value="${p.name}"
-                onchange="data.products[${index}].name=this.value">
+        const div=
+        document.createElement(
+            "div"
+        );
 
-            <label>Narxi</label>
-            <input class="input"
-                type="number"
-                value="${p.price}"
-                onchange="data.products[${index}].price=Number(this.value)">
 
-            <button class="btn danger"
-                onclick="deleteProduct(${index})">
-                O‘chirish
-            </button>
+        div.className=
+        "product-editor";
+
+
+        div.innerHTML=`
+
+        <label>
+        Mahsulot nomi
+        </label>
+
+        <input
+        class="input"
+        value="${p.name}"
+        onchange="
+        data.products[${index}].name=this.value
+        ">
+
+
+        <label>
+        Narxi
+        </label>
+
+        <input
+        class="input"
+        type="number"
+        value="${p.price}"
+        onchange="
+        data.products[${index}].price=
+        Number(this.value)
+        ">
+
+
+        <button
+        class="btn danger"
+        onclick="
+        deleteProduct(${index})
+        ">
+
+        O‘chirish
+
+        </button>
+
         `;
 
+
         box.appendChild(div);
+
     });
+
 }
+
 
 function addProduct(){
 
-    const id =
-        "p" + Date.now();
+    const id=
+    "p"+Date.now();
+
 
     data.products.push({
+
         id:id,
+
         name:"Yangi mahsulot",
+
         price:0
+
     });
 
+
     renderProductEditors();
+
 }
+
 
 function deleteProduct(index){
 
-    if(data.products.length <= 1){
-        alert("Kamida bitta mahsulot qolishi kerak.");
+    if(
+        data.products.length<=1
+    ){
+
+        alert(
+            "Kamida bitta mahsulot qolishi kerak."
+        );
+
         return;
+
     }
 
-    if(!confirm("Bu mahsulotni o‘chirasizmi?")) return;
 
-    data.products.splice(index,1);
+    if(
+        !confirm(
+            "Bu mahsulotni o‘chirasizmi?"
+        )
+    )
+        return;
+
+
+    data.products.splice(
+        index,
+        1
+    );
+
 
     renderProductEditors();
+
 }
+
 
 function saveSettings(){
 
-    let count =
-        Number(document.getElementById("tableCount").value);
+    let count=
+    Number(
+        document
+        .getElementById(
+            "tableCount"
+        )
+        .value
+    );
 
-    if(count < 1) count = 1;
 
-    if(count > 200) count = 200;
+    if(count<1)
+        count=1;
 
-    data.tableCount = count;
+
+    if(count>200)
+        count=200;
+
+
+    data.tableCount=count;
+
 
     saveData();
 
-    closeModal("settingsModal");
+
+    closeModal(
+        "settingsModal"
+    );
+
 
     renderAll();
+
 }
+
 
 function renderReport(){
 
-    const revenue =
-        data.history.reduce((sum,h)=>sum+h.total,0);
+    const revenue=
+    data.history.reduce(
+        (sum,h)=>sum+h.total,
+        0
+    );
 
-    document.getElementById("reportRevenue")
-        .textContent = money(revenue);
 
-    document.getElementById("reportBills")
-        .textContent = data.history.length;
+    document
+    .getElementById(
+        "reportRevenue"
+    )
+    .textContent=
+    money(revenue);
 
-    const stats = {};
+
+    document
+    .getElementById(
+        "reportBills"
+    )
+    .textContent=
+    data.history.length;
+
+
+    const stats={};
+
 
     data.products.forEach(p=>{
-        stats[p.id] = 0;
+
+        stats[p.id]=0;
+
     });
+
 
     data.history.forEach(h=>{
 
-        Object.keys(h.items).forEach(id=>{
+        Object.keys(h.items)
+        .forEach(id=>{
 
-            if(stats[id] !== undefined){
-                stats[id] += h.items[id].qty;
+            if(
+                stats[id]!==undefined
+            ){
+
+                stats[id]+=
+                h.items[id].qty;
+
             }
+
         });
+
     });
 
-    const box = document.getElementById("productReport");
 
-    box.innerHTML = "";
+    const box=
+    document.getElementById(
+        "productReport"
+    );
+
+
+    box.innerHTML="";
+
 
     data.products.forEach(p=>{
 
-        box.innerHTML += `
-            <div class="report-row">
-                <span>${p.name}</span>
-                <b>${stats[p.id] || 0} dona</b>
-            </div>
+        box.innerHTML+=`
+
+        <div class="report-row">
+
+        <span>
+        ${p.name}
+        </span>
+
+        <b>
+        ${stats[p.id]||0} dona
+        </b>
+
+        </div>
+
         `;
+
     });
 
-    const history =
-        document.getElementById("historyList");
 
-    history.innerHTML = "";
+    const history=
+    document.getElementById(
+        "historyList"
+    );
 
-    if(data.history.length === 0){
 
-        history.innerHTML = `
-            <div class="empty">
-                Hali yopilgan hisoblar yo‘q.
-            </div>
+    history.innerHTML="";
+
+
+    if(
+        data.history.length===0
+    ){
+
+        history.innerHTML=`
+
+        <div class="empty">
+        Hali yopilgan hisoblar yo‘q.
+        </div>
+
         `;
 
         return;
+
     }
 
-    data.history.slice(0,50).forEach(h=>{
 
-        const div = document.createElement("div");
+    data.history
+    .slice(0,50)
+    .forEach(h=>{
 
-        div.className = "history";
+        const div=
+        document.createElement(
+            "div"
+        );
 
-        let items = "";
 
-        Object.values(h.items).forEach(item=>{
-            items += `
-                <div class="small">
-                    ${item.name} × ${item.qty}
-                </div>
+        div.className="history";
+
+
+        let items="";
+
+
+        Object.values(
+            h.items
+        )
+        .forEach(item=>{
+
+            items+=`
+
+            <div class="small">
+
+            ${item.name}
+            ×
+            ${item.qty}
+
+            </div>
+
             `;
+
         });
 
-        div.innerHTML = `
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                margin-bottom:8px;
-            ">
-                <b>Stol ${h.table}</b>
-                <b>${money(h.total)}</b>
-            </div>
 
-            ${items}
+        div.innerHTML=`
 
-            <div class="small" style="margin-top:9px">
-                ${h.time}
-            </div>
+        <div
+        style="
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:8px;
+        ">
+
+        <b>
+        Stol ${h.table}
+        </b>
+
+        <b>
+        ${money(h.total)}
+        </b>
+
+        </div>
+
+        ${items}
+
+        <div
+        class="small"
+        style="margin-top:9px">
+
+        ${h.time}
+
+        </div>
+
         `;
 
+
         history.appendChild(div);
+
     });
+
 }
+
 
 function closeModal(id){
-    document.getElementById(id)
-        .classList.remove("show");
+
+    document
+    .getElementById(id)
+    .classList.remove("show");
+
 }
 
-document.querySelectorAll(".modal-bg")
+
+document
+.querySelectorAll(".modal-bg")
 .forEach(bg=>{
-    bg.addEventListener("click",function(e){
-        if(e.target === bg){
-            bg.classList.remove("show");
+
+    bg.addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target===bg
+            ){
+
+                bg.classList.remove(
+                    "show"
+                );
+
+            }
+
         }
-    });
+    );
+
 });
 
+
 renderAll();
+
 </script>
 
 </body>
