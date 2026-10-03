@@ -3,872 +3,528 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ILMIX — Hammasiga erishish o‘z qo‘lingda</title>
+<title>Abdurazzoq Somsa</title>
 
 <style>
 :root{
-    --blue:#2563eb;
-    --blue2:#1d4ed8;
-    --dark:#111827;
-    --text:#182235;
-    --muted:#687386;
-    --bg:#f6f8fc;
-    --white:#fff;
-    --border:#e5eaf2;
-    --green:#059669;
+ --bg:#07111b;
+ --panel:#0d1c29;
+ --card:#122536;
+ --line:#29465c;
+ --gold:#ffc83d;
+ --green:#16b875;
+ --blue:#1687ff;
+ --red:#e84667;
+ --text:#f7f9fb;
+ --muted:#9dafbf;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-    font-family:Inter,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
+ font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ min-height:100vh;
 }
-
-button,
-input,
-select{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-}
-
-/* HEADER */
+button,input,select{font:inherit}
+button{cursor:pointer;border:0}
+button:active{transform:scale(.97)}
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);
+ position:sticky;
+ top:0;
+ z-index:50;
+ background:#08131ef5;
+ backdrop-filter:blur(12px);
+ border-bottom:1px solid var(--line);
+ padding:12px 16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
 }
 
-.nav{
-    max-width:1250px;
-    height:74px;
-    margin:auto;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
+.brand{display:flex;align-items:center;gap:10px}
 .logo{
-    font-size:29px;
-    font-weight:950;
-    color:var(--blue);
-    letter-spacing:-1.5px;
+ width:48px;
+ height:48px;
+ border-radius:14px;
+ background:linear-gradient(135deg,#ffdf63,#ff9800);
+ display:grid;
+ place-items:center;
+ font-size:28px;
+}
+.brand h1{font-size:21px;color:var(--gold)}
+.brand p{font-size:11px;color:var(--muted);margin-top:3px}
+
+.settings{
+ background:#122638;
+ color:white;
+ border:1px solid var(--gold);
+ border-radius:11px;
+ padding:11px 13px;
+ font-weight:bold;
 }
 
-.logo span{
-    color:var(--dark);
+main{
+ max-width:1500px;
+ margin:auto;
+ padding:18px 15px 90px;
 }
 
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:25px;
+.page{display:none}
+.page.active{display:block}
+
+.page-title{
+ font-size:25px;
+ font-weight:900;
+ margin-bottom:8px;
+}
+.sub{
+ color:var(--muted);
+ font-size:13px;
+ margin-bottom:16px;
 }
 
-.nav-links a{
-    color:#566174;
-    font-size:14px;
-    font-weight:700;
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+ margin-bottom:16px;
 }
-
-.nav-links a:hover{
-    color:var(--blue);
+.stat{
+ background:linear-gradient(145deg,var(--card),#0d1b28);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:14px;
 }
-
-.login{
-    border:0;
-    background:var(--blue);
-    color:white;
-    padding:12px 20px;
-    border-radius:12px;
-    font-weight:800;
+.stat small{
+ display:block;
+ color:var(--muted);
+ margin-bottom:6px;
 }
+.stat strong{font-size:20px}
 
-.menu{
-    display:none;
-    border:0;
-    background:none;
-    font-size:27px;
-}
-
-/* HERO */
-
-.hero{
-    max-width:1250px;
-    min-height:600px;
-    margin:auto;
-    padding:70px 22px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-}
-
-.badge{
-    display:inline-block;
-    color:var(--blue);
-    background:#eaf1ff;
-    padding:9px 15px;
-    border-radius:50px;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:.5px;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-size:58px;
-    line-height:1.05;
-    letter-spacing:-2.7px;
-    margin-bottom:22px;
-}
-
-.hero h1 span{
-    color:var(--blue);
-}
-
-.hero p{
-    color:var(--muted);
-    font-size:17px;
-    line-height:1.8;
-    max-width:590px;
-    margin-bottom:30px;
-}
-
-.hero-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
+.toolbar{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-bottom:15px;
 }
 
 .btn{
-    border:0;
-    border-radius:13px;
-    padding:14px 21px;
-    font-weight:850;
-}
-
-.btn-primary{
-    color:white;
-    background:var(--blue);
-    box-shadow:0 12px 30px rgba(37,99,235,.22);
-}
-
-.btn-secondary{
-    color:var(--text);
-    background:white;
-    border:1px solid var(--border);
-}
-
-.hero-visual{
-    min-height:430px;
-    border-radius:35px;
-    background:linear-gradient(145deg,#e9f0ff,#f7faff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.circle{
-    position:absolute;
-    width:310px;
-    height:310px;
-    background:#d9e6ff;
-    border-radius:50%;
-}
-
-.study{
-    position:relative;
-    z-index:2;
-    width:300px;
-    background:white;
-    border-radius:25px;
-    padding:25px;
-    box-shadow:0 25px 70px rgba(30,60,120,.15);
-}
-
-.study-logo{
-    font-size:25px;
-    font-weight:950;
-    color:var(--blue);
-    margin-bottom:20px;
-}
-
-.study-card{
-    padding:18px;
-    border-radius:15px;
-    background:#f3f6fb;
-    margin-bottom:12px;
-}
-
-.study-card:last-child{
-    margin-bottom:0;
-}
-
-.study-card b{
-    display:block;
-    margin-bottom:5px;
-}
-
-.study-card span{
-    color:var(--muted);
-    font-size:13px;
-}
-
-/* SECTION */
-
-.section{
-    max-width:1250px;
-    margin:auto;
-    padding:75px 22px;
-}
-
-.heading{
-    text-align:center;
-    margin-bottom:42px;
-}
-
-.heading small{
-    color:var(--blue);
-    font-weight:900;
-}
-
-.heading h2{
-    margin-top:8px;
-    font-size:39px;
-    letter-spacing:-1.4px;
-}
-
-.heading p{
-    color:var(--muted);
-    margin-top:10px;
-}
-
-/* FEATURES */
-
-.features{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.feature{
-    background:white;
-    border:1px solid var(--border);
-    padding:27px;
-    border-radius:21px;
-    transition:.25s;
-}
-
-.feature:hover{
-    transform:translateY(-5px);
-    box-shadow:0 18px 40px rgba(30,50,90,.08);
-}
-
-.icon{
-    width:51px;
-    height:51px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#edf3ff;
-    border-radius:15px;
-    font-size:23px;
-    margin-bottom:17px;
-}
-
-.feature h3{
-    margin-bottom:8px;
-}
-
-.feature p{
-    color:var(--muted);
-    line-height:1.6;
-    font-size:14px;
-}
-
-/* SEARCH */
-
-.search{
-    max-width:850px;
-    margin:0 auto 30px;
-    position:relative;
-}
-
-.search input{
-    width:100%;
-    height:58px;
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:0 20px;
-    outline:none;
-    background:white;
-    box-shadow:0 8px 25px rgba(20,40,80,.05);
-}
-
-.search input:focus{
-    border-color:var(--blue);
-}
-
-/* FILTERS */
-
-.filters{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-bottom:35px;
-}
-
-.filter{
-    border:1px solid var(--border);
-    background:white;
-    padding:10px 15px;
-    border-radius:50px;
-    color:#596477;
-    font-weight:700;
-}
-
-.filter.active{
-    background:var(--blue);
-    border-color:var(--blue);
-    color:white;
-}
-
-/* BOOKS */
-
-.books{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.book{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:21px;
-    overflow:hidden;
-    transition:.25s;
-}
-
-.book:hover{
-    transform:translateY(-5px);
-    box-shadow:0 18px 45px rgba(20,40,80,.1);
-}
-
-.cover{
-    height:250px;
-    padding:19px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.cover.blue{
-    background:linear-gradient(145deg,#155eef,#5790ff);
-}
-
-.cover.green{
-    background:linear-gradient(145deg,#047857,#34d399);
-}
-
-.cover.orange{
-    background:linear-gradient(145deg,#ea580c,#fb923c);
-}
-
-.cover.red{
-    background:linear-gradient(145deg,#be123c,#fb7185);
-}
-
-.cover.purple{
-    background:linear-gradient(145deg,#6d28d9,#a78bfa);
-}
-
-.cover.dark{
-    background:linear-gradient(145deg,#111827,#475569);
-}
-
-.cover-inner{
-    width:100%;
-    height:100%;
-    border:2px solid rgba(255,255,255,.65);
-    border-radius:8px;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
-
-.cover-inner small{
-    opacity:.85;
-    margin-bottom:12px;
-    font-weight:700;
-}
-
-.cover-inner h3{
-    font-size:23px;
-    line-height:1.2;
-}
-
-.cover-symbol{
-    font-size:38px;
-    margin-top:18px;
-}
-
-.book-body{
-    padding:18px;
-}
-
-.book-body h3{
-    margin-bottom:7px;
-}
-
-.book-body p{
-    color:var(--muted);
-    font-size:13px;
-    min-height:40px;
-    line-height:1.5;
-}
-
-.book-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:14px;
-}
-
-.book-actions button{
-    border:0;
-    padding:10px 7px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:12px;
-}
-
-.open{
-    color:white;
-    background:var(--blue);
-}
-
-.exercise{
-    color:var(--blue);
-    background:#edf3ff;
-}
-
-/* EMPTY */
-
-.empty{
-    display:none;
-    text-align:center;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    color:var(--muted);
-}
-
-/* EXERCISES */
-
-.exercise-box{
-    max-width:800px;
-    margin:auto;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:23px;
-    padding:28px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.field{
-    width:100%;
-    height:50px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    padding:0 14px;
-    outline:none;
-    background:white;
-}
-
-.field:focus{
-    border-color:var(--blue);
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-.find-btn{
-    width:100%;
-    height:50px;
-    margin-top:13px;
-    border:0;
-    border-radius:11px;
-    background:var(--blue);
-    color:white;
-    font-weight:850;
-}
-
-.result{
-    display:none;
-    margin-top:20px;
-    background:#f4f7fc;
-    border-radius:16px;
-    padding:20px;
-    line-height:1.7;
-}
-
-.result.show{
-    display:block;
-}
-
-/* PHOTO */
-
-.photo-section{
-    background:#111827;
-    border-radius:30px;
-    padding:55px;
-    color:white;
-    display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:40px;
-    align-items:center;
-}
-
-.photo-section small{
-    color:#79a2ff;
-    font-weight:900;
-}
-
-.photo-section h2{
-    font-size:38px;
-    margin-top:9px;
-}
-
-.photo-section p{
-    color:#b7c1d2;
-    line-height:1.7;
-    margin:15px 0 25px;
-}
-
-.upload{
-    display:inline-block;
-    background:var(--blue);
-    padding:14px 20px;
-    border-radius:12px;
-    font-weight:850;
-}
-
-.upload input{
-    display:none;
-}
-
-.upload-box{
-    min-height:220px;
-    border:2px dashed #4b5870;
-    border-radius:22px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#aeb8ca;
-    padding:20px;
-}
-
-.upload-box strong{
-    font-size:46px;
-    margin-bottom:10px;
-}
-
-/* HOW */
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.step{
-    background:white;
-    border:1px solid var(--border);
-    padding:30px;
-    border-radius:20px;
-}
-
-.step-number{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:var(--blue);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
-    margin-bottom:20px;
-}
-
-.step p{
-    color:var(--muted);
-    line-height:1.65;
-    margin-top:8px;
-}
-
-/* FOOTER */
-
-.footer{
-    background:#101827;
-    color:white;
-    margin-top:40px;
-}
-
-.footer-inner{
-    max-width:1250px;
-    margin:auto;
-    padding:55px 22px 30px;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
-}
-
-.footer-logo{
-    font-size:30px;
-    font-weight:950;
-    color:#6f99ff;
-}
-
-.footer-text{
-    max-width:410px;
-    color:#98a4b8;
-    line-height:1.7;
-    margin-top:12px;
-}
-
-.footer h4{
-    margin-bottom:15px;
-}
-
-.footer a{
-    display:block;
-    color:#98a4b8;
-    margin-bottom:10px;
-    font-size:14px;
-}
-
-.copyright{
-    max-width:1250px;
-    margin:auto;
-    border-top:1px solid #273245;
-    padding:18px 22px;
-    color:#68758b;
-    font-size:12px;
-    position:relative;
-}
-
-.founder{
-    position:absolute;
-    right:22px;
-    bottom:18px;
-    color:#59667a;
-}
-
-/* MODAL */
+ min-height:44px;
+ padding:0 14px;
+ border-radius:10px;
+ font-weight:bold;
+}
+.blue{background:var(--blue);color:white}
+.gold{background:var(--gold);color:#111}
+.green{background:var(--green);color:white}
+.dark{background:#1a3143;color:white;border:1px solid var(--line)}
+.red{background:var(--red);color:white}
+
+.tables{
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:12px;
+}
+
+.table{
+ background:linear-gradient(145deg,#122536,#0d1b28);
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:13px;
+ min-height:175px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+}
+.table-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.table-name{
+ font-size:19px;
+ font-weight:900;
+}
+.badge{
+ padding:5px 8px;
+ border-radius:20px;
+ font-size:10px;
+ font-weight:bold;
+}
+.busy{background:#0e9c63}
+.empty{background:var(--red)}
+
+.table-info{
+ display:grid;
+ gap:6px;
+ color:#dce6ee;
+ font-size:13px;
+}
+.total{
+ background:#087a52;
+ border-radius:10px;
+ padding:10px;
+ text-align:center;
+ font-weight:bold;
+}
+.order-btn{
+ background:var(--blue);
+ color:white;
+ min-height:43px;
+ border-radius:10px;
+ font-weight:bold;
+}
+
+.card{
+ background:linear-gradient(145deg,var(--card),#0d1b28);
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:16px;
+}
+
+.tandir-grid,
+.history-grid,
+.menu-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+}
+
+.menu-grid{grid-template-columns:repeat(4,1fr)}
+
+.menu-item{
+ background:linear-gradient(145deg,var(--card),#0d1b28);
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:15px;
+}
+.menu-item .emoji{font-size:28px}
+.menu-item h3{margin:8px 0 5px}
+.price{
+ color:var(--gold);
+ font-weight:900;
+}
+
+.history-item{
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+}
+
+.row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+}
+
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.numbers{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin:12px 0;
+}
+.num{
+ background:#091722;
+ border-radius:10px;
+ padding:10px;
+ text-align:center;
+}
+.num small{
+ display:block;
+ color:var(--muted);
+ font-size:10px;
+ margin-bottom:4px;
+}
+.num b{font-size:17px}
+
+.green-t{color:#54e1ad}
+.gold-t{color:var(--gold)}
+.red-t{color:#ff7d97}
+
+.progress{
+ height:8px;
+ background:#091722;
+ border-radius:20px;
+ overflow:hidden;
+}
+.progress i{
+ display:block;
+ height:100%;
+ background:linear-gradient(90deg,var(--green),var(--gold));
+}
+
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ z-index:60;
+ background:#08131ef5;
+ border-top:1px solid var(--line);
+ display:flex;
+ padding:5px;
+ backdrop-filter:blur(12px);
+}
+
+.nav{
+ background:transparent;
+ color:#9dadbc;
+ min-height:56px;
+ flex:1;
+ font-size:11px;
+ font-weight:bold;
+ display:grid;
+ place-items:center;
+}
+.nav span{font-size:20px}
+.nav.active{color:var(--gold)}
 
 .modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    background:rgba(8,15,30,.72);
-    align-items:center;
-    justify-content:center;
-    padding:18px;
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:100;
+ padding:12px;
+ overflow:auto;
 }
-
 .modal.show{
-    display:flex;
+ display:flex;
+ align-items:center;
+ justify-content:center;
 }
 
-.modal-card{
-    width:min(950px,100%);
-    max-height:92vh;
-    overflow:hidden;
-    background:white;
-    border-radius:22px;
-    position:relative;
+.box{
+ width:min(700px,100%);
+ max-height:94vh;
+ overflow:auto;
+ background:#0d1c29;
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:16px;
+}
+.head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:15px;
+}
+.x{
+ width:42px;
+ height:42px;
+ border-radius:10px;
+ background:#1b3041;
+ color:white;
+ font-size:24px;
 }
 
-.modal-top{
-    height:65px;
-    padding:0 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--border);
+.section{
+ background:#112536;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+ margin-bottom:12px;
+}
+.section h3{margin-bottom:12px}
+
+.field{margin-bottom:10px}
+.field label{
+ display:block;
+ color:#b9c7d2;
+ font-size:12px;
+ margin-bottom:5px;
+}
+.field input,
+.product-row input,
+.order-add select,
+.order-add input{
+ width:100%;
+ min-height:47px;
+ background:#081621;
+ border:1px solid #35546b;
+ border-radius:10px;
+ color:white;
+ padding:0 11px;
+ outline:none;
 }
 
-.modal-top h3{
-    font-size:17px;
+.save{
+ width:100%;
+ min-height:49px;
+ border-radius:11px;
+ background:var(--gold);
+ color:#111;
+ font-weight:900;
 }
 
-.close{
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:50%;
-    background:#eef1f6;
-    font-size:21px;
+.product-row{
+ display:grid;
+ grid-template-columns:1fr 120px 42px;
+ gap:7px;
+ margin-bottom:8px;
+}
+.product-row button{
+ border-radius:9px;
+ background:#8f2942;
+ color:white;
 }
 
-.modal-body{
-    overflow:auto;
-    max-height:calc(92vh - 65px);
+.add{
+ width:100%;
+ min-height:44px;
+ border-radius:10px;
+ background:#1a3a51;
+ color:white;
+ font-weight:bold;
 }
 
-.pdf{
-    width:100%;
-    height:75vh;
-    border:0;
+.order-item{
+ background:#132a3b;
+ border:1px solid var(--line);
+ border-radius:12px;
+ padding:11px;
+ margin-bottom:8px;
 }
 
-.info{
-    padding:30px;
+.order-top{
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+}
+.order-name{font-weight:bold}
+.order-price{
+ color:var(--gold);
+ font-weight:bold;
 }
 
-.info h2{
-    margin-bottom:10px;
+.controls{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ margin-top:9px;
+}
+.qty-btn{
+ width:42px;
+ height:42px;
+ border-radius:9px;
+ background:#203d52;
+ color:white;
+ font-size:20px;
+ font-weight:bold;
+}
+.qty{
+ min-width:35px;
+ text-align:center;
+ font-size:17px;
+ font-weight:bold;
+}
+.edit{
+ margin-left:auto;
+ background:#294a61;
+ color:white;
+ border-radius:9px;
+ padding:9px 11px;
+ font-size:11px;
+ font-weight:bold;
 }
 
-.info p{
-    color:var(--muted);
-    line-height:1.7;
+.order-add{
+ display:grid;
+ grid-template-columns:1fr 85px;
+ gap:8px;
+}
+.order-add button{
+ grid-column:1/-1;
+ min-height:47px;
+ border-radius:10px;
+ background:var(--blue);
+ color:white;
+ font-weight:bold;
 }
 
-.notice{
-    margin-top:18px;
-    padding:15px;
-    background:#eff6ff;
-    color:#2450a4;
-    border-radius:12px;
-    line-height:1.6;
+.big-total{
+ background:#087a52;
+ border-radius:13px;
+ text-align:center;
+ padding:15px;
+ margin:12px 0;
+}
+.big-total small{
+ display:block;
+ color:#d4fff0;
+}
+.big-total strong{font-size:26px}
+
+.close-order{
+ width:100%;
+ min-height:52px;
+ border-radius:11px;
+ background:var(--green);
+ color:white;
+ font-weight:900;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:1050px){
-
-    .books{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .features{
-        grid-template-columns:repeat(2,1fr);
-    }
+.empty-state{
+ text-align:center;
+ color:var(--muted);
+ padding:30px 10px;
+ background:#0d1c29;
+ border:1px dashed var(--line);
+ border-radius:14px;
 }
 
-@media(max-width:760px){
+.toast{
+ position:fixed;
+ z-index:300;
+ left:50%;
+ bottom:80px;
+ transform:translate(-50%,20px);
+ background:#172c3e;
+ border:1px solid #4b667d;
+ color:white;
+ padding:11px 15px;
+ border-radius:10px;
+ opacity:0;
+ pointer-events:none;
+ transition:.2s;
+ max-width:90%;
+ text-align:center;
+}
+.toast.show{
+ opacity:1;
+ transform:translate(-50%,0);
+}
 
-    .nav{
-        height:68px;
-    }
-
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:68px;
-        left:0;
-        width:100%;
-        background:white;
-        flex-direction:column;
-        align-items:flex-start;
-        padding:20px 22px;
-        border-bottom:1px solid var(--border);
-    }
-
-    .nav-links.show{
-        display:flex;
-    }
-
-    .menu{
-        display:block;
-    }
-
-    .login{
-        display:none;
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        padding-top:45px;
-    }
-
-    .hero h1{
-        font-size:43px;
-    }
-
-    .hero-visual{
-        min-height:340px;
-    }
-
-    .features,
-    .books,
-    .steps{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .full{
-        grid-column:auto;
-    }
-
-    .photo-section{
-        grid-template-columns:1fr;
-        padding:30px;
-    }
-
-    .footer-inner{
-        grid-template-columns:1fr;
-    }
-
-    .founder{
-        position:static;
-        display:block;
-        margin-top:7px;
-    }
+@media(max-width:1150px){
+ .tables{grid-template-columns:repeat(4,1fr)}
+ .menu-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:850px){
+ .brand h1{font-size:18px}
+ .brand p{display:none}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .tables{grid-template-columns:repeat(2,1fr)}
+ .tandir-grid,.history-grid{grid-template-columns:repeat(2,1fr)}
+ .menu-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:450px){
+ .brand h1{font-size:15px}
+ .logo{width:42px;height:42px;font-size:24px}
+ .settings{padding:10px;font-size:11px}
+ .tables{gap:8px}
+ .table{min-height:170px;padding:10px}
+ .table-name{font-size:16px}
+ .tandir-grid,.history-grid,.menu-grid{grid-template-columns:1fr}
+ .product-row{grid-template-columns:1fr 100px 40px}
 }
 </style>
 </head>
@@ -876,1460 +532,2278 @@ a{
 <body>
 
 <header class="header">
+ <div class="brand">
+  <div class="logo">🥟</div>
+  <div>
+   <h1>ABDURAZZOQ SOMSA</h1>
+   <p>Stol • Tandir • Menyu • Hisobot</p>
+  </div>
+ </div>
 
-<div class="nav">
-
-<a href="#home" class="logo">
-ILM<span>IX</span>
-</a>
-
-<nav class="nav-links" id="navLinks">
-<a href="#home">Bosh sahifa</a>
-<a href="#books">Darsliklar</a>
-<a href="#exercises">Mashqlar</a>
-<a href="#photo">Rasm orqali</a>
-<a href="#how">Qanday ishlaydi?</a>
-</nav>
-
-<button class="login" onclick="openLogin()">
-Kirish
-</button>
-
-<button class="menu" onclick="toggleMenu()">
-☰
-</button>
-
-</div>
-
+ <button class="settings" onclick="openSettings()">⚙️ Sozlamalar</button>
 </header>
-
 
 <main>
 
-<!-- HERO -->
+<section id="home" class="page active"></section>
 
-<section class="hero" id="home">
+<section id="tablesPage" class="page"></section>
 
-<div>
+<section id="tandirPage" class="page"></section>
 
-<div class="badge">
-9-SINF TA'LIM PLATFORMASI
-</div>
+<section id="menuPage" class="page"></section>
 
-<h1>
-Hammasiga erishish
-<span>o‘z qo‘lingda.</span>
-</h1>
-
-<p>
-ILMIX — 9-sinf o‘quvchilari uchun darslik,
-mashq, izoh va o‘rganishni bir joyga jamlaydigan
-zamonaviy ta’lim platformasi.
-</p>
-
-<div class="hero-buttons">
-
-<a href="#books" class="btn btn-primary">
-Darsliklarni ko‘rish
-</a>
-
-<a href="#exercises" class="btn btn-secondary">
-Mashqni topish
-</a>
-
-</div>
-
-</div>
-
-
-<div class="hero-visual">
-
-<div class="circle"></div>
-
-<div class="study">
-
-<div class="study-logo">
-ILMIX
-</div>
-
-<div class="study-card">
-<b>📚 Darslik</b>
-<span>Kerakli fan va darslikni tanlang</span>
-</div>
-
-<div class="study-card">
-<b>✏️ Mashq</b>
-<span>Bet va mashq orqali qidiring</span>
-</div>
-
-<div class="study-card">
-<b>📷 Rasm orqali</b>
-<span>Masalani suratdan aniqlash</span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section class="section">
-
-<div class="heading">
-
-<small>ILMIX IMKONIYATLARI</small>
-
-<h2>O‘qishni osonlashtiramiz</h2>
-
-<p>
-Kerakli ta’lim vositalari bitta platformada.
-</p>
-
-</div>
-
-
-<div class="features">
-
-<div class="feature">
-<div class="icon">📚</div>
-<h3>Darsliklar</h3>
-<p>
-9-sinf fanlari bo‘yicha rasmiy elektron darsliklarga
-qulay kirish.
-</p>
-</div>
-
-<div class="feature">
-<div class="icon">✏️</div>
-<h3>Mashqlar</h3>
-<p>
-Fan, bet va mashq raqami orqali topshiriqni topish
-uchun maxsus qidiruv.
-</p>
-</div>
-
-<div class="feature">
-<div class="icon">📷</div>
-<h3>Rasm orqali</h3>
-<p>
-Masalani suratga olib yuborish uchun tayyor interfeys.
-AI modul keyingi backend bosqichida ulanadi.
-</p>
-</div>
-
-<div class="feature">
-<div class="icon">🧠</div>
-<h3>Tushuntirish</h3>
-<p>
-Faqat javobni emas, masalani tushunishga yordam
-beradigan yechimni ko‘rsatish.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- BOOKS -->
-
-<section class="section" id="books">
-
-<div class="heading">
-
-<small>9-SINF</small>
-
-<h2>Darsliklar</h2>
-
-<p>
-Kerakli fanni tanlang va rasmiy elektron darslikni oching.
-</p>
-
-</div>
-
-
-<div class="search">
-
-<input
-id="bookSearch"
-type="text"
-placeholder="🔎 Fan yoki darslik nomini qidiring..."
-oninput="searchBooks()"
->
-
-</div>
-
-
-<div class="filters">
-
-<button class="filter active" onclick="filterBooks('all',this)">
-Barchasi
-</button>
-
-<button class="filter" onclick="filterBooks('aniq',this)">
-Aniq fanlar
-</button>
-
-<button class="filter" onclick="filterBooks('tabiiy',this)">
-Tabiiy fanlar
-</button>
-
-<button class="filter" onclick="filterBooks('ijtimoiy',this)">
-Ijtimoiy fanlar
-</button>
-
-<button class="filter" onclick="filterBooks('til',this)">
-Tillar
-</button>
-
-</div>
-
-
-<div class="books" id="booksContainer">
-
-<!-- MATEMATIKA -->
-
-<article class="book"
-data-name="matematika algebra geometriya"
-data-category="aniq">
-
-<div class="cover blue">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>MATEMATIKA</h3>
-<div class="cover-symbol">∑ √ π</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Matematika</h3>
-
-<p>
-9-sinf matematika darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Matematika','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Matematika')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- FIZIKA -->
-
-<article class="book"
-data-name="fizika astronomiya"
-data-category="tabiiy">
-
-<div class="cover purple">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>FIZIKA</h3>
-<div class="cover-symbol">⚛</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Fizika</h3>
-
-<p>
-Fizika va astronomiya yo‘nalishi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Fizika','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Fizika')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- KIMYO -->
-
-<article class="book"
-data-name="kimyo"
-data-category="tabiiy">
-
-<div class="cover green">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>KIMYO</h3>
-<div class="cover-symbol">⚗</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Kimyo</h3>
-
-<p>
-9-sinf Kimyo darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openPDF(
-'https://eduportal.uz/Umumiyfiles/darsliklar/9/kimyo_9_uzb.pdf',
-'Kimyo — 9-sinf'
-)">
-Darslikni ochish
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Kimyo')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- BIOLOGIYA -->
-
-<article class="book"
-data-name="biologiya genetika"
-data-category="tabiiy">
-
-<div class="cover green">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>BIOLOGIYA</h3>
-<div class="cover-symbol">🧬</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Biologiya</h3>
-
-<p>
-9-sinf Biologiya darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openPDF(
-'https://old.eduportal.uz/Umumiyfiles/darsliklar/9/biologiya_9_uzb.pdf',
-'Biologiya — 9-sinf'
-)">
-Darslikni ochish
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Biologiya')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- GEOGRAFIYA -->
-
-<article class="book"
-data-name="geografiya"
-data-category="tabiiy">
-
-<div class="cover blue">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>GEOGRAFIYA</h3>
-<div class="cover-symbol">🌍</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Geografiya</h3>
-
-<p>
-9-sinf Geografiya darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Geografiya','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Geografiya')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- ONA TILI -->
-
-<article class="book"
-data-name="ona tili o'zbek tili"
-data-category="til">
-
-<div class="cover orange">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>ONA TILI</h3>
-<div class="cover-symbol">Aa</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Ona tili</h3>
-
-<p>
-9-sinf Ona tili darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Ona tili','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Ona tili')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- ADABIYOT -->
-
-<article class="book"
-data-name="adabiyot"
-data-category="til">
-
-<div class="cover red">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>ADABIYOT</h3>
-<div class="cover-symbol">📖</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Adabiyot</h3>
-
-<p>
-9-sinf Adabiyot darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Adabiyot','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Adabiyot')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- INGLIZ TILI -->
-
-<article class="book"
-data-name="ingliz tili english"
-data-category="til">
-
-<div class="cover orange">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>ENGLISH</h3>
-<div class="cover-symbol">EN</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Ingliz tili</h3>
-
-<p>
-9-sinf English darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Ingliz tili','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Ingliz tili')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- RUS TILI -->
-
-<article class="book"
-data-name="rus tili"
-data-category="til">
-
-<div class="cover dark">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>RUS TILI</h3>
-<div class="cover-symbol">АБВ</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Rus tili</h3>
-
-<p>
-9-sinf Rus tili darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Rus tili','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Rus tili')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- O'ZBEKISTON TARIXI -->
-
-<article class="book"
-data-name="o'zbekiston tarixi tarix"
-data-category="ijtimoiy">
-
-<div class="cover red">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>O‘ZBEKISTON TARIXI</h3>
-<div class="cover-symbol">🏛</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>O‘zbekiston tarixi</h3>
-
-<p>
-9-sinf O‘zbekiston tarixi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('O‘zbekiston tarixi','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('O‘zbekiston tarixi')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- JAHON TARIXI -->
-
-<article class="book"
-data-name="jahon tarixi"
-data-category="ijtimoiy">
-
-<div class="cover purple">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>JAHON TARIXI</h3>
-<div class="cover-symbol">🌍</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Jahon tarixi</h3>
-
-<p>
-9-sinf Jahon tarixi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openPDF(
-'https://old.eduportal.uz/Umumiyfiles/muhokama/jahon_tarixi_9_uzb.pdf',
-'Jahon tarixi — 9-sinf'
-)">
-Darslikni ochish
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Jahon tarixi')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- INFORMATIKA -->
-
-<article class="book"
-data-name="informatika axborot texnologiyalari"
-data-category="aniq">
-
-<div class="cover dark">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>INFORMATIKA</h3>
-<div class="cover-symbol">&lt;/&gt;</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Informatika</h3>
-
-<p>
-Informatika va axborot texnologiyalari
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openPDF(
-'https://eduportal.uz/Umumiyfiles/darsliklar/9/informatika_9_uzb.pdf',
-'Informatika va axborot texnologiyalari — 9-sinf'
-)">
-Darslikni ochish
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Informatika')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- DAVLAT VA HUQUQ -->
-
-<article class="book"
-data-name="davlat huquq huquqshunoslik"
-data-category="ijtimoiy">
-
-<div class="cover blue">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>DAVLAT VA HUQUQ ASOSLARI</h3>
-<div class="cover-symbol">⚖</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Davlat va huquq asoslari</h3>
-
-<p>
-9-sinf darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Davlat va huquq asoslari','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Davlat va huquq asoslari')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- TARBIYA -->
-
-<article class="book"
-data-name="tarbiya"
-data-category="ijtimoiy">
-
-<div class="cover green">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>TARBIYA</h3>
-<div class="cover-symbol">💡</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Tarbiya</h3>
-
-<p>
-9-sinf Tarbiya darsligi
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Tarbiya','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Tarbiya')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- IQTISOD -->
-
-<article class="book"
-data-name="iqtisod iqtisodiyot tadbirkorlik"
-data-category="ijtimoiy">
-
-<div class="cover orange">
-<div class="cover-inner">
-<small>9-SINF</small>
-<h3>IQTISOD</h3>
-<div class="cover-symbol">₽ $</div>
-</div>
-</div>
-
-<div class="book-body">
-
-<h3>Iqtisodiy bilim asoslari</h3>
-
-<p>
-Iqtisodiyot va tadbirkorlik asoslari
-</p>
-
-<div class="book-actions">
-
-<button class="open"
-onclick="openOfficial('Iqtisodiy bilim asoslari','https://qr.uzedu.uz/uz/services/index/4')">
-Rasmiy darslik
-</button>
-
-<button class="exercise"
-onclick="chooseExercise('Iqtisodiy bilim asoslari')">
-Mashqlar
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-</div>
-
-
-<div class="empty" id="empty">
-🔎 Bunday darslik topilmadi.
-</div>
-
-</section>
-
-
-<!-- EXERCISES -->
-
-<section class="section" id="exercises">
-
-<div class="heading">
-
-<small>MASHQLAR</small>
-
-<h2>Mashqni toping</h2>
-
-<p>
-Fan, bet va mashq raqamini kiriting.
-</p>
-
-</div>
-
-
-<div class="exercise-box">
-
-<div class="form-grid">
-
-<select class="field full" id="subject">
-<option value="">Fanni tanlang</option>
-<option>Matematika</option>
-<option>Fizika</option>
-<option>Kimyo</option>
-<option>Biologiya</option>
-<option>Geografiya</option>
-<option>Ona tili</option>
-<option>Adabiyot</option>
-<option>Ingliz tili</option>
-<option>Rus tili</option>
-<option>O‘zbekiston tarixi</option>
-<option>Jahon tarixi</option>
-<option>Informatika</option>
-<option>Davlat va huquq asoslari</option>
-<option>Tarbiya</option>
-<option>Iqtisodiy bilim asoslari</option>
-</select>
-
-<input
-class="field"
-id="page"
-type="number"
-min="1"
-placeholder="Bet raqami">
-
-<input
-class="field"
-id="exerciseNumber"
-type="number"
-min="1"
-placeholder="Mashq raqami">
-
-</div>
-
-<button class="find-btn" onclick="findExercise()">
-🔎 Mashqni qidirish
-</button>
-
-<div class="result" id="result"></div>
-
-</div>
-
-</section>
-
-
-<!-- PHOTO -->
-
-<section class="section" id="photo">
-
-<div class="photo-section">
-
-<div>
-
-<small>RASM ORQALI YECHISH</small>
-
-<h2>
-Masalani rasmga oling
-</h2>
-
-<p>
-O‘quvchi masala yoki topshiriqni suratga oladi.
-ILMIX uni aniqlash va javob/tushuntirish chiqarish
-uchun tayyorlangan.
-</p>
-
-<label class="upload">
-
-📷 Rasm tanlash
-
-<input
-type="file"
-accept="image/*"
-onchange="photoSelected(this)"
->
-
-</label>
-
-</div>
-
-
-<div class="upload-box">
-
-<strong>📷</strong>
-
-<div id="uploadText">
-Masala rasmini shu yerga yuklang
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- HOW -->
-
-<section class="section" id="how">
-
-<div class="heading">
-
-<small>3 QADAM</small>
-
-<h2>ILMIX qanday ishlaydi?</h2>
-
-</div>
-
-
-<div class="steps">
-
-<div class="step">
-
-<div class="step-number">1</div>
-
-<h3>Fanni tanlang</h3>
-
-<p>
-Kerakli 9-sinf fanini va darslikni tanlang.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">2</div>
-
-<h3>Mashqni toping</h3>
-
-<p>
-Bet va mashq raqami orqali kerakli topshiriqqa
-o‘ting.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">3</div>
-
-<h3>Yechimni o‘rganing</h3>
-
-<p>
-Javob va tushuntirishni ko‘rib, masalani
-o‘zingiz ham tushunib oling.
-</p>
-
-</div>
-
-</div>
-
-</section>
+<section id="reportPage" class="page"></section>
 
 </main>
 
+<nav class="bottom">
+ <button class="nav active" data-page="home" onclick="go('home')">
+  <span>🏠</span>Asosiy
+ </button>
 
-<!-- FOOTER -->
+ <button class="nav" data-page="tablesPage" onclick="go('tablesPage')">
+  <span>🪑</span>Stollar
+ </button>
 
-<footer class="footer">
+ <button class="nav" data-page="tandirPage" onclick="go('tandirPage')">
+  <span>🔥</span>Tandirlar
+ </button>
 
-<div class="footer-inner">
+ <button class="nav" data-page="menuPage" onclick="go('menuPage')">
+  <span>🍽️</span>Menyu
+ </button>
 
-<div>
-
-<div class="footer-logo">
-ILMIX
-</div>
-
-<p class="footer-text">
-Hammasiga erishish o‘z qo‘lingda.
-9-sinf o‘quvchilari uchun zamonaviy
-ta’lim platformasi.
-</p>
-
-</div>
-
-
-<div>
-
-<h4>Platforma</h4>
-
-<a href="#books">Darsliklar</a>
-<a href="#exercises">Mashqlar</a>
-<a href="#photo">Rasm orqali</a>
-<a href="#how">Qanday ishlaydi?</a>
-
-</div>
+ <button class="nav" data-page="reportPage" onclick="go('reportPage')">
+  <span>📊</span>Hisobot
+ </button>
+</nav>
 
 
-<div>
+<!-- SOZLAMALAR -->
 
-<h4>Rasmiy manba</h4>
+<div id="settingsModal" class="modal">
+<div class="box">
 
-<a
-href="https://qr.uzedu.uz/uz/services/index/4"
-target="_blank">
-Darsliklar portali
-</a>
+ <div class="head">
+  <h2>⚙️ Sozlamalar</h2>
+  <button class="x" onclick="closeModal('settingsModal')">×</button>
+ </div>
 
-<a href="#home">
-Bosh sahifa
-</a>
+ <div class="section">
+  <h3>🪑 Stol soni</h3>
 
-</div>
+  <div class="field">
+   <label>Nechta stol bor?</label>
+   <input id="tableCount" type="number" min="1" max="100">
+  </div>
 
-</div>
+  <button class="save" onclick="saveTableCount()">
+   💾 Stol sonini saqlash
+  </button>
+ </div>
 
+ <div class="section">
+  <h3>💰 Mahsulotlar va narxlar</h3>
 
-<div class="copyright">
+  <div id="productFields"></div>
 
-© 2026 ILMIX. Barcha huquqlar himoyalangan.
+  <button class="add" onclick="addProductField()">
+   ➕ Yangi mahsulot
+  </button>
 
-<span class="founder">
-Loyiha asoschisi — Umar Tursunov
-</span>
+  <br><br>
 
-</div>
+  <button class="save" onclick="saveProducts()">
+   💾 Mahsulotlarni saqlash
+  </button>
+ </div>
 
-</footer>
+ <div class="section">
+  <h3>🗑️ Ma'lumotlar</h3>
 
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-<div class="modal-card">
-
-<div class="modal-top">
-
-<h3 id="modalTitle">
-ILMIX
-</h3>
-
-<button class="close" onclick="closeModal()">
-×
-</button>
+  <button class="btn red" style="width:100%" onclick="resetAll()">
+   Barcha ma'lumotlarni tozalash
+  </button>
+ </div>
 
 </div>
-
-<div class="modal-body" id="modalBody"></div>
-
 </div>
 
+
+<!-- STOL ZAKAZI -->
+
+<div id="orderModal" class="modal">
+<div class="box">
+
+ <div class="head">
+  <h2 id="orderTitle"></h2>
+  <button class="x" onclick="closeModal('orderModal')">×</button>
+ </div>
+
+ <div class="section">
+
+  <h3>➕ Zakaz qo‘shish</h3>
+
+  <div class="order-add">
+
+   <select id="orderProduct"></select>
+
+   <input
+    id="orderQty"
+    type="number"
+    min="1"
+    value="1"
+    inputmode="numeric"
+   >
+
+   <button onclick="addOrder()">➕ Qo‘shish</button>
+
+  </div>
+
+ </div>
+
+ <div class="section">
+
+  <h3>📋 Stol zakazi</h3>
+
+  <div id="orderItems"></div>
+
+  <div class="big-total">
+   <small>Jami hisob</small>
+   <strong id="orderTotal">0 so‘m</strong>
+  </div>
+
+  <button class="close-order" onclick="closeOrder()">
+   ✅ Hisobni yopish
+  </button>
+
+ </div>
+
 </div>
+</div>
+
+
+<!-- TANDIR -->
+
+<div id="tandirModal" class="modal">
+<div class="box">
+
+ <div class="head">
+  <h2>🔥 Yangi tandir</h2>
+  <button class="x" onclick="closeModal('tandirModal')">×</button>
+ </div>
+
+ <div class="section">
+
+  <div class="field">
+   <label>Mol go‘shtli somsa — nechta yopildi?</label>
+   <input id="beefBaked" type="number" min="0" value="0">
+  </div>
+
+  <div class="field">
+   <label>Qo‘y go‘shtli somsa — nechta yopildi?</label>
+   <input id="muttonBaked" type="number" min="0" value="0">
+  </div>
+
+  <button class="save" onclick="createTandir()">
+   🔥 Tandirni ochish
+  </button>
+
+ </div>
+
+</div>
+</div>
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-/* MENU */
+/* =========================
+   MA'LUMOTLAR
+========================= */
 
-function toggleMenu(){
+const KEY = "abdurazzoq_somsa_daily_v2";
 
-    document
-    .getElementById("navLinks")
-    .classList.toggle("show");
+const defaults = [
 
-}
+ {
+  id:1,
+  name:"Mol go‘shtli somsa",
+  price:10000,
+  type:"beef",
+  emoji:"🥟",
+  isSomsa:true
+ },
 
+ {
+  id:2,
+  name:"Qo‘y go‘shtli somsa",
+  price:10000,
+  type:"mutton",
+  emoji:"🥟",
+  isSomsa:true
+ },
 
-/* MODAL */
+ {
+  id:3,
+  name:"Maydacha somsa",
+  price:8000,
+  type:"mayda",
+  emoji:"🥟",
+  isSomsa:true
+ },
 
-function openModal(title,html){
+ {
+  id:4,
+  name:"Coca-Cola",
+  price:12000,
+  type:"drink",
+  emoji:"🥤",
+  isSomsa:false
+ },
 
-    document.getElementById("modalTitle").textContent=title;
+ {
+  id:5,
+  name:"Fanta",
+  price:12000,
+  type:"drink",
+  emoji:"🥤",
+  isSomsa:false
+ },
 
-    document.getElementById("modalBody").innerHTML=html;
+ {
+  id:6,
+  name:"Choy",
+  price:5000,
+  type:"drink",
+  emoji:"🫖",
+  isSomsa:false
+ }
 
-    document.getElementById("modal").classList.add("show");
-
-}
-
-function closeModal(){
-
-    document.getElementById("modal").classList.remove("show");
-
-}
-
-
-/* PDF */
-
-function openPDF(url,title){
-
-    openModal(
-        title,
-        `
-        <iframe
-            class="pdf"
-            src="${url}">
-        </iframe>
-        `
-    );
-
-}
-
-
-/* OFFICIAL PORTAL */
-
-function openOfficial(subject,url){
-
-    openModal(
-        subject,
-        `
-        <div class="info">
-
-            <h2>${subject}</h2>
-
-            <p>
-            ILMIX sizni rasmiy ta'lim portalidagi
-            darslikka olib boradi.
-            </p>
-
-            <div class="notice">
-            📚 Darslikning original elektron nusxasi
-            rasmiy manbadan ochiladi.
-            </div>
-
-            <br>
-
-            <a
-            href="${url}"
-            target="_blank"
-            class="btn btn-primary"
-            style="display:inline-block;color:white">
-
-            Rasmiy darslikni ochish
-
-            </a>
-
-        </div>
-        `
-    );
-
-}
+];
 
 
-/* LOGIN */
+let db = load();
+let currentTable = null;
 
-function openLogin(){
 
-    openModal(
-        "ILMIX — Kirish",
-        `
-        <div class="info">
+/* =========================
+   SAQLASH
+========================= */
 
-        <h2>Xush kelibsiz!</h2>
+function load(){
 
-        <p>
-        Profil tizimi keyingi backend bosqichida
-        haqiqiy akkauntlar bilan ulanadi.
-        </p>
+ try{
 
-        <br>
+  const x = JSON.parse(
+   localStorage.getItem(KEY)
+  );
 
-        <input
-        class="field"
-        placeholder="Telefon yoki email">
+  if(x){
 
-        <br><br>
+   if(!x.dailyReports)
+    x.dailyReports = {};
 
-        <input
-        class="field"
-        type="password"
-        placeholder="Parol">
+   return x;
+  }
 
-        <br><br>
+ }catch(e){}
 
-        <button
-        class="btn btn-primary"
-        style="border:0;color:white">
+ return {
 
-        Kirish
+  tableCount:20,
 
-        </button>
+  products:defaults,
 
-        </div>
-        `
-    );
+  tables:{},
+
+  tandirs:[],
+
+  history:[],
+
+  dailyReports:{}
+
+ };
 
 }
 
 
-/* BOOK SEARCH */
+function save(){
 
-function searchBooks(){
-
-    const query=
-    document.getElementById("bookSearch")
-    .value
-    .toLowerCase()
-    .trim();
-
-    const books=
-    document.querySelectorAll(".book");
-
-    let count=0;
-
-    books.forEach(book=>{
-
-        const name=
-        book.dataset.name.toLowerCase();
-
-        if(name.includes(query)){
-
-            book.style.display="block";
-            count++;
-
-        }else{
-
-            book.style.display="none";
-
-        }
-
-    });
-
-    document.getElementById("empty").style.display=
-    count===0 ? "block" : "none";
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(db)
+ );
 
 }
 
 
-/* FILTER */
+/* =========================
+   YORDAMCHI
+========================= */
 
-function filterBooks(category,button){
+function money(n){
 
-    document
-    .querySelectorAll(".filter")
-    .forEach(x=>x.classList.remove("active"));
-
-    button.classList.add("active");
-
-    const books=
-    document.querySelectorAll(".book");
-
-    let count=0;
-
-    books.forEach(book=>{
-
-        if(
-            category==="all" ||
-            book.dataset.category===category
-        ){
-
-            book.style.display="block";
-            count++;
-
-        }else{
-
-            book.style.display="none";
-
-        }
-
-    });
-
-    document.getElementById("empty").style.display=
-    count===0 ? "block" : "none";
+ return Number(n || 0)
+  .toLocaleString("uz-UZ")
+  .replace(/,/g," ")
+  + " so‘m";
 
 }
 
 
-/* EXERCISE */
+function todayKey(){
 
-function chooseExercise(subject){
+ const d = new Date();
 
-    document.getElementById("subject").value=subject;
+ const y = d.getFullYear();
 
-    document
-    .getElementById("exercises")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
+ const m = String(
+  d.getMonth()+1
+ ).padStart(2,"0");
+
+ const day = String(
+  d.getDate()
+ ).padStart(2,"0");
+
+ return `${y}-${m}-${day}`;
 
 }
 
 
-/* EXERCISE SEARCH */
+function niceDate(key){
 
-function findExercise(){
+ const [y,m,d] = key.split("-");
 
-    const subject=
-    document.getElementById("subject").value;
+ return `${d}.${m}.${y}`;
 
-    const page=
-    document.getElementById("page").value;
-
-    const number=
-    document.getElementById("exerciseNumber").value;
-
-    const result=
-    document.getElementById("result");
-
-    if(!subject || !page || !number){
-
-        result.innerHTML=
-        "⚠️ Iltimos, fan, bet va mashq raqamini kiriting.";
-
-        result.classList.add("show");
-
-        return;
-
-    }
+}
 
 
-    /*
-       REAL DATABASE ULANISH UCHUN TAYYOR FORMAT
+function dateText(d=new Date()){
 
-       Masalan backenddan:
+ return d.toLocaleString(
+  "uz-UZ",
+  {
+   day:"2-digit",
+   month:"2-digit",
+   year:"numeric",
+   hour:"2-digit",
+   minute:"2-digit"
+  }
+ );
 
-       {
-          subject:"Matematika",
-          page:34,
-          exercise:5,
-          answer:"...",
-          solution:"..."
-       }
+}
 
-       keladi.
-    */
 
-    result.innerHTML=`
+function toast(text){
 
-    <h3>
-    ${subject} — ${page}-bet, ${number}-mashq
-    </h3>
+ const el =
+  document.getElementById("toast");
 
-    <p style="margin-top:10px;color:#687386">
+ el.textContent = text;
 
-    Bu qidiruv oynasi real ma'lumotlar bazasi bilan
-    ishlashga tayyor.
+ el.classList.add("show");
 
-    </p>
+ clearTimeout(window.toastTimer);
 
-    <div class="notice">
+ window.toastTimer =
+  setTimeout(
+   ()=>el.classList.remove("show"),
+   2200
+  );
 
-    📚 Keyingi server bazasida aynan shu
-    <b>fan → bet → mashq → javob → yechim</b>
-    tuzilmasi ishlaydi.
+}
+
+
+function closeModal(id){
+
+ document
+  .getElementById(id)
+  .classList.remove("show");
+
+}
+
+
+function table(n){
+
+ if(!db.tables[n])
+  db.tables[n] = {
+   orders:[]
+  };
+
+ return db.tables[n];
+
+}
+
+
+function total(n){
+
+ return table(n)
+  .orders
+  .reduce(
+   (s,o)=>s + o.price*o.qty,
+   0
+  );
+
+}
+
+
+function activeTandir(){
+
+ return db.tandirs.find(
+  t=>t.status==="active"
+ ) || null;
+
+}
+
+
+function tandirRemain(type){
+
+ const t = activeTandir();
+
+ if(!t) return 0;
+
+ return Math.max(
+  0,
+  (t[type+"Baked"] || 0) -
+  (t[type+"Sold"] || 0)
+ );
+
+}
+
+
+function somsaQty(n){
+
+ return table(n)
+  .orders
+  .reduce(
+   (s,o)=>
+    s+(o.isSomsa ? o.qty : 0),
+   0
+  );
+
+}
+
+
+function product(id){
+
+ return db.products.find(
+  p=>String(p.id)===String(id)
+ );
+
+}
+
+
+/* =========================
+   KUNLIK HISOBOT
+========================= */
+
+function createDailyReport(){
+
+ const key = todayKey();
+
+ if(!db.dailyReports[key]){
+
+  db.dailyReports[key] = {
+
+   date:key,
+
+   revenue:0,
+
+   bills:0,
+
+   products:{},
+
+   tables:[]
+
+  };
+
+ }
+
+ return db.dailyReports[key];
+
+}
+
+
+function addToDailyReport(record){
+
+ const report =
+  createDailyReport();
+
+ report.revenue += record.total;
+
+ report.bills += 1;
+
+ report.tables.push({
+  table:record.table,
+  total:record.total,
+  time:record.date
+ });
+
+ record.orders.forEach(o=>{
+
+  if(!report.products[o.productId]){
+
+   report.products[o.productId] = {
+
+    name:o.name,
+
+    qty:0,
+
+    total:0,
+
+    type:o.type || ""
+
+   };
+
+  }
+
+  report.products[o.productId].qty += o.qty;
+
+  report.products[o.productId].total +=
+   o.qty * o.price;
+
+ });
+
+ save();
+
+}
+
+
+/* =========================
+   NAVIGATSIYA
+========================= */
+
+function go(id){
+
+ document
+  .querySelectorAll(".page")
+  .forEach(
+   x=>x.classList.remove("active")
+  );
+
+ document
+  .getElementById(id)
+  .classList.add("active");
+
+ document
+  .querySelectorAll(".nav")
+  .forEach(
+   x=>x.classList.toggle(
+    "active",
+    x.dataset.page===id
+   )
+  );
+
+ renderAll();
+
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
+
+}
+
+
+/* =========================
+   HAMMASINI CHIZISH
+========================= */
+
+function renderAll(){
+
+ renderHome();
+
+ renderTables();
+
+ renderTandir();
+
+ renderMenu();
+
+ renderReport();
+
+}
+
+
+/* =========================
+   ASOSIY
+========================= */
+
+function renderHome(){
+
+ const activeTables =
+  Object.keys(db.tables)
+  .filter(
+   k=>table(k).orders.length
+  ).length;
+
+ const report =
+  db.dailyReports[todayKey()] ||
+  {
+   revenue:0,
+   bills:0
+  };
+
+ document.getElementById("home")
+ .innerHTML = `
+
+ <div class="page-title">
+  🏠 Abdurazzoq Somsa
+ </div>
+
+ <div class="sub">
+  Bugungi savdo va boshqaruv.
+ </div>
+
+ <div class="stats">
+
+  <div class="stat">
+   <small>Band stollar</small>
+   <strong>${activeTables}</strong>
+  </div>
+
+  <div class="stat">
+   <small>Stollar jami</small>
+   <strong>${db.tableCount}</strong>
+  </div>
+
+  <div class="stat">
+   <small>Bugungi tushum</small>
+   <strong>${money(report.revenue)}</strong>
+  </div>
+
+  <div class="stat">
+   <small>Bugungi hisoblar</small>
+   <strong>${report.bills}</strong>
+  </div>
+
+ </div>
+
+ <div class="toolbar">
+
+  <button
+   class="btn blue"
+   onclick="go('tablesPage')">
+   🪑 Stol zakazlari
+  </button>
+
+  <button
+   class="btn gold"
+   onclick="openTandir()">
+   🔥 Yangi tandir
+  </button>
+
+  <button
+   class="btn dark"
+   onclick="go('reportPage')">
+   📊 Bugungi hisobot
+  </button>
+
+ </div>
+
+ <div class="card">
+
+  <h3>📅 Bugun</h3>
+
+  <p
+   class="muted"
+   style="margin-top:10px;line-height:1.6">
+
+   ${niceDate(todayKey())} kuni yopilgan
+   barcha stollar avtomatik ravishda
+   bugungi hisobotga qo‘shiladi.
+
+  </p>
+
+ </div>
+ `;
+
+}
+
+
+/* =========================
+   STOLLAR
+========================= */
+
+function renderTables(){
+
+ const el =
+  document.getElementById(
+   "tablesPage"
+  );
+
+ let html = `
+
+ <div class="page-title">
+  🪑 Stollar
+ </div>
+
+ <div class="sub">
+  Stolni bosib buyurtma kiriting.
+ </div>
+
+ <div class="tables">
+ `;
+
+ for(let i=1;i<=db.tableCount;i++){
+
+  const t = table(i);
+
+  const busy =
+   t.orders.length > 0;
+
+  html += `
+
+  <div class="table">
+
+   <div class="table-head">
+
+    <div class="table-name">
+     ${i}-stol
+    </div>
+
+    <span class="badge ${
+     busy ? "busy":"empty"
+    }">
+
+     ${busy ? "Band":"Bo‘sh"}
+
+    </span>
+
+   </div>
+
+   ${
+    busy
+
+    ?
+
+    `
+
+    <div class="table-info">
+
+     <div>
+      🥟 ${somsaQty(i)} ta somsa
+     </div>
+
+     <div>
+      📋 ${t.orders.length} xil mahsulot
+     </div>
+
+     <div>
+      💵 ${money(total(i))}
+     </div>
 
     </div>
 
-    `;
+    <div class="total">
+     ${money(total(i))}
+    </div>
 
-    result.classList.add("show");
+    <button
+     class="order-btn"
+     onclick="openOrder(${i})">
 
-}
+     Buyurtmani ochish
 
+    </button>
 
-/* PHOTO */
-
-function photoSelected(input){
-
-    if(!input.files.length) return;
-
-    const file=input.files[0];
-
-    document.getElementById("uploadText").innerHTML=
     `
-    <b style="color:#8fb2ff">
-    ✓ ${file.name}
-    </b>
-    <br>
-    <small>
-    Rasm qabul qilindi.
-    </small>
-    `;
+
+    :
+
+    `
+
+    <div
+     class="table-info"
+     style="
+      text-align:center;
+      min-height:80px;
+      justify-content:center
+     ">
+
+     <div style="font-size:30px">
+      🪑
+     </div>
+
+     <div class="muted">
+      Bo‘sh stol
+     </div>
+
+    </div>
+
+    <button
+     class="order-btn"
+     onclick="openOrder(${i})">
+
+     + Buyurtma
+
+    </button>
+
+    `
+   }
+
+  </div>
+
+  `;
+
+ }
+
+ html += `
+ </div>
+ `;
+
+ el.innerHTML = html;
 
 }
 
 
-/* MODAL OUTSIDE CLICK */
+/* =========================
+   ZAKAZ
+========================= */
 
-document
-.getElementById("modal")
-.addEventListener("click",function(e){
+function openOrder(n){
 
-    if(e.target===this){
+ currentTable = n;
 
-        closeModal();
+ document
+  .getElementById("orderTitle")
+  .textContent =
+   `🪑 ${n}-stol`;
 
-    }
+ fillOrderProducts();
 
-});
+ renderOrderItems();
+
+ document
+  .getElementById("orderModal")
+  .classList.add("show");
+
+}
+
+
+function fillOrderProducts(){
+
+ const select =
+  document.getElementById(
+   "orderProduct"
+  );
+
+ select.innerHTML = "";
+
+ db.products.forEach(p=>{
+
+  const option =
+   document.createElement("option");
+
+  option.value = p.id;
+
+  option.textContent =
+   `${p.emoji || "•"} ${p.name} — ${money(p.price)}`;
+
+  select.appendChild(option);
+
+ });
+
+}
+
+
+function renderOrderItems(){
+
+ const box =
+  document.getElementById(
+   "orderItems"
+  );
+
+ const t = table(currentTable);
+
+ if(!t.orders.length){
+
+  box.innerHTML = `
+   <div class="empty-state">
+    Hali zakaz yo‘q.
+   </div>
+  `;
+
+ }else{
+
+  box.innerHTML =
+   t.orders.map((o,i)=>`
+
+   <div class="order-item">
+
+    <div class="order-top">
+
+     <div class="order-name">
+      ${o.emoji || "•"}
+      ${o.name}
+     </div>
+
+     <div class="order-price">
+      ${money(o.price*o.qty)}
+     </div>
+
+    </div>
+
+    <div class="controls">
+
+     <button
+      class="qty-btn"
+      onclick="changeQty(${i},-1)">
+      −
+     </button>
+
+     <div class="qty">
+      ${o.qty}
+     </div>
+
+     <button
+      class="qty-btn"
+      onclick="changeQty(${i},1)">
+      +
+     </button>
+
+     <button
+      class="edit"
+      onclick="editQty(${i})">
+      ✏️ Miqdor
+     </button>
+
+    </div>
+
+   </div>
+
+  `).join("");
+
+ }
+
+ document
+  .getElementById("orderTotal")
+  .textContent =
+   money(total(currentTable));
+
+}
+
+
+function addOrder(){
+
+ const p =
+  product(
+   document.getElementById(
+    "orderProduct"
+   ).value
+  );
+
+ const q =
+  Math.floor(
+   Number(
+    document.getElementById(
+     "orderQty"
+    ).value
+   )
+  );
+
+ if(!p || q<1){
+
+  toast(
+   "Miqdorni to‘g‘ri kiriting."
+  );
+
+  return;
+ }
+
+
+ if(p.isSomsa){
+
+  const t =
+   activeTandir();
+
+  if(!t){
+
+   toast(
+    "Avval faol tandir oching."
+   );
+
+   return;
+  }
+
+  const left =
+   tandirRemain(p.type);
+
+  if(q>left){
+
+   toast(
+    `Tandirda faqat ${left} ta qoldi.`
+   );
+
+   return;
+  }
+
+ }
+
+
+ const t =
+  table(currentTable);
+
+ const old =
+  t.orders.find(
+   o=>o.productId===p.id
+  );
+
+
+ if(old){
+
+  old.qty += q;
+
+ }else{
+
+  t.orders.push({
+
+   productId:p.id,
+
+   name:p.name,
+
+   price:p.price,
+
+   qty:q,
+
+   isSomsa:p.isSomsa,
+
+   type:p.type || "",
+
+   emoji:p.emoji || "🍽️"
+
+  });
+
+ }
+
+
+ if(p.isSomsa){
+
+  const at =
+   activeTandir();
+
+  at[p.type+"Sold"] += q;
+
+ }
+
+
+ save();
+
+ renderOrderItems();
+
+ renderAll();
+
+ document
+  .getElementById("orderQty")
+  .value=1;
+
+ toast(
+  `${q} ta ${p.name} qo‘shildi`
+ );
+
+}
+
+
+function changeQty(i,d){
+
+ const t =
+  table(currentTable);
+
+ const o =
+  t.orders[i];
+
+
+ if(d>0 && o.isSomsa){
+
+  const at =
+   activeTandir();
+
+  if(!at){
+
+   toast(
+    "Faol tandir yo‘q."
+   );
+
+   return;
+  }
+
+  if(
+   tandirRemain(o.type)<1
+  ){
+
+   toast(
+    "Tandirda somsa qolmagan."
+   );
+
+   return;
+  }
+
+  at[o.type+"Sold"]++;
+
+ }
+
+
+ if(
+  d<0 &&
+  o.isSomsa &&
+  activeTandir()
+ ){
+
+  const at =
+   activeTandir();
+
+  at[o.type+"Sold"] =
+   Math.max(
+    0,
+    at[o.type+"Sold"]-1
+   );
+
+ }
+
+
+ o.qty += d;
+
+
+ if(o.qty<=0){
+
+  t.orders.splice(i,1);
+
+ }
+
+
+ save();
+
+ renderOrderItems();
+
+ renderAll();
+
+}
+
+
+function editQty(i){
+
+ const t =
+  table(currentTable);
+
+ const o =
+  t.orders[i];
+
+ const n =
+  Number(
+   prompt(
+    `${o.name} nechta bo‘lsin?`,
+    o.qty
+   )
+  );
+
+ if(
+  !Number.isInteger(n) ||
+  n<1
+ ) return;
+
+
+ const diff =
+  n-o.qty;
+
+
+ if(o.isSomsa){
+
+  const at =
+   activeTandir();
+
+  if(!at){
+
+   toast(
+    "Faol tandir yo‘q."
+   );
+
+   return;
+  }
+
+
+  if(
+   diff>0 &&
+   tandirRemain(o.type)<diff
+  ){
+
+   toast(
+    `Faqat ${tandirRemain(o.type)} ta qoldi.`
+   );
+
+   return;
+  }
+
+
+  at[o.type+"Sold"] =
+   Math.max(
+    0,
+    at[o.type+"Sold"] + diff
+   );
+
+ }
+
+
+ o.qty=n;
+
+ save();
+
+ renderOrderItems();
+
+ renderAll();
+
+}
+
+
+/* =========================
+   HISOBNI YOPISH
+========================= */
+
+function closeOrder(){
+
+ const t =
+  table(currentTable);
+
+ if(!t.orders.length){
+
+  closeModal("orderModal");
+
+  return;
+ }
+
+
+ const sum =
+  total(currentTable);
+
+
+ if(!confirm(
+  `${currentTable}-stol hisobi ${money(sum)}.\n\nHisobni yopasizmi?`
+ )) return;
+
+
+ const record = {
+
+  table:currentTable,
+
+  total:sum,
+
+  orders:
+   JSON.parse(
+    JSON.stringify(t.orders)
+   ),
+
+  date:
+   new Date().toISOString()
+
+ };
+
+
+ /* umumiy tarix */
+
+ db.history.push(record);
+
+
+ /* KUNLIK HISOBOTGA QO‘SHISH */
+
+ addToDailyReport(record);
+
+
+ /* stolni bo‘shatish */
+
+ t.orders=[];
+
+
+ save();
+
+ closeModal("orderModal");
+
+ renderAll();
+
+ toast(
+  "Hisob yopildi va kunlik hisobotga saqlandi."
+ );
+
+}
+
+
+/* =========================
+   TANDIR
+========================= */
+
+function openTandir(){
+
+ if(activeTandir()){
+
+  toast(
+   "Avval hozirgi tandirni tugating."
+  );
+
+  return;
+ }
+
+ document
+  .getElementById("beefBaked")
+  .value=0;
+
+ document
+  .getElementById("muttonBaked")
+  .value=0;
+
+ document
+  .getElementById("tandirModal")
+  .classList.add("show");
+
+}
+
+
+function createTandir(){
+
+ const b =
+  Math.floor(
+   Number(
+    document.getElementById(
+     "beefBaked"
+    ).value
+   ) || 0
+  );
+
+ const m =
+  Math.floor(
+   Number(
+    document.getElementById(
+     "muttonBaked"
+    ).value
+   ) || 0
+  );
+
+
+ if(b+m<1){
+
+  toast(
+   "Kamida bitta somsa kiriting."
+  );
+
+  return;
+ }
+
+
+ db.tandirs.push({
+
+  id:Date.now(),
+
+  name:
+   `${db.tandirs.length+1}-tandir`,
+
+  beefBaked:b,
+
+  muttonBaked:m,
+
+  beefSold:0,
+
+  muttonSold:0,
+
+  status:"active",
+
+  openedAt:
+   new Date().toISOString()
+
+ });
+
+
+ save();
+
+ closeModal("tandirModal");
+
+ renderAll();
+
+ toast(
+  "Yangi tandir ochildi."
+ );
+
+}
+
+
+function finishTandir(){
+
+ const t =
+  activeTandir();
+
+ if(!t) return;
+
+
+ if(
+  Object.keys(db.tables)
+  .some(
+   k=>table(k).orders.length
+  )
+ ){
+
+  toast(
+   "Avval faol stol hisoblarini yoping."
+  );
+
+  return;
+ }
+
+
+ if(!confirm(
+  `${t.name}ni tugatasizmi?`
+ )) return;
+
+
+ t.status="closed";
+
+ t.closedAt =
+  new Date().toISOString();
+
+ save();
+
+ renderAll();
+
+ toast(
+  "Tandir tugatildi."
+ );
+
+}
+
+
+function renderTandir(){
+
+ const el =
+  document.getElementById(
+   "tandirPage"
+  );
+
+ const at =
+  activeTandir();
+
+
+ let html = `
+
+ <div class="page-title">
+  🔥 Tandirlar
+ </div>
+
+ <div class="sub">
+  Yopilgan, sotilgan va qolgan somsani nazorat qiling.
+ </div>
+
+ <div class="toolbar">
+
+  <button
+   class="btn gold"
+   onclick="openTandir()">
+   ➕ Yangi tandir
+  </button>
+
+ </div>
+ `;
+
+
+ if(at){
+
+  const b=at.beefBaked;
+  const m=at.muttonBaked;
+
+  const bs=at.beefSold;
+  const ms=at.muttonSold;
+
+  html += `
+
+  <div class="card">
+
+   <div class="row">
+
+    <h3>🔥 ${at.name}</h3>
+
+    <span class="badge busy">
+     Faol
+    </span>
+
+   </div>
+
+
+   <div class="numbers">
+
+    <div class="num">
+     <small>Mol yopilgan</small>
+     <b>${b}</b>
+    </div>
+
+    <div class="num">
+     <small>Mol sotilgan</small>
+     <b class="gold-t">${bs}</b>
+    </div>
+
+    <div class="num">
+     <small>Mol qolgan</small>
+     <b class="green-t">
+      ${b-bs}
+     </b>
+    </div>
+
+   </div>
+
+
+   <div class="numbers">
+
+    <div class="num">
+     <small>Qo‘y yopilgan</small>
+     <b>${m}</b>
+    </div>
+
+    <div class="num">
+     <small>Qo‘y sotilgan</small>
+     <b class="gold-t">${ms}</b>
+    </div>
+
+    <div class="num">
+     <small>Qo‘y qolgan</small>
+     <b class="green-t">
+      ${m-ms}
+     </b>
+    </div>
+
+   </div>
+
+
+   <button
+    class="btn green"
+    style="width:100%"
+    onclick="finishTandir()">
+
+    ✅ Tandirni tugatish
+
+   </button>
+
+  </div>
+
+  `;
+
+ }else{
+
+  html += `
+
+  <div class="empty-state">
+
+   Hozir faol tandir yo‘q.
+
+   <br><br>
+
+   Yangi tandir oching.
+
+  </div>
+
+  `;
+
+ }
+
+
+ const old =
+  db.tandirs
+  .filter(t=>t.status==="closed")
+  .slice()
+  .reverse();
+
+
+ html += `
+
+ <h3 style="margin:20px 0 10px">
+  📚 Tandirlar tarixi
+ </h3>
+
+ <div class="history-grid">
+ `;
+
+
+ if(!old.length){
+
+  html += `
+   <div
+    class="empty-state"
+    style="grid-column:1/-1">
+
+    Hali tandir tarixi yo‘q.
+
+   </div>
+  `;
+
+ }
+
+
+ old.forEach(t=>{
+
+  html += `
+
+  <div class="history-item">
+
+   <div class="row">
+
+    <b>${t.name}</b>
+
+    <span class="small muted">
+     ${dateText(t.closedAt)}
+    </span>
+
+   </div>
+
+   <div class="numbers">
+
+    <div class="num">
+     <small>Yopilgan</small>
+     <b>
+      ${t.beefBaked+t.muttonBaked}
+     </b>
+    </div>
+
+    <div class="num">
+     <small>Sotilgan</small>
+     <b>
+      ${t.beefSold+t.muttonSold}
+     </b>
+    </div>
+
+    <div class="num">
+     <small>Qolgan</small>
+     <b>
+      ${
+       (t.beefBaked-t.beefSold)
+       +
+       (t.muttonBaked-t.muttonSold)
+      }
+     </b>
+    </div>
+
+   </div>
+
+  </div>
+
+  `;
+
+ });
+
+
+ html += `</div>`;
+
+ el.innerHTML=html;
+
+}
+
+
+/* =========================
+   MENYU
+========================= */
+
+function renderMenu(){
+
+ const el =
+  document.getElementById(
+   "menuPage"
+  );
+
+ el.innerHTML = `
+
+ <div class="page-title">
+  🍽️ Menyu
+ </div>
+
+ <div class="sub">
+  Mahsulotlar va narxlar.
+ </div>
+
+ <div class="menu-grid">
+
+ ${
+  db.products.map(p=>`
+
+  <div class="menu-item">
+
+   <div class="emoji">
+    ${p.emoji || "🍽️"}
+   </div>
+
+   <h3>
+    ${p.name}
+   </h3>
+
+   <div class="price">
+    ${money(p.price)}
+   </div>
+
+   <div
+    class="small muted"
+    style="margin-top:6px">
+
+    ${p.isSomsa ? "Somsa":"Ichimlik / mahsulot"}
+
+   </div>
+
+  </div>
+
+  `).join("")
+ }
+
+ </div>
+ `;
+
+}
+
+
+/* =========================
+   HISOBOT
+========================= */
+
+function renderReport(){
+
+ const el =
+  document.getElementById(
+   "reportPage"
+  );
+
+
+ const today =
+  db.dailyReports[todayKey()] ||
+  {
+   revenue:0,
+   bills:0,
+   products:{}
+  };
+
+
+ const todayProducts =
+  Object.values(
+   today.products || {}
+  );
+
+
+ const todayQty =
+  todayProducts.reduce(
+   (s,p)=>s+p.qty,
+   0
+  );
+
+
+ const dailyKeys =
+  Object.keys(
+   db.dailyReports
+  ).sort().reverse();
+
+
+ let html = `
+
+ <div class="page-title">
+  📊 Hisobot
+ </div>
+
+ <div class="sub">
+  Har bir kunning hisoboti alohida saqlanadi.
+ </div>
+
+
+ <!-- BUGUNGI HISOB -->
+
+ <div class="card"
+      style="margin-bottom:14px">
+
+  <div class="row">
+
+   <h3>
+    📅 Bugun — ${niceDate(todayKey())}
+   </h3>
+
+  </div>
+
+
+  <div class="stats"
+       style="margin-top:12px">
+
+   <div class="stat">
+
+    <small>Bugungi tushum</small>
+
+    <strong>
+     ${money(today.revenue)}
+    </strong>
+
+   </div>
+
+
+   <div class="stat">
+
+    <small>Yopilgan hisoblar</small>
+
+    <strong>
+     ${today.bills}
+    </strong>
+
+   </div>
+
+
+   <div class="stat">
+
+    <small>Sotilgan mahsulot</small>
+
+    <strong>
+     ${todayQty}
+    </strong>
+
+   </div>
+
+
+   <div class="stat">
+
+    <small>Mahsulot turlari</small>
+
+    <strong>
+     ${todayProducts.length}
+    </strong>
+
+   </div>
+
+  </div>
+
+
+  <h3 style="margin:15px 0 10px">
+   🥟 Bugungi sotuv
+  </h3>
+
+
+  ${
+   todayProducts.length
+
+   ?
+
+   todayProducts.map(p=>`
+
+   <div
+    class="row"
+    style="
+     padding:10px 0;
+     border-bottom:1px solid var(--line)
+    ">
+
+    <span>
+     ${p.name}
+    </span>
+
+    <b>
+     ${p.qty} ta
+    </b>
+
+    <strong
+     style="color:var(--gold)">
+
+     ${money(p.total)}
+
+    </strong>
+
+   </div>
+
+   `).join("")
+
+   :
+
+   `<div class="empty-state">
+     Bugun hali savdo yopilmagan.
+    </div>`
+  }
+
+ </div>
+
+
+ <!-- KUNLIK TARIX -->
+
+ <h3 style="margin:20px 0 10px">
+  📚 Kunlik hisobotlar
+ </h3>
+
+ <div class="history-grid">
+
+ `;
+
+
+ if(!dailyKeys.length){
+
+  html += `
+
+  <div
+   class="empty-state"
+   style="grid-column:1/-1">
+
+   Hali kunlik hisobot yo‘q.
+
+  </div>
+
+  `;
+
+ }else{
+
+  dailyKeys.forEach(key=>{
+
+   const r =
+    db.dailyReports[key];
+
+   const products =
+    Object.values(
+     r.products || {}
+    );
+
+   const qty =
+    products.reduce(
+     (s,p)=>s+p.qty,
+     0
+    );
+
+
+   html += `
+
+   <div class="history-item">
+
+    <div class="row">
+
+     <b>
+      📅 ${niceDate(key)}
+     </b>
+
+     ${
+      key===todayKey()
+      ?
+      `<span class="badge busy">
+       BUGUN
+       </span>`
+      :
+      ""
+     }
+
+    </div>
+
+
+    <div
+     style="
+      margin-top:13px;
+      display:grid;
+      gap:8px
+     ">
+
+     <div>
+      💰 Tushum:
+      <strong style="color:var(--gold)">
+       ${money(r.revenue)}
+      </strong>
+     </div>
+
+     <div>
+      🧾 Hisoblar:
+      <strong>
+       ${r.bills} ta
+      </strong>
+     </div>
+
+     <div>
+      🥟 Sotuv:
+      <strong>
+       ${qty} ta
+      </strong>
+     </div>
+
+    </div>
+
+
+    <details style="margin-top:12px">
+
+     <summary
+      style="
+       cursor:pointer;
+       color:var(--gold);
+       font-weight:bold
+      ">
+
+      Batafsil ko‘rish
+
+     </summary>
+
+
+     <div style="margin-top:10px">
+
+      ${
+       products.length
+
+       ?
+
+       products.map(p=>`
+
+       <div
+        class="row"
+        style="
+         padding:7px 0;
+         border-bottom:1px solid var(--line)
+        ">
+
+        <span>
+         ${p.name}
+        </span>
+
+        <span>
+         ${p.qty} ta
+        </span>
+
+        <b style="color:var(--gold)">
+         ${money(p.total)}
+        </b>
+
+       </div>
+
+       `).join("")
+
+       :
+
+       `<span class="muted">
+        Ma'lumot yo‘q
+       </span>`
+      }
+
+     </div>
+
+    </details>
+
+   </div>
+
+   `;
+
+  });
+
+ }
+
+
+ html += `
+
+ </div>
+
+ `;
+
+
+ el.innerHTML=html;
+
+}
+
+
+/* =========================
+   SOZLAMALAR
+========================= */
+
+function openSettings(){
+
+ document
+  .getElementById("tableCount")
+  .value=db.tableCount;
+
+ renderProductFields();
+
+ document
+  .getElementById("settingsModal")
+  .classList.add("show");
+
+}
+
+
+function renderProductFields(){
+
+ document
+  .getElementById("productFields")
+  .innerHTML =
+
+ db.products.map(
+  (p,i)=>`
+
+  <div class="product-row">
+
+   <input
+    class="pname"
+    data-i="${i}"
+    value="${esc(p.name)}"
+    placeholder="Mahsulot nomi">
+
+   <input
+    class="pprice"
+    data-i="${i}"
+    type="number"
+    min="0"
+    value="${p.price}"
+    placeholder="Narx">
+
+   <button
+    onclick="deleteProduct(${i})">
+    ×
+   </button>
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+function addProductField(){
+
+ db.products.push({
+
+  id:Date.now(),
+
+  name:"Yangi mahsulot",
+
+  price:0,
+
+  type:"other",
+
+  emoji:"🍽️",
+
+  isSomsa:false
+
+ });
+
+ renderProductFields();
+
+}
+
+
+function deleteProduct(i){
+
+ if(db.products.length<=1){
+
+  toast(
+   "Kamida bitta mahsulot qolishi kerak."
+  );
+
+  return;
+ }
+
+ db.products.splice(i,1);
+
+ renderProductFields();
+
+}
+
+
+function saveProducts(){
+
+ const names =
+  [...document.querySelectorAll(
+   ".pname"
+  )];
+
+ const prices =
+  [...document.querySelectorAll(
+   ".pprice"
+  )];
+
+
+ names.forEach((e,i)=>{
+
+  db.products[i].name =
+   e.value.trim() ||
+   "Mahsulot";
+
+  db.products[i].price =
+   Math.max(
+    0,
+    Number(prices[i].value)||0
+   );
+
+ });
+
+
+ save();
+
+ closeModal(
+  "settingsModal"
+ );
+
+ renderAll();
+
+ toast(
+  "Mahsulotlar saqlandi."
+ );
+
+}
+
+
+function saveTableCount(){
+
+ const n =
+  Math.floor(
+   Number(
+    document.getElementById(
+     "tableCount"
+    ).value
+   )
+  );
+
+
+ if(n<1 || n>100){
+
+  toast(
+   "Stol soni 1–100 bo‘lsin."
+  );
+
+  return;
+ }
+
+
+ db.tableCount=n;
+
+ save();
+
+ closeModal(
+  "settingsModal"
+ );
+
+ renderAll();
+
+ toast(
+  `${n} ta stol saqlandi.`
+ );
+
+}
+
+
+function resetAll(){
+
+ if(!confirm(
+  "Barcha stollar, tandirlar va kunlik hisobotlar o‘chadi. Davom etasizmi?"
+ )) return;
+
+ localStorage.removeItem(KEY);
+
+ location.reload();
+
+}
+
+
+function esc(s){
+
+ return String(s).replace(
+  /[&<>"']/g,
+  m=>({
+
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#039;"
+
+  }[m])
+ );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderAll();
 
 </script>
 
